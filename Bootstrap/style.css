@@ -1,0 +1,7 @@
+body{
+    /* background-color: black; */
+}
+nav *{
+    backdrop-filter: blur(30px);
+    background-color: #081625 ;
+}
