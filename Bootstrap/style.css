@@ -144,11 +144,8 @@ nav .offcanvas{
 }
 .clothe-img-brand{
     mask-image: linear-gradient(to top, transparent, black 30%),
-                linear-gradient(to bottom, transparent, black 30%),
-                linear-gradient(to left, transparent, black 30%),
-                linear-gradient(to right, transparent, black 30%);
+                linear-gradient(to bottom, transparent, black 7%);
     mask-composite: intersect;
-    -webkit-mask-composite: intersect;
 }
 .btn-catalog{
     height: 60px;
