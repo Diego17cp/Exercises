@@ -1,1 +1,1 @@
-Various exercises of some technologies:)
+- Exercise of HTML/Bootstrap it's done and I won't update it because everything I wanted to do in it, I did on [Futbolera](https://github.com/Diego17cp/soccer-clothing) xD
