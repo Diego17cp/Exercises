@@ -11,9 +11,9 @@
 body{
     height: 100vh;
 }
-*{
-    /* border: 1px solid green ; */
-}
+/* *{
+     border: 1px solid green ; 
+} */
 html{
     scroll-behavior: smooth;
 }
