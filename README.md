@@ -1,1 +1,2 @@
 - Exercise of HTML/Bootstrap it's done and I won't update it because everything I wanted to do in it, I did on [Futbolera](https://github.com/Diego17cp/soccer-clothing) xD
+- Exercises of JS Logic were extracted from [MoureDev JS Course](https://github.com/mouredev/hello-javascript). 🫡
