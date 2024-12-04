@@ -7,13 +7,18 @@ body {
     padding: 10px;
     width: 480px;
     height: 100px;
-    overflow-x: hidden;
+    overflow: hidden;
+    position: relative;
 }
 #text {
+    font-family: monospace;
+    font-size: 1rem;
     color: #ffffff;
     display: inline-block;
     overflow: hidden;
     animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
+    line-height: 1.5;
+    white-space: pre-wrap;
 }
 #game {
     max-width: 500px;
