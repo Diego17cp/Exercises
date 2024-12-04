@@ -6,6 +6,8 @@ let fighting;
 let monsterHealth;
 let inventory = ["stick"];
 
+const txtIni="Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above."
+
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
 const button3 = document.querySelector("#button3");
@@ -312,4 +314,8 @@ function escritura(txt, element, delay=50) {
             clearInterval(interval);
         }
     }, delay);
+}
+window.onload = () => {
+    const txtSpan=document.querySelector("#text");
+    escritura(txtIni, txtSpan);
 }
