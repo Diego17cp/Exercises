@@ -16,7 +16,6 @@ body {
     color: #ffffff;
     display: inline-block;
     overflow: hidden;
-    animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
     line-height: 1.5;
     white-space: pre-wrap;
 }
@@ -68,13 +67,4 @@ button {
 }
 button:hover {
     opacity: 1;
-}
-/* Animations */
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
 }
