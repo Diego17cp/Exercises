@@ -124,7 +124,8 @@ function buyHealth() {
         goldText.innerText = gold;
         healthText.innerText = health;
     } else {
-        text.innerText = "You do not have enough gold to buy health.";
+        escritura("You do not have enough gold to buy health.", text);
+        // text.innerText = "You do not have enough gold to buy health.";
     }
 }
 
@@ -135,14 +136,18 @@ function buyWeapon() {
             currentWeapon++;
             goldText.innerText = gold;
             let newWeapon = weapons[currentWeapon].name;
-            text.innerText = "You now have a " + newWeapon + ".";
+            escritura=("You now have a " + newWeapon + ".", text);
+            // text.innerText = "You now have a " + newWeapon + ".";
             inventory.push(newWeapon);
-            text.innerText += " In your inventory you have: " + inventory;
+            escritura("In your inventory you have: " + inventory, text);
+            // text.innerText += " In your inventory you have: " + inventory;
         } else {
-            text.innerText = "You do not have enough gold to buy a weapon.";
+            escritura("You do not have enough gold to buy a weapon.", text);
+            // text.innerText = "You do not have enough gold to buy a weapon.";
         }
     } else {
-        text.innerText = "You already have the most powerful weapon!";
+        // text.innerText = "You already have the most powerful weapon!";
+        escritura("You already have the most powerful weapon!", text);
         button2.innerText = "Sell weapon for 15 gold";
         button2.onclick = sellWeapon;
     }
@@ -153,8 +158,10 @@ function sellWeapon() {
         gold += 15;
         goldText.innerText = gold;
         let currentWeapon = inventory.shift();
-        text.innerText = "You sold a " + currentWeapon + ".";
-        text.innerText += " In your inventory you have: " + inventory;
+        // text.innerText = "You sold a " + currentWeapon + ".";
+        escritura("You sold a " + currentWeapon + ".", text);
+        // text.innerText += " In your inventory you have: " + inventory;
+        escritura("In your inventory you have: " + inventory, text);
     } else {
         text.innerText = "Don't sell your only weapon!";
     }
@@ -183,14 +190,17 @@ function goFight() {
     monsterHealthText.innerText = monsterHealth;
 }
 
-function attack() {
-    text.innerText = "The " + monsters[fighting].name + " attacks.";
-    text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
+function attack() {  
+    // text.innerText = "The " + monsters[fighting].name + " attacks.";
+    escritura("The " + monsters[fighting].name + " attacks.", text);
+    // text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
+    escritura("You attack it with your " + weapons[currentWeapon].name + ".", text);
     health -= getMonsterAttackValue(monsters[fighting].level);
     if (isMonsterHit()) {
         monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
     } else {
-        text.innerText += " You miss.";
+        // text.innerText += " You miss.";
+        escritura("You miss.", text);
     }
     healthText.innerText = health;
     monsterHealthText.innerText = monsterHealth;
@@ -204,7 +214,8 @@ function attack() {
         }
     }
     if (Math.random() <= .1 && inventory.length !== 1) {
-        text.innerText += " Your " + inventory.pop() + " breaks.";
+        // text.innerText += " Your " + inventory.pop() + " breaks.";
+        escritura("Your " + inventory.pop() + " breaks.", text);
         currentWeapon--;
     }
 }
@@ -220,7 +231,8 @@ function isMonsterHit() {
 }
 
 function dodge() {
-    text.innerText = "You dodge the attack from the " + monsters[fighting].name;
+    // text.innerText = "You dodge the attack from the " + monsters[fighting].name;
+    escritura("You dodge the attack from the " + monsters[fighting].name, text);
 }
 
 function defeatMonster() {
@@ -268,20 +280,36 @@ function pick(guess) {
     while (numbers.length < 10) {
         numbers.push(Math.floor(Math.random() * 11));
     }
-    text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+    // text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+    escritura("You picked " + guess + ". Here are the random numbers:\n", text);
     for (let i = 0; i < 10; i++) {
-        text.innerText += numbers[i] + "\n";
+        // text.innerText += numbers[i] + "\n";
+        escritura(numbers[i] + "\n", text);
     }
     if (numbers.includes(guess)) {
-        text.innerText += "Right! You win 20 gold!";
+        // text.innerText += "Right! You win 20 gold!";
+        escritura("Right! You win 20 gold!", text);
         gold += 20;
         goldText.innerText = gold;
     } else {
-        text.innerText += "Wrong! You lose 10 health!";
+        // text.innerText += "Wrong! You lose 10 health!";
+        escritura("Wrong! You lose 10 health!", text);
         health -= 10;
         healthText.innerText = health;
         if (health <= 0) {
             lose();
         }
     }
+}
+function escritura(txt, element, delay=50) {
+    element.textContent = "";
+    let i = 0;
+    const interval =  setInterval(() => {
+        if (i < txt.length) {
+            element.textContent += txt.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    }, delay);
 }
