@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.css'
-
-
+import { Pointer } from './Components/Pointer.jsx'
 export const App = () => {
   const [enabled, setEnabled] = useState(false)
   const [position, setPosition]= useState({x: 0, y: 0})
@@ -25,23 +23,12 @@ export const App = () => {
 
   // change body classname
   useEffect(() => {
-    document.body.classList.toggle('no-cursor', enabled)
+    document.querySelector(".tracker").classList.toggle('no-cursor', !enabled)
   }, [enabled])
 
   return (
     <main>
-      <div className='tracker' style={{
-        position: 'absolute',
-        backgroundColor: '#09f',
-        borderRadius: '50%',
-        width: 40,
-        height: 40,
-        opacity: 0.8,
-        pointerEvents: 'none',
-        left: -25,
-        top: -25,
-        transform: `translate(${position.x}px, ${position.y}px)`
-      }}></div>
+      <Pointer positionX={position.x} positionY={position.y} />
       <button onClick={() => setEnabled(!enabled)}>
         {enabled ? 'Disable' : 'Enable'} pointer tracking
       </button>
