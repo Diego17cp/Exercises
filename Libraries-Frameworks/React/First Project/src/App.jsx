@@ -1,5 +1,5 @@
 // import "./App.css";
-import { TwitterFollowCard } from "./TwitterFollowCard.jsx";
+import { TwitterFollowCard } from "./Components/TwitterFollowCard.jsx";
 
 export const App = () => {
 	// Pass a function as a prop to the TwitterFollowCard component
@@ -31,9 +31,9 @@ export const App = () => {
                     const { userName, name } = user;
                     return(
                         <TwitterFollowCard
-                            key={user.userName}
-                            userName={user.userName}
-                            name={user.name}
+                            key={userName}
+                            userName={userName}
+                            name={name}
                             formatUsername={formatUsername}
                         />
                     )

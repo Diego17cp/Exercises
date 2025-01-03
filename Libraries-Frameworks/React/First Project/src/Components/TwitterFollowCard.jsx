@@ -1,5 +1,6 @@
 import "./TwitterFollowCard.css";
 import { useState } from "react";
+import PropTypes from 'prop-types'
 
 export const TwitterFollowCard = ({
 	formatUsername,
@@ -35,3 +36,9 @@ export const TwitterFollowCard = ({
 		</article>
 	);
 };
+
+TwitterFollowCard.propTypes = {
+	formatUsername: PropTypes.func.isRequired,
+	userName: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired
+}
