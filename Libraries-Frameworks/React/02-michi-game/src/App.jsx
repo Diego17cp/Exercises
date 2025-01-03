@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import './App.css'
 import confetti from 'canvas-confetti'
-import { Square } from './components/Square.jsx'
 import { turns } from './constants.js'
 import { WinnerModal } from './components/WinnerModal.jsx'
 import { checkWinner, checkEndGame } from './logic/board.js'
+import { Board } from './components/Board.jsx'
+import { Turns } from './components/Turns.jsx'
 
 export const App = () => {
 
@@ -31,7 +32,7 @@ export const App = () => {
   }
 
   const updateBoard=(index)=>{
-    
+
     if(board[index]||winner) return 
     const newBoard=[...board]
     newBoard[index]=turn
@@ -57,25 +58,8 @@ export const App = () => {
     <main className='board'>
 			<h1>Michi Game</h1>
       <button onClick={resetGame}>Reiniciar juego</button>
-      <section className='game'>
-        {
-          board.map((square, index) => {
-            return (
-              <Square key={index} index={index} updateBoard={updateBoard}>
-                {square}
-              </Square>
-            )
-          })
-        }
-      </section>
-      <section className='turn'>
-        <Square isSelected={turn===turns.X} >
-          {turns.X}
-        </Square>
-        <Square isSelected={turn===turns.O} >
-          {turns.O}
-        </Square>
-      </section>
+      <Board board={board} updateBoard={updateBoard}/>
+      <Turns turn={turn} />
       <WinnerModal resetGame={resetGame} winner={winner}/>
     </main>
 	);
