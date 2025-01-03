@@ -13,8 +13,8 @@ export const Square=({children, updateBoard, index, isSelected}) => {
 }
 
 Square.propTypes={
-    children: PropTypes.node.isRequired,
-    updateBoard: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    isSelected: PropTypes.bool.isRequired
+    children: PropTypes.node,
+    updateBoard: PropTypes.func,
+    index: PropTypes.number,
+    isSelected: PropTypes.bool
 }
