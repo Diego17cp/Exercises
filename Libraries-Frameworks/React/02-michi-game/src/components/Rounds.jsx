@@ -1,8 +1,8 @@
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Square } from "./Square";
 import { turns } from "../constants";
 
-export const Rounds = () => {
+export const Rounds = ({roundsWonX, roundsWonO}) => {
     return (
         <section className="round">
             <h2>Rounds won</h2>
@@ -12,9 +12,14 @@ export const Rounds = () => {
             </div>
             <hr />
             <div className="row score">
-                <Square></Square>
-                <Square></Square>
+                <Square>{roundsWonX}</Square>
+                <Square>{roundsWonO}</Square>
             </div>
         </section>
     )
+}
+
+Rounds.propTypes = {
+    roundsWonX: PropTypes.number.isRequired,
+    roundsWonO: PropTypes.number.isRequired
 }

@@ -24,6 +24,18 @@ export const App = () => {
 
   const [winner, setWinner]=useState(null)
 
+  const [roundsWonX, setRoundsWonX]=useState(() => {
+    const roundsWonStorage=window.localStorage.getItem('roundsWonX')
+    if(roundsWonStorage) return JSON.parse(roundsWonStorage)
+    return 0
+  })
+
+  const [roundsWonO, setRoundsWonO]=useState(() => {
+    const roundsWonStorage=window.localStorage.getItem('roundsWonO')
+    if(roundsWonStorage) return JSON.parse(roundsWonStorage)
+    return 0
+  })
+
   const resetGame=()=>{
     setBoard(Array(9).fill(null))
     setTurn(turns.X)
@@ -35,6 +47,7 @@ export const App = () => {
   const updateBoard=(index)=>{
 
     if(board[index]||winner) return 
+
     const newBoard=[...board]
     newBoard[index]=turn
     setBoard(newBoard)
@@ -49,6 +62,20 @@ export const App = () => {
     if(newWinner){
       confetti()
       setWinner(newWinner)
+      if(newWinner === turns.X) {
+        setRoundsWonX(prevRounds => {
+            const newRounds = prevRounds + 1
+            // Guardar en localStorage dentro del callback
+            window.localStorage.setItem('roundsWonX', JSON.stringify(newRounds))
+            return newRounds
+        })
+      } else {
+        setRoundsWonO(prevRounds => {
+            const newRounds = prevRounds + 1
+            window.localStorage.setItem('roundsWonO', JSON.stringify(newRounds))
+            return newRounds
+        })
+      }
     } 
     else if(checkEndGame(newBoard)){
       setWinner(false)
@@ -62,7 +89,7 @@ export const App = () => {
       <Board board={board} updateBoard={updateBoard}/>
       <Turns turn={turn} />
       <WinnerModal resetGame={resetGame} winner={winner}/>
-      <Rounds />
+      <Rounds roundsWonX={roundsWonX} roundsWonO={roundsWonO}/>
     </main>
 	);
 };
