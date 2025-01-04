@@ -58,6 +58,15 @@ body {
   color: #222;
 }
 
+button:nth-of-type(2) {
+  background: #de2e59;
+  color: #000;
+}
+button:nth-of-type(2):hover {
+  background: #8b092a;
+  color: #fff;
+}
+
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -166,6 +175,7 @@ body {
       color:#de2e59;
     }
 }
+
 
 @media only screen and (max-width: 770px) {
   .round{
