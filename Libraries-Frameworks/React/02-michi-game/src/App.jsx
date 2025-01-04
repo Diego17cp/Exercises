@@ -6,6 +6,7 @@ import { WinnerModal } from './components/WinnerModal.jsx'
 import { checkWinner, checkEndGame } from './logic/board.js'
 import { Board } from './components/Board.jsx'
 import { Turns } from './components/Turns.jsx'
+import { Rounds } from './components/Rounds.jsx'
 
 export const App = () => {
 
@@ -61,6 +62,7 @@ export const App = () => {
       <Board board={board} updateBoard={updateBoard}/>
       <Turns turn={turn} />
       <WinnerModal resetGame={resetGame} winner={winner}/>
+      <Rounds />
     </main>
 	);
 };
