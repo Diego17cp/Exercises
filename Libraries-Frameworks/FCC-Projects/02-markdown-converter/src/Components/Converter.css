@@ -1,0 +1,104 @@
+.editor-container{
+    height: 40%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 10px 0 34px #7363ed5e;
+    
+    .bar-header{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #3c00ac;
+        border-radius: 10px 10px 0 0;
+
+        h2{
+            margin-left: 20px;
+            font-weight: bold;
+        }
+    }
+
+    #editor{
+        width: 100%;
+        height: 80%;
+        background-color: #5f64c8;
+        overflow-y: auto;
+        resize: none;
+        padding: 15px;
+        border: none;
+        outline: none;
+        font-size: 1.2em;
+    }
+    #editor::placeholder{
+        color: #bebdbd;
+    }
+}
+
+.preview-container{
+    height: 60%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 10px 0 34px #7363ed5e;
+    overflow-y: auto;
+
+    .bar-header{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #3c00ac;
+        border-radius: 10px 10px 0 0;
+
+        h2{
+            margin-left: 20px;
+            font-weight: bold;
+        }
+    }
+
+    #output{
+        width: 100%;
+        height: auto;
+        min-height: 350px;
+        background-color: #5f64c8;
+        padding: 15px;
+
+        h1{
+            font-size: 2em;
+            border-bottom: 2px solid #bebdbd;
+            padding-bottom: 10px;
+        }
+        h2{
+            font-size: 1.5em;
+            border-bottom: 2px solid #bebdbd;
+            padding-bottom: 10px;
+        }
+        h3{
+            font-size: 1.2em;
+            padding-bottom: 10px;
+        }
+        code{
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 5px;
+            color: #3c00ac;
+        }
+        pre{
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            color: #3c00ac;
+        }
+        a{
+            color: #f4f4f4;
+        }
+        ul{
+            list-style-type: square;
+        }
+    }
+}
