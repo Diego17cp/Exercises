@@ -2,7 +2,7 @@ import { useSession } from "../hooks/useSession"
 
 
 export const Session = () => {
-    const { counter, handleIncrement, handleDecrement } = useSession()
+    const { minutesSession, handleIncrement, handleDecrement } = useSession()
     
     return (
         <div className="length-control">
@@ -13,7 +13,7 @@ export const Session = () => {
                 <button id="session-increment" onClick={handleIncrement}>
                     <i className="fa fa-arrow-up"></i>
                 </button>
-                <span id="session-length">{ counter }</span>
+                <span id="session-length">{ minutesSession }</span>
                 <button id="session-decrement" onClick={handleDecrement}>
                     <i className="fa fa-arrow-down"></i>
                 </button>

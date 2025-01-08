@@ -2,6 +2,7 @@
 import { Session } from './Components/Session'
 import { Break } from './Components/Break'
 import './App.css'
+import { Timer } from './Components/Timer'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <main>
         <Break></Break>
         <Session></Session>
+        <Timer></Timer>
       </main>
       <footer>
         <p>
