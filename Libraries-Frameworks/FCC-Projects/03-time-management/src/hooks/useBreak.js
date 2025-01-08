@@ -13,7 +13,7 @@ export const useBreak = () => {
 			interval = setInterval(() => {
 				if (secondsBreak === 0) {
 					if (minutesBreak === 0) {
-						setIsBreak((prevState) => !prevState);
+						setIsBreak(false);
 						setIsRunningBreak(false);
                         setMinutesBreak(initialMinuteBreak);
                         setSecondsBreak(0);

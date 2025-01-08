@@ -1,0 +1,10 @@
+.timer-wrapper.finishing {
+    .timer-label{
+        color: #f55a5a;
+    }
+    .time-left{
+        #time{
+            color: #f56060;
+        }
+    }
+}

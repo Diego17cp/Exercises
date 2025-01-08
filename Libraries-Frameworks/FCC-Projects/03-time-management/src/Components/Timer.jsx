@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import { useTimer } from '../hooks/useTimer';
 import PropTypes from 'prop-types'
+import "../Components/Components.css"
 
 export const Timer = ({
 	isSession,
@@ -18,44 +19,27 @@ export const Timer = ({
     setIsBreak
 }) => {
 
-    useEffect(
-        () => {
-            if(!isSession && !isRunningSession) {
-                setIsBreak(true)
-                toggleReproductionBreak()
-            }
-        }
-    , [isSession, isRunningSession])
-
-    useEffect(
-        () => {
-            if(!isBreak && !isRunningBreak && minutesSession === 0 && secondsSession === 0) {
-                setIsSession(true)
-                toggleReproductionSession()
-            }
-        }
-    , [isBreak, isRunningBreak, minutesSession, secondsSession])
+    const {label, toggleReproduction, finishingClass, handleReset} = useTimer({
+        isSession,
+        isRunningSession,
+        isRunningBreak,
+        minutesSession,
+        minutesBreak,
+        secondsSession,
+        secondsBreak,
+        setIsBreak,
+        toggleReproductionBreak,
+        toggleReproductionSession,
+        setIsSession,
+        resetBreakTimer,
+        resetSessionTimer
+    })
     
-
-    const label = isSession ? "Session" : "Break";
-
-	const toggleReproduction = () => {
-		if (isSession) {
-			toggleReproductionSession();
-		} else {
-			toggleReproductionBreak();
-		}
-	};
-
-	const handleReset = () => {
-		resetBreakTimer()
-        resetSessionTimer()
-	};
 
 
 	return (
 		<div className="timer">
-			<div className="timer-wrapper">
+			<div className = {`timer-wrapper ${finishingClass}`}>
 				<div className="timer-label" id="timer-label">
 					{label}
 				</div>
