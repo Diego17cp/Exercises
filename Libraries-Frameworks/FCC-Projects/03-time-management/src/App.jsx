@@ -4,9 +4,19 @@ import './App.css'
 function App() {
 
   return (
-    <>
-      <h1>Hola mundo</h1>
-    </>
+    <div className="app">
+      <header>
+        <h1>Time Management Project</h1>
+      </header>
+      <main>
+
+      </main>
+      <footer>
+        <p>
+          Created by: <a href="https://github.com/Diego17cp">Diego17</a>
+        </p>
+      </footer>
+    </div>
   )
 }
 
