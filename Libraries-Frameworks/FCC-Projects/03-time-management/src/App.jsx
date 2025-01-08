@@ -1,4 +1,6 @@
 // import { useState } from 'react'
+import { Session } from './Components/Session'
+import { Break } from './Components/Break'
 import './App.css'
 
 function App() {
@@ -9,7 +11,8 @@ function App() {
         <h1>Time Management Project</h1>
       </header>
       <main>
-
+        <Break></Break>
+        <Session></Session>
       </main>
       <footer>
         <p>
