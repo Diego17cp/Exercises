@@ -73,14 +73,3 @@ export const useBreak = () => {
         setIsBreak
 	};
 };
-
-// TODO:
-// 1. Cuando el componente esta corriendo y se actualiza el tiempo, no se debe parar ni reiniciar el tiempo
-// 2. cuando el componente esta en pausa si se puede actualizar el tiempo
-// 3. cuando se reinicia el tiempo, se debe parar el contador
-// 4. cuando se acaba el tiempo se debe intercambiar entre el tiempo de sesion y el tiempo de descanso
-// 5. cuando se acaba el tiempo del break se debe volver al tiempo de sesion con el value seleccionado
-// 6. cuando el tiempo sea 1 minuto se debe dar un estilo especial
-// 7. cuando el tiempo se acabe en cualquier modo se debe reproducir un sonido
-// 8. cuando se reinicie el tiempo se debe parar el sonido
-// 9. cuando se usan los botones para controlar el tiempo el timer debe actualizarse al tiempo seleccionado

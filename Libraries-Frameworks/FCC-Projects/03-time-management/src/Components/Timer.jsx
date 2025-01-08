@@ -16,7 +16,9 @@ export const Timer = ({
 	resetBreakTimer,
 	isRunningBreak,
     setIsSession,
-    setIsBreak
+    setIsBreak,
+    playAudio,
+    resetAudio
 }) => {
 
     const {label, toggleReproduction, finishingClass, handleReset} = useTimer({
@@ -32,7 +34,9 @@ export const Timer = ({
         toggleReproductionSession,
         setIsSession,
         resetBreakTimer,
-        resetSessionTimer
+        resetSessionTimer,
+        playAudio,
+        resetAudio
     })
     
 
@@ -96,5 +100,7 @@ Timer.propTypes = {
     resetBreakTimer: PropTypes.func.isRequired,
     isRunningBreak: PropTypes.bool.isRequired,
     setIsSession: PropTypes.func.isRequired,
-    setIsBreak: PropTypes.func.isRequired
+    setIsBreak: PropTypes.func.isRequired,
+    playAudio: PropTypes.func.isRequired,
+    resetAudio: PropTypes.func.isRequired
 }

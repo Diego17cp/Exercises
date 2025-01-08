@@ -14,10 +14,13 @@ export const useTimer = ({
 	setIsSession,
 	resetBreakTimer,
 	resetSessionTimer,
+	playAudio,
+	resetAudio
 }) => {
 	const [isFinishing, setIsFinishing] = useState(false);
 
 	const finishingClass = isFinishing ? "finishing" : "";
+	
 
 	useEffect(() => {
 		if (isSession && isRunningSession) {
@@ -37,6 +40,7 @@ export const useTimer = ({
 
 	useEffect(() => {
 		if (minutesSession === 0 && secondsSession === 0 && isRunningSession) {
+			playAudio();
 			setIsBreak(true);
 			toggleReproductionBreak();
 		}
@@ -44,6 +48,7 @@ export const useTimer = ({
 
 	useEffect(() => {
 		if (minutesBreak === 0 && secondsBreak === 0 && isRunningBreak) {
+			playAudio();
 			setIsSession(true);
 			toggleReproductionSession();
 		}
@@ -62,6 +67,7 @@ export const useTimer = ({
 	const handleReset = () => {
 		resetBreakTimer();
 		resetSessionTimer();
+		resetAudio();
 	};
     return {
         label,

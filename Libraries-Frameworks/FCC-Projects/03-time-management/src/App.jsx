@@ -4,6 +4,8 @@ import { Session } from "./Components/Session";
 import { Break } from "./Components/Break";
 import "./App.css";
 import { Timer } from "./Components/Timer";
+import { useRef } from "react";
+import { playAudio, resetAudio } from "./Services/audio";
 
 function App() {
 	const {
@@ -30,6 +32,15 @@ function App() {
 		handleDecrement: handleDecBreak,
 		handleIncrement: handleIncBreak,
 	} = useBreak();
+
+  const audioRef = useRef(null);
+
+  const handlePlay = () => {
+    playAudio(audioRef);
+  }
+  const handleReset = () => {
+    resetAudio(audioRef);
+  }
 
 	return (
 		<div className="app">
@@ -62,7 +73,10 @@ function App() {
           isRunningBreak={isRunningBreak}
           setIsSession={setIsSession}
           setIsBreak={setIsBreak}
+          playAudio={handlePlay}
+          resetAudio={handleReset}
 				></Timer>
+        <audio id="beep" preload="auto" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav" ref={audioRef}></audio>
 			</main>
 			<footer>
 				<p>
