@@ -6,7 +6,7 @@ export const useSession = () => {
     const [secondsSession, setSecondsSession] = useState(0)
     const [isSession, setIsSession] = useState(true)
     const [isRunningSession, setIsRunningSession] = useState(false)
-
+    const [initialMinutesSession, setInitialMinute] = useState(25)
 
     useEffect(
         () => {
@@ -17,7 +17,8 @@ export const useSession = () => {
                         if (minutesSession === 0) {
                             setIsSession(false)
                             setIsRunningSession(false)
-                            // Trigger break time
+                            setMinutesSession(initialMinutesSession)
+                            setSecondsSession(0)
                             return
                         }
                         setMinutesSession(prev => prev - 1)
@@ -30,34 +31,40 @@ export const useSession = () => {
             return () => clearInterval(interval)
         }
     , [isRunningSession, minutesSession, secondsSession])
-
+    
     const handleIncrement = () => {
-        if (minutesSession === 60) {
+        if (initialMinutesSession === 60 || isRunningSession) {
             return
         }
-        setMinutesSession(
-            prevState => prevState + 1
-        )
+        const newMinutes = initialMinutesSession + 1
+        setInitialMinute(newMinutes)
+        setMinutesSession(newMinutes)
+        setSecondsSession(0)
     }
     const handleDecrement = () => {
-        if (minutesSession === 1) {
+        if (initialMinutesSession === 1 || isRunningSession) {
             return
         }
-        setMinutesSession(
-            prevState => prevState - 1
-        )
-    }
-
-    const toggleReproductionSession = () => {
-        setIsRunningSession(prev => !prev)
-    }
-
-    const resetSessionTimer = () => {
-        setMinutesSession(25)
+        const newValue = initialMinutesSession - 1
+        setInitialMinute(newValue)
+        setMinutesSession(newValue)
         setSecondsSession(0)
     }
 
+    const toggleReproductionSession = () => {
+        setIsRunningSession(!isRunningSession)
+    }
+
+    const resetSessionTimer = () => {
+        setInitialMinute(25)
+        setMinutesSession(25)
+        setSecondsSession(0)
+        setIsRunningSession(false)
+        setIsSession(true)
+    }
+
     return { 
+        initialMinutesSession,
         minutesSession, 
         secondsSession,
         handleIncrement, 
@@ -65,8 +72,7 @@ export const useSession = () => {
         isRunningSession,
         toggleReproductionSession,
         isSession,
-        setSecondsSession,
-        setMinutesSession,
+        setIsSession,
         resetSessionTimer
     }
 }
