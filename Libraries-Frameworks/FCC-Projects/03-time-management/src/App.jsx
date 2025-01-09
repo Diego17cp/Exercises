@@ -33,14 +33,14 @@ function App() {
 		handleIncrement: handleIncBreak,
 	} = useBreak();
 
-  const audioRef = useRef(null);
+	const audioRef = useRef(null);
 
-  const handlePlay = () => {
-    playAudio(audioRef);
-  }
-  const handleReset = () => {
-    resetAudio(audioRef);
-  }
+	const handlePlay = () => {
+		playAudio(audioRef);
+	};
+	const handleReset = () => {
+		resetAudio(audioRef);
+	};
 
 	return (
 		<div className="app">
@@ -67,18 +67,23 @@ function App() {
 					isRunningSession={isRunningSession}
 					toggleReproductionSession={toggleReproductionSession}
 					resetSessionTimer={resetSessionTimer}
-          minutesBreak={minutesBreak}
-          secondsBreak={secondsBreak}
-          isBreak={isBreak}
-          toggleReproductionBreak={toggleReproductionBreak}
-          resetBreakTimer={resetBreakTimer}
-          isRunningBreak={isRunningBreak}
-          setIsSession={setIsSession}
-          setIsBreak={setIsBreak}
-          playAudio={handlePlay}
-          resetAudio={handleReset}
+					minutesBreak={minutesBreak}
+					secondsBreak={secondsBreak}
+					isBreak={isBreak}
+					toggleReproductionBreak={toggleReproductionBreak}
+					resetBreakTimer={resetBreakTimer}
+					isRunningBreak={isRunningBreak}
+					setIsSession={setIsSession}
+					setIsBreak={setIsBreak}
+					playAudio={handlePlay}
+					resetAudio={handleReset}
 				></Timer>
-        <audio id="beep" preload="auto" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav" ref={audioRef}></audio>
+				<audio
+					id="beep"
+					preload="auto"
+					src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"
+					ref={audioRef}
+				></audio>
 			</main>
 			<footer>
 				<p>

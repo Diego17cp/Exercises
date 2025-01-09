@@ -1,6 +1,6 @@
-import { useTimer } from '../hooks/useTimer';
-import PropTypes from 'prop-types'
-import "../Components/Components.css"
+import { useTimer } from "../hooks/useTimer";
+import PropTypes from "prop-types";
+import "../Components/Components.css";
 
 export const Timer = ({
 	isSession,
@@ -15,35 +15,34 @@ export const Timer = ({
 	toggleReproductionBreak,
 	resetBreakTimer,
 	isRunningBreak,
-    setIsSession,
-    setIsBreak,
-    playAudio,
-    resetAudio
+	setIsSession,
+	setIsBreak,
+	playAudio,
+	resetAudio,
 }) => {
-
-    const {label, toggleReproduction, finishingClass, handleReset} = useTimer({
-        isSession,
-        isRunningSession,
-        isRunningBreak,
-        minutesSession,
-        minutesBreak,
-        secondsSession,
-        secondsBreak,
-        setIsBreak,
-        toggleReproductionBreak,
-        toggleReproductionSession,
-        setIsSession,
-        resetBreakTimer,
-        resetSessionTimer,
-        playAudio,
-        resetAudio
-    })
-    
-
+	const { label, toggleReproduction, finishingClass, handleReset } = useTimer(
+		{
+			isSession,
+			isRunningSession,
+			isRunningBreak,
+			minutesSession,
+			minutesBreak,
+			secondsSession,
+			secondsBreak,
+			setIsBreak,
+			toggleReproductionBreak,
+			toggleReproductionSession,
+			setIsSession,
+			resetBreakTimer,
+			resetSessionTimer,
+			playAudio,
+			resetAudio,
+		}
+	);
 
 	return (
 		<div className="timer">
-			<div className = {`timer-wrapper ${finishingClass}`}>
+			<div className={`timer-wrapper ${finishingClass}`}>
 				<div className="timer-label" id="timer-label">
 					{label}
 				</div>
@@ -54,21 +53,21 @@ export const Timer = ({
 									minutesSession < 10
 										? `0${minutesSession}`
 										: minutesSession
-							}:${
+							  }:${
 									secondsSession < 10
 										? `0${secondsSession}`
 										: secondsSession
-							}`
+							  }`
 							: isBreak
 							? `${
 									minutesBreak < 10
 										? `0${minutesBreak}`
 										: minutesBreak
-							}:${
+							  }:${
 									secondsBreak < 10
 										? `0${secondsBreak}`
 										: secondsBreak
-							}`
+							  }`
 							: ""}
 					</span>
 				</div>
@@ -87,20 +86,20 @@ export const Timer = ({
 };
 
 Timer.propTypes = {
-    isSession: PropTypes.bool.isRequired,
-    toggleReproductionSession: PropTypes.func.isRequired,
-    isRunningSession: PropTypes.bool.isRequired,
-    resetSessionTimer: PropTypes.func.isRequired,
-    minutesSession: PropTypes.number.isRequired,
-    secondsSession: PropTypes.number.isRequired,
-    minutesBreak: PropTypes.number.isRequired,
-    secondsBreak: PropTypes.number.isRequired,
-    isBreak: PropTypes.bool.isRequired,
-    toggleReproductionBreak: PropTypes.func.isRequired,
-    resetBreakTimer: PropTypes.func.isRequired,
-    isRunningBreak: PropTypes.bool.isRequired,
-    setIsSession: PropTypes.func.isRequired,
-    setIsBreak: PropTypes.func.isRequired,
-    playAudio: PropTypes.func.isRequired,
-    resetAudio: PropTypes.func.isRequired
-}
+	isSession: PropTypes.bool.isRequired,
+	toggleReproductionSession: PropTypes.func.isRequired,
+	isRunningSession: PropTypes.bool.isRequired,
+	resetSessionTimer: PropTypes.func.isRequired,
+	minutesSession: PropTypes.number.isRequired,
+	secondsSession: PropTypes.number.isRequired,
+	minutesBreak: PropTypes.number.isRequired,
+	secondsBreak: PropTypes.number.isRequired,
+	isBreak: PropTypes.bool.isRequired,
+	toggleReproductionBreak: PropTypes.func.isRequired,
+	resetBreakTimer: PropTypes.func.isRequired,
+	isRunningBreak: PropTypes.bool.isRequired,
+	setIsSession: PropTypes.func.isRequired,
+	setIsBreak: PropTypes.func.isRequired,
+	playAudio: PropTypes.func.isRequired,
+	resetAudio: PropTypes.func.isRequired,
+};

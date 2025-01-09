@@ -15,8 +15,8 @@ export const useBreak = () => {
 					if (minutesBreak === 0) {
 						setIsBreak(false);
 						setIsRunningBreak(false);
-                        setMinutesBreak(initialMinuteBreak);
-                        setSecondsBreak(0);
+						setMinutesBreak(initialMinuteBreak);
+						setSecondsBreak(0);
 						return;
 					}
 					setMinutesBreak((prev) => prev - 1);
@@ -28,7 +28,7 @@ export const useBreak = () => {
 		}
 		return () => clearInterval(interval);
 	}, [isRunningBreak, minutesBreak, secondsBreak]);
-    
+
 	const handleIncrement = () => {
 		if (minutesBreak === 60 || isRunningBreak) {
 			return;
@@ -61,7 +61,7 @@ export const useBreak = () => {
 	};
 
 	return {
-        initialMinuteBreak,
+		initialMinuteBreak,
 		minutesBreak,
 		secondsBreak,
 		handleIncrement,
@@ -70,6 +70,6 @@ export const useBreak = () => {
 		isRunningBreak,
 		toggleReproductionBreak,
 		resetBreakTimer,
-        setIsBreak
+		setIsBreak,
 	};
 };

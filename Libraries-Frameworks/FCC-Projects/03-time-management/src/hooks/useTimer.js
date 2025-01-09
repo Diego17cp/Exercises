@@ -15,12 +15,11 @@ export const useTimer = ({
 	resetBreakTimer,
 	resetSessionTimer,
 	playAudio,
-	resetAudio
+	resetAudio,
 }) => {
 	const [isFinishing, setIsFinishing] = useState(false);
 
 	const finishingClass = isFinishing ? "finishing" : "";
-	
 
 	useEffect(() => {
 		if (isSession && isRunningSession) {
@@ -69,10 +68,10 @@ export const useTimer = ({
 		resetSessionTimer();
 		resetAudio();
 	};
-    return {
-        label,
-        finishingClass,
-        toggleReproduction,
-        handleReset
-    }
+	return {
+		label,
+		finishingClass,
+		toggleReproduction,
+		handleReset,
+	};
 };
