@@ -48,16 +48,18 @@ function App() {
 				<h1>Time Management Project</h1>
 			</header>
 			<main>
-				<Break
-					initialMinutesBreak={initialMinuteBreak}
-					handleIncrement={handleIncBreak}
-					handleDecrement={handleDecBreak}
-				></Break>
-				<Session
-					initialMinutesSession={initialMinutesSession}
-					handleDecrement={handleDecrement}
-					handleIncrement={handleIncrement}
-				></Session>
+				<section className="controls-wrapper">
+					<Break
+						initialMinutesBreak={initialMinuteBreak}
+						handleIncrement={handleIncBreak}
+						handleDecrement={handleDecBreak}
+					></Break>
+					<Session
+						initialMinutesSession={initialMinutesSession}
+						handleDecrement={handleDecrement}
+						handleIncrement={handleIncrement}
+					></Session>
+				</section>
 				<Timer
 					minutesSession={minutesSession}
 					secondsSession={secondsSession}
