@@ -1,13 +1,20 @@
-// import { useState } from 'react'
-import './App.css'
+import { Products } from "./components/Products";
+import { products as initialProducts } from "./mocks/products.json";
+import { Header } from "./components/Header";
+import { useFilters } from "./hooks/useFilters";
+import { Footer } from "./components/Footer";
 
 function App() {
+  const { filterProducts } = useFilters();
+	const filteredProducts = filterProducts({ initialProducts });
 
-  return (
-    <>
-    <h1>Hola React</h1>
-    </>
-  )
+	return (
+		<>
+      <Header></Header>
+			<Products products={filteredProducts} />
+      <Footer></Footer>
+		</>
+	);
 }
 
-export default App
+export default App;
