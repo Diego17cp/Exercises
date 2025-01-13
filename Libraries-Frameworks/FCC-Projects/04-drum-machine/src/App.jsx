@@ -1,4 +1,6 @@
-// import { useState } from 'react'
+import { useState } from 'react'
+import { Pad } from './components/Pad';
+import { Controls } from './components/Controls';
 import './App.css'
 
 const heaterKit = [
@@ -26,9 +28,48 @@ const smoothPianoKit = [
 ];
 
 function App() {
+  const [power, setPower] = useState(true)
+  const [bank, setBank] = useState(heaterKit)
+  const [volume, setVolume] = useState(0.5)
+  const [display, setDisplay] = useState(String.fromCharCode(160))
+  // const [currentPadBankId, setCurrentPadBankId] = useState('Heater Kit')
+
+  const togglePower = () => {
+    setPower(!power)
+    setDisplay(String.fromCharCode(160))
+  }
+  const toggleBank = () => {
+    if(power){
+      if (bank === heaterKit){
+        setBank(smoothPianoKit)
+        setDisplay('Smooth Piano Kit')
+      }else{
+        setBank(heaterKit)
+        setDisplay('Heater Kit')
+      }
+    }
+  }
+  const updateDisplay = (songName) => {
+    if(power){
+      setDisplay(songName)
+    }
+  }
+  const adjustVolume = (e) => {
+    if(power) {
+      const newVolume = e.target.value
+      setVolume(newVolume)
+      setDisplay(`Volume: ${Math.round(newVolume * 100)}`)
+      setTimeout(() => {
+        setDisplay(String.fromCharCode(160))
+      }, 1000)
+    }
+  }
+
+
   return (
     <main className='app'>
-      <h1>Hello React</h1>
+      <Pad currentPadBank={bank} power={power} updateDisplay={updateDisplay} volume={volume}></Pad>
+      <Controls volume={volume} display={display} toggleBank={toggleBank} togglePower={togglePower} adjustVolume={adjustVolume}></Controls>
     </main>
   )
 }
