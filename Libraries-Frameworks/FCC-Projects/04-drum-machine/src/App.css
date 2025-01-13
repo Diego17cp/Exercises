@@ -29,7 +29,7 @@
 		gap: 0.7rem;
 
 		.drum-key {
-			background-color: rgba(138, 138, 138, 0.788);
+			background-color: #8a8a8ac9;
 			border-radius: 10px;
 			text-align: center;
 			display: flex;

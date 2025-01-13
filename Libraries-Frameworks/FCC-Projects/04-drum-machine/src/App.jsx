@@ -26,6 +26,18 @@ const smoothPianoKit = [
   { keyCode: 88, keyTrigger: "X", id: "Side-Stick", url: "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3" },
   { keyCode: 67, keyTrigger: "C", id: "Snare", url: "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3" }
 ];
+const colors = [
+  "#39FF14", 
+  "#FF073A", 
+  "#FF77FF", 
+  "#8E44AD", 
+  "#01F1F1", 
+  "#FDFD96", 
+  "#FFAA1D", 
+  "#CCFF00", 
+  "#FE019A", 
+  "#0AFFEF"
+]
 
 function App() {
   const [power, setPower] = useState(true)
@@ -70,7 +82,7 @@ function App() {
 
   return (
     <main className='app'>
-      <Pad currentPadBank={bank} power={power} updateDisplay={updateDisplay} volume={volume}></Pad>
+      <Pad currentPadBank={bank} power={power} updateDisplay={updateDisplay} volume={volume} colors={colors}></Pad>
       <Controls volume={volume} display={display} toggleBank={toggleBank} togglePower={togglePower} adjustVolume={adjustVolume} power={power} bank={currentPadBankId}></Controls>
     </main>
   )

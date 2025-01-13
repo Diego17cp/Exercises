@@ -1,5 +1,5 @@
 import { Key } from "./Key.jsx";
-export const Pad = ({ currentPadBank, power, updateDisplay, volume }) => {
+export const Pad = ({ currentPadBank, power, updateDisplay, volume, colors }) => {
 	return (
 		<section className="pad-bank">
 			{currentPadBank.map((pad) => (
@@ -12,6 +12,7 @@ export const Pad = ({ currentPadBank, power, updateDisplay, volume }) => {
 					power={power}
 					updateDisplay={updateDisplay}
 					volume={volume}
+					colors={colors}
 				/>
 			))}
 		</section>
