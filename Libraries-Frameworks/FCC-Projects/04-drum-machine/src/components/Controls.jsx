@@ -1,10 +1,16 @@
-export const Controls = ({ volume, display, togglePower, toggleBank, adjustVolume  }) => {
+export const Controls = ({ volume, display, togglePower, toggleBank, adjustVolume, power, bank  }) => {
 	return (
 		<section className="controls-container">
 			<div className="control">
 				<p>Power</p>
 				<div className="select" onClick={togglePower}>
-					<div className="switch"></div>
+					<div className="switch" style={
+                        {
+                            transform: power ? 'rotate(0deg)' : 'rotate(180deg)',
+                        }
+                    }>
+                        <span className="indicator"></span>
+                    </div>
 				</div>
 			</div>
 			<p className="display">{display}</p>
@@ -23,7 +29,13 @@ export const Controls = ({ volume, display, togglePower, toggleBank, adjustVolum
 			<div className="control">
 				<p>Bank</p>
 				<div className="select" onClick={toggleBank}>
-					<div className="switch"></div>
+					<div className="switch" style={
+                        {
+                            transform: bank === 'Heater Kit' ? 'rotate(0deg)' : 'rotate(180deg)',
+                        }
+                    }>
+                        <span className="indicator"></span>
+                    </div>
 				</div>
 			</div>
 		</section>

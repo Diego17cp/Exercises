@@ -32,7 +32,7 @@ function App() {
   const [bank, setBank] = useState(heaterKit)
   const [volume, setVolume] = useState(0.5)
   const [display, setDisplay] = useState(String.fromCharCode(160))
-  // const [currentPadBankId, setCurrentPadBankId] = useState('Heater Kit')
+  const [currentPadBankId, setCurrentPadBankId] = useState('Heater Kit')
 
   const togglePower = () => {
     setPower(!power)
@@ -43,9 +43,11 @@ function App() {
       if (bank === heaterKit){
         setBank(smoothPianoKit)
         setDisplay('Smooth Piano Kit')
+        setCurrentPadBankId('Smooth Piano Kit')
       }else{
         setBank(heaterKit)
         setDisplay('Heater Kit')
+        setCurrentPadBankId('Heater Kit')
       }
     }
   }
@@ -69,7 +71,7 @@ function App() {
   return (
     <main className='app'>
       <Pad currentPadBank={bank} power={power} updateDisplay={updateDisplay} volume={volume}></Pad>
-      <Controls volume={volume} display={display} toggleBank={toggleBank} togglePower={togglePower} adjustVolume={adjustVolume}></Controls>
+      <Controls volume={volume} display={display} toggleBank={toggleBank} togglePower={togglePower} adjustVolume={adjustVolume} power={power} bank={currentPadBankId}></Controls>
     </main>
   )
 }
