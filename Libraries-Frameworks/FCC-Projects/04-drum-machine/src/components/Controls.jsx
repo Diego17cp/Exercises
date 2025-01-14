@@ -1,4 +1,14 @@
-export const Controls = ({ volume, display, togglePower, toggleBank, adjustVolume, power, bank  }) => {
+import { useBank } from "../hooks/useBank";
+import { useDisplay } from "../hooks/useDisplay";
+import { usePower } from "../hooks/usePower";
+import { useVolume } from "../hooks/useVolume";
+
+export const Controls = () => {
+	const { power, togglePower } = usePower();
+	const { volume, adjustVolume } = useVolume();
+	const { bank, toggleBank } = useBank();
+	const { display } = useDisplay();
+
 	return (
 		<section className="controls-container">
 			<div className="control">

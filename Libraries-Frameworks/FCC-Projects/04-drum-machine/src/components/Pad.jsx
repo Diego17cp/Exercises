@@ -1,5 +1,9 @@
+import { useBank } from "../hooks/useBank.js";
 import { Key } from "./Key.jsx";
-export const Pad = ({ currentPadBank, power, updateDisplay, volume, colors }) => {
+
+
+export const Pad = () => {
+	const { bank: currentPadBank } = useBank();
 	return (
 		<section className="pad-bank">
 			{currentPadBank.map((pad) => (
@@ -9,10 +13,6 @@ export const Pad = ({ currentPadBank, power, updateDisplay, volume, colors }) =>
 					keyTrigger={pad.keyTrigger}
 					keyCode={pad.keyCode}
 					url={pad.url}
-					power={power}
-					updateDisplay={updateDisplay}
-					volume={volume}
-					colors={colors}
 				/>
 			))}
 		</section>
