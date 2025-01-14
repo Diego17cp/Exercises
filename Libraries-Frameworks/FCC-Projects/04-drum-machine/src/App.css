@@ -178,12 +178,10 @@
 		.pad-bank {
 			width: 100%;
 			height: 45%;
-			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 		}
-		.controls-container{
+		.controls-container {
 			width: 50%;
 			height: 50%;
 		}
-
 	}
 }

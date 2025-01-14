@@ -8,5 +8,5 @@ export const useDisplay = () => {
 			setDisplay(songName);
 		}
 	};
-    return { display, updateDisplay, setDisplay };
+	return { display, updateDisplay, setDisplay };
 };

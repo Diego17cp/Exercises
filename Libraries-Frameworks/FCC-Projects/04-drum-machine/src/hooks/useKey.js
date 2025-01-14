@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-export const useKey = ({ keyCode, volume, audioRef, handlePlay, handleColor }) => {
+export const useKey = ({
+	keyCode,
+	volume,
+	audioRef,
+	handlePlay,
+	handleColor,
+}) => {
 	const [style, setStyle] = useState({
 		backgroundColor: "#8a8a8ac9",
 		boxShadow: "1px 1px 8px 2px #6d6f6fd0",
@@ -9,7 +15,7 @@ export const useKey = ({ keyCode, volume, audioRef, handlePlay, handleColor }) =
 		const handleKeyPress = (e) => {
 			if (e.keyCode === keyCode) {
 				handlePlay();
-				handleColor()
+				handleColor();
 			}
 		};
 		document.addEventListener("keydown", handleKeyPress);
@@ -24,8 +30,8 @@ export const useKey = ({ keyCode, volume, audioRef, handlePlay, handleColor }) =
 		}
 	}, [volume]);
 
-    return {
-        style, 
-        setStyle
-    }
+	return {
+		style,
+		setStyle,
+	};
 };

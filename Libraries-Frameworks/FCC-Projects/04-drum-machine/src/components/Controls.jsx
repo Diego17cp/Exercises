@@ -6,7 +6,7 @@ import { useVolume } from "../hooks/useVolume";
 export const Controls = () => {
 	const { power, togglePower } = usePower();
 	const { volume, adjustVolume } = useVolume();
-	const { bank, toggleBank } = useBank();
+	const { currentPadBankId: bank, toggleBank } = useBank();
 	const { display } = useDisplay();
 
 	return (
@@ -14,13 +14,16 @@ export const Controls = () => {
 			<div className="control">
 				<p>Power</p>
 				<div className="select" onClick={togglePower}>
-					<div className="switch" style={
-                        {
-                            transform: power ? 'rotate(0deg)' : 'rotate(180deg)',
-                        }
-                    }>
-                        <span className="indicator"></span>
-                    </div>
+					<div
+						className="switch"
+						style={{
+							transform: power
+								? "rotate(0deg)"
+								: "rotate(180deg)",
+						}}
+					>
+						<span className="indicator"></span>
+					</div>
 				</div>
 			</div>
 			<p className="display">{display}</p>
@@ -33,19 +36,23 @@ export const Controls = () => {
 					min="0"
 					step="0.1"
 					value={volume}
-                    onChange={adjustVolume}
+					onChange={adjustVolume}
 				/>
 			</div>
 			<div className="control">
 				<p>Bank</p>
 				<div className="select" onClick={toggleBank}>
-					<div className="switch" style={
-                        {
-                            transform: bank === 'Heater Kit' ? 'rotate(0deg)' : 'rotate(180deg)',
-                        }
-                    }>
-                        <span className="indicator"></span>
-                    </div>
+					<div
+						className="switch"
+						style={{
+							transform:
+								bank === "Heater Kit"
+									? "rotate(0deg)"
+									: "rotate(180deg)",
+						}}
+					>
+						<span className="indicator"></span>
+					</div>
 				</div>
 			</div>
 		</section>

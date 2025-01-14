@@ -1,7 +1,6 @@
 import { useBank } from "../hooks/useBank.js";
 import { Key } from "./Key.jsx";
 
-
 export const Pad = () => {
 	const { bank: currentPadBank } = useBank();
 	return (

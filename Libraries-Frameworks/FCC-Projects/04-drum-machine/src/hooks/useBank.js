@@ -3,7 +3,14 @@ import { heaterKit, smoothPianoKit } from "../constants/consts";
 import { DrumMachineContext } from "../context/drumMachine";
 
 export const useBank = () => {
-	const { bank, setBank, currentPadBankId, setCurrentPadBankId, power, setDisplay } = useContext(DrumMachineContext);
+	const {
+		bank,
+		setBank,
+		currentPadBankId,
+		setCurrentPadBankId,
+		power,
+		setDisplay,
+	} = useContext(DrumMachineContext);
 	const toggleBank = () => {
 		if (power) {
 			if (bank === heaterKit) {
@@ -18,5 +25,5 @@ export const useBank = () => {
 		}
 	};
 
-    return { bank, toggleBank, currentPadBankId };
+	return { bank, toggleBank, currentPadBankId };
 };

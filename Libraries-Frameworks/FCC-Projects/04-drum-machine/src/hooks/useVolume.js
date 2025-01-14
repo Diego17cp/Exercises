@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { DrumMachineContext } from "../context/drumMachine";
 
 export const useVolume = () => {
-
-	const { volume, setVolume, power, setDisplay } = useContext(DrumMachineContext);
+	const { volume, setVolume, power, setDisplay } =
+		useContext(DrumMachineContext);
 
 	const adjustVolume = (e) => {
 		if (power) {
@@ -16,5 +16,5 @@ export const useVolume = () => {
 		}
 	};
 
-    return { volume, adjustVolume };
+	return { volume, adjustVolume };
 };

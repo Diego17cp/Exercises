@@ -10,15 +10,22 @@ export const DrumMachineProvider = ({ children }) => {
 	const [bank, setBank] = useState(heaterKit);
 	const [currentPadBankId, setCurrentPadBankId] = useState("Heater Kit");
 
-    return (
-        <DrumMachineContext.Provider value={{
-            power, setPower,
-            volume, setVolume,
-            display, setDisplay,
-            bank, setBank,
-            currentPadBankId, setCurrentPadBankId
-        }}>
-            {children}
-        </DrumMachineContext.Provider>
-    )
+	return (
+		<DrumMachineContext.Provider
+			value={{
+				power,
+				setPower,
+				volume,
+				setVolume,
+				display,
+				setDisplay,
+				bank,
+				setBank,
+				currentPadBankId,
+				setCurrentPadBankId,
+			}}
+		>
+			{children}
+		</DrumMachineContext.Provider>
+	);
 };
