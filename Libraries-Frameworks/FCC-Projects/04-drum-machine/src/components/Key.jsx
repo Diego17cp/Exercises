@@ -4,6 +4,7 @@ import { useKey } from '../hooks/useKey';
 import { usePower } from '../hooks/usePower';
 import { useVolume } from '../hooks/useVolume';
 import { useDisplay } from '../hooks/useDisplay';
+import PropTypes from 'prop-types';
 
 
 export const Key = ({ id, keyTrigger, url, keyCode}) => {
@@ -29,4 +30,11 @@ export const Key = ({ id, keyTrigger, url, keyCode}) => {
             {keyTrigger}
         </div>
     )
+}
+
+Key.propTypes = {
+    id: PropTypes.string.isRequired,
+    keyTrigger: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    keyCode: PropTypes.number.isRequired
 }
