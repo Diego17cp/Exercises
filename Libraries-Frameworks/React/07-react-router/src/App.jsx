@@ -1,33 +1,28 @@
-import { useEffect, useState } from 'react'
-import { NAVIGATION_EVENTS } from './constants/consts'
-import './App.css'
-import HomePage from './pages/Home'
-import AboutPage from './pages/About'
+import { Router } from "./components/Router";
+import "./App.css";
+import HomePage from "./pages/Home";
+import AboutPage from "./pages/About";
+import { Page404 } from "./pages/404";
+import { SearchPage } from "./pages/Search";
+import { Route } from "./components/Route";
 
-
-
-
+const appRoutes = [
+  {
+    path: '/search/:query',
+    Component: SearchPage
+  }
+]
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
-  useEffect(() => {
-    const onLocationChange = () => {
-      setCurrentPath(window.location.pathname)
-    }
-    window.addEventListener(NAVIGATION_EVENTS.PUSHSTATE, onLocationChange)
-    window.addEventListener(NAVIGATION_EVENTS.POPSTATE, onLocationChange)
-    return () => {
-      window.removeEventListener(NAVIGATION_EVENTS.PUSHSTATE, onLocationChange)
-      window.removeEventListener(NAVIGATION_EVENTS.POPSTATE, onLocationChange)
-    }   
-  }, [])
 
-  return (
-    <main>
-        {currentPath === '/' && <HomePage />}
-        {currentPath === '/about' && <AboutPage />}
-    </main>
-  )
+	return (
+		<main>
+			<Router routes={appRoutes} defaultComponent={Page404}>
+        <Route path='/' Component={HomePage}></Route>
+        <Route path='/about' Component={AboutPage}></Route>
+      </Router>
+		</main>
+	);
 }
 
-export default App
+export default App;
