@@ -1,2 +1,2 @@
 
-export const getCurrentPath = () => window.location.pathname;
+export const getCurrentPath = () => window.location.pathname; 
