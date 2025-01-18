@@ -4,6 +4,7 @@ import { TodoId, TodoTitle, Todo as TodoType } from "./types";
 import { Filter, TODO_FILTERS } from "./consts";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { Copyright } from "./components/Copyright";
 
 const mockToDos = [
 	{
@@ -95,22 +96,25 @@ function App(): JSX.Element {
 	};
 
 	return (
-		<div className="todoapp">
-			<Header onAddTodo={handleAddTodo} />
-			<Todos
-				todos={filteredTodos}
-				onRemoveTodo={handleRemove}
-				onToggleCompleted={handleCompleted}
-				setTitle={handleUpdateTitle}
-			/>
-			<Footer
-				activeCount={activeCounts}
-				filterSelected={filterSelected}
-				handleFilterChange={handleFilterChange}
-				completedCount={completedCounts}
-				onClearCompleted={handleRemoveCompleteds}
-			/>
-		</div>
+		<>
+			<div className="todoapp">
+				<Header onAddTodo={handleAddTodo} />
+				<Todos
+					todos={filteredTodos}
+					onRemoveTodo={handleRemove}
+					onToggleCompleted={handleCompleted}
+					setTitle={handleUpdateTitle}
+				/>
+				<Footer
+					activeCount={activeCounts}
+					filterSelected={filterSelected}
+					handleFilterChange={handleFilterChange}
+					completedCount={completedCounts}
+					onClearCompleted={handleRemoveCompleteds}
+				/>
+			</div>
+			<Copyright />
+		</>
 	);
 }
 
