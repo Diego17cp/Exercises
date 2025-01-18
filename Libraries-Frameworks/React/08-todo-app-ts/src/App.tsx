@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Todos } from "./components/Todos";
-import { TodoId, Todo as TodoType } from "./types";
+import { TodoId, TodoTitle, Todo as TodoType } from "./types";
 import { Filter, TODO_FILTERS } from "./consts";
 import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 
 const mockToDos = [
 	{
@@ -24,7 +25,9 @@ const mockToDos = [
 
 function App(): JSX.Element {
 	const [todos, setTodos] = useState(mockToDos);
-	const [filterSelected, setFilterSelected] = useState<Filter>(TODO_FILTERS.ALL);
+	const [filterSelected, setFilterSelected] = useState<Filter>(
+		TODO_FILTERS.ALL
+	);
 
 	const handleRemove = ({ id }: TodoId) => {
 		const newTodos = todos.filter((todo) => todo.id !== id);
@@ -48,23 +51,34 @@ function App(): JSX.Element {
 	const handleFilterChange = (filter: Filter) => {
 		setFilterSelected(filter);
 	};
-  
+
 	const activeCounts = todos.filter((todo) => !todo.completed).length;
 	const completedCounts = todos.length - activeCounts;
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed;
-    if (filterSelected === TODO_FILTERS.COMPLETED) return todo.completed;
-    return todos
-  })
+	const filteredTodos = todos.filter((todo) => {
+		if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed;
+		if (filterSelected === TODO_FILTERS.COMPLETED) return todo.completed;
+		return todos;
+	});
 
-  const handleRemoveCompleteds = () => {
-    const newTodos = todos.filter((todo) => !todo.completed);
-    setTodos(newTodos);
-  }
+	const handleRemoveCompleteds = () => {
+		const newTodos = todos.filter((todo) => !todo.completed);
+		setTodos(newTodos);
+	};
+
+	const handleAddTodo = ({ title }: TodoTitle) => {
+		const newTodo = {
+			title,
+			id: crypto.randomUUID(),
+			completed: false,
+		};
+		const newTodos = [...todos, newTodo];
+		setTodos(newTodos);
+	};
 
 	return (
 		<div className="todoapp">
+			<Header onAddTodo={handleAddTodo} />
 			<Todos
 				todos={filteredTodos}
 				onRemoveTodo={handleRemove}
@@ -75,7 +89,7 @@ function App(): JSX.Element {
 				filterSelected={filterSelected}
 				handleFilterChange={handleFilterChange}
 				completedCount={completedCounts}
-        onClearCompleted={handleRemoveCompleteds}
+				onClearCompleted={handleRemoveCompleteds}
 			/>
 		</div>
 	);
