@@ -16,20 +16,18 @@ export const Todos: React.FC<Props> = ({
 	todos,
 	onRemoveTodo,
 	onToggleCompleted,
-	setTitle
+	setTitle,
 }) => {
-	const [isEditing, setIsEditing] = useState('');
-	
+	const [isEditing, setIsEditing] = useState("");
+
 	return (
 		<ul className="todo-list">
 			{todos.map((todo) => (
 				<li
 					key={todo.id}
-					onDoubleClick={
-						() => {
-							setIsEditing(todo.id);
-						}
-					}
+					onDoubleClick={() => {
+						setIsEditing(todo.id);
+					}}
 					className={`
 						${todo.completed ? "completed" : ""}
 						${isEditing === todo.id ? "editing" : ""}

@@ -21,27 +21,28 @@ export const Todo: React.FC<Props> = ({
 	setTitle,
 	setIsEditing,
 	isEditing,
-
 }) => {
 	const [editedTitle, setEditedTitle] = useState(title);
 	const inputEditTitle = useRef<HTMLInputElement>(null);
 
-	const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+	const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
+		event
+	) => {
 		if (event.key === "Enter") {
 			setEditedTitle(editedTitle.trim());
-			if(editedTitle !== title) {
+			if (editedTitle !== title) {
 				setTitle({ id, title: editedTitle });
 			}
-			if(editedTitle === "") {
+			if (editedTitle === "") {
 				onRemoveTodo({ id });
 			}
 			setIsEditing("");
 		}
-		if(event.key === "Escape") {
+		if (event.key === "Escape") {
 			setEditedTitle(title);
 			setIsEditing("");
 		}
-	}
+	};
 
 	useEffect(() => {
 		inputEditTitle.current?.focus();
@@ -55,7 +56,10 @@ export const Todo: React.FC<Props> = ({
 					className="toggle"
 					checked={completed}
 					onChange={(event) => {
-						onToggleCompleted({ id, completed: event.target.checked });
+						onToggleCompleted({
+							id,
+							completed: event.target.checked,
+						});
 					}}
 				/>
 				<label>{title}</label>
@@ -67,13 +71,15 @@ export const Todo: React.FC<Props> = ({
 				></button>
 			</div>
 
-			<input 
-				className="edit" 
-				value={editedTitle} 
+			<input
+				className="edit"
+				value={editedTitle}
 				onChange={(event) => setEditedTitle(event.target.value)}
 				onKeyDown={handleKeyDown}
 				ref={inputEditTitle}
-				onBlur={() => {setIsEditing("");}}
+				onBlur={() => {
+					setIsEditing("");
+				}}
 			/>
 		</>
 	);

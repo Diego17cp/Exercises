@@ -3,9 +3,7 @@ import { FILTER_BUTTONS, Filter } from "../consts";
 
 interface Props {
 	filterSelected: Filter;
-	onFilterChange: (
-		filter: Filter
-	) => void;
+	onFilterChange: (filter: Filter) => void;
 }
 
 export const Filters: React.FC<Props> = ({
@@ -24,9 +22,7 @@ export const Filters: React.FC<Props> = ({
 							className={className}
 							onClick={(event) => {
 								event.preventDefault();
-								onFilterChange(
-									key as Filter
-								);
+								onFilterChange(key as Filter);
 							}}
 						>
 							{label}

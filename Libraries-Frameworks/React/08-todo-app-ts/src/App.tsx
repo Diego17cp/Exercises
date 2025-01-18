@@ -78,18 +78,21 @@ function App(): JSX.Element {
 		setTodos(newTodos);
 	};
 
-  const handleUpdateTitle = ({ id, title }: Pick<TodoType, 'id' | 'title'>) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          title,
-        };
-      }
-      return todo;
-    });
-    setTodos(newTodos);
-  }
+	const handleUpdateTitle = ({
+		id,
+		title,
+	}: Pick<TodoType, "id" | "title">) => {
+		const newTodos = todos.map((todo) => {
+			if (todo.id === id) {
+				return {
+					...todo,
+					title,
+				};
+			}
+			return todo;
+		});
+		setTodos(newTodos);
+	};
 
 	return (
 		<div className="todoapp">
@@ -98,7 +101,7 @@ function App(): JSX.Element {
 				todos={filteredTodos}
 				onRemoveTodo={handleRemove}
 				onToggleCompleted={handleCompleted}
-        setTitle = {handleUpdateTitle}
+				setTitle={handleUpdateTitle}
 			/>
 			<Footer
 				activeCount={activeCounts}
