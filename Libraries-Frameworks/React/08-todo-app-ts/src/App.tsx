@@ -33,6 +33,7 @@ function App(): JSX.Element {
 		const newTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(newTodos);
 	};
+
 	const handleCompleted = ({
 		id,
 		completed,
@@ -48,6 +49,7 @@ function App(): JSX.Element {
 		});
 		setTodos(newTodos);
 	};
+
 	const handleFilterChange = (filter: Filter) => {
 		setFilterSelected(filter);
 	};
@@ -76,6 +78,19 @@ function App(): JSX.Element {
 		setTodos(newTodos);
 	};
 
+  const handleUpdateTitle = ({ id, title }: Pick<TodoType, 'id' | 'title'>) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          title,
+        };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  }
+
 	return (
 		<div className="todoapp">
 			<Header onAddTodo={handleAddTodo} />
@@ -83,6 +98,7 @@ function App(): JSX.Element {
 				todos={filteredTodos}
 				onRemoveTodo={handleRemove}
 				onToggleCompleted={handleCompleted}
+        setTitle = {handleUpdateTitle}
 			/>
 			<Footer
 				activeCount={activeCounts}
