@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-// import { useState } from 'react'
+// import { useReducer, useState } from 'react'
+import { useStore } from './hooks/useStore'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
