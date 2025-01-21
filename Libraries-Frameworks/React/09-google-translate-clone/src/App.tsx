@@ -7,6 +7,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { AUTO_LANG } from "./constants";
 import { ArrowsIcon } from "./components/Iconos";
 import { LanguageSelector } from "./components/LanguageSelector";
+import { SectionType } from "./types.d";
 
 function App() {
 	const { fromLang, toLang, interchangeLang, setFromLang, setToLang } =
@@ -20,7 +21,7 @@ function App() {
 				<Col>
 					<h2>From</h2>
 					<LanguageSelector
-						type="from"
+						type={SectionType.From}
 						value={fromLang}
 						onChange={setFromLang}
 					></LanguageSelector>
@@ -38,7 +39,7 @@ function App() {
 					<h2>to</h2>
 					<LanguageSelector
 						onChange={setToLang}
-						type="to"
+						type={SectionType.To}
 						value={toLang}
 					></LanguageSelector>
 				</Col>

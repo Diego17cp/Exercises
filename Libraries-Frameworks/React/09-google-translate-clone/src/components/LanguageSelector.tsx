@@ -2,11 +2,11 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Form } from "react-bootstrap";
 import { AUTO_LANG, SUPPORTED_LANGUAGES } from "../constants";
-import { FromLang, Language } from "../types";
+import { type FromLang, type Language, SectionType } from "../types.d";
 
 type Props =
-	| { type: "from"; value: FromLang; onChange: (lang: FromLang) => void }
-	| { type: "to"; value: Language; onChange: (lang: Language) => void };
+	| { type: SectionType.From; value: FromLang; onChange: (lang: FromLang) => void }
+	| { type: SectionType.To; value: Language; onChange: (lang: Language) => void };
 
 export const LanguageSelector: React.FC<Props> = ({
 	onChange,
@@ -24,7 +24,7 @@ export const LanguageSelector: React.FC<Props> = ({
 			value={value}
 		>
             {
-                type === 'from' && <option value={AUTO_LANG}>Detect language</option>
+                type === SectionType.From && <option value={AUTO_LANG}>Detect language</option>
             }
 			{Object.entries(SUPPORTED_LANGUAGES).map(([key, literal]) => (
 				<option key={key} value={key}>
