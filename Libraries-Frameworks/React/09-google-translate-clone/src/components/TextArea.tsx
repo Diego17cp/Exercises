@@ -37,6 +37,7 @@ export const TextArea = ({ type, loading, value, onChange  }: Props) => {
 			style={styles}
             value={value}
             onChange={handleChange}
+            disabled={type===SectionType.To}
 		/>
 	);
 };

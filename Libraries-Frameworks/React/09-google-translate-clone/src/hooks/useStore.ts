@@ -14,6 +14,7 @@ const initialState: State = {
 // 2. Create a reducer function
 const reducer = (state: State, action: Action) => {
 	const { type } = action;
+	const loading = state.fromText !== ""
 	switch (type) {
 		case "INTERCHANGE_LANG":
 			if(state.fromLang === AUTO_LANG) return state
@@ -23,14 +24,20 @@ const reducer = (state: State, action: Action) => {
 				toLang: state.fromLang,
 			};
 		case "SET_FROM_LANG":
+			if(state.fromLang === action.payload) return state
 			return {
 				...state,
 				fromLang: action.payload,
+				result: "",
+				loading
 			};
 		case "SET_TO_LANG":
+			if(state.toLang === action.payload) return state
 			return {
 				...state,
 				toLang: action.payload,
+				result: "",
+				loading
 			};
 		case "SET_FROM_TEXT":
 			return {

@@ -9,6 +9,8 @@ import { ArrowsIcon } from "./components/Iconos";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { SectionType } from "./types.d";
 import { TextArea } from "./components/TextArea";
+import { useEffect } from "react";
+import { translate } from "./services/translate";
 
 function App() {
 	const {
@@ -21,8 +23,19 @@ function App() {
 		result,
 		setFromText,
 		setResult,
-    loading
+		loading,
 	} = useStore();
+
+	useEffect(() => {
+		if(fromText === "") return
+		translate({ fromLang, toLang, text: fromText })
+			.then(res => {
+				if(res == null) return
+				setResult(res)
+			}).catch(
+				() => setResult("Error")
+			)
+	}, [toLang, fromLang])
 
 	return (
 		<Container fluid>
@@ -39,7 +52,7 @@ function App() {
 						<TextArea
 							type={SectionType.From}
 							value={fromText}
-              onChange={setFromText}
+							onChange={setFromText}
 						/>
 					</Stack>
 				</Col>
@@ -62,8 +75,8 @@ function App() {
 						<TextArea
 							type={SectionType.To}
 							value={result}
-              onChange={setResult}
-              loading={loading}
+							onChange={setResult}
+							loading={loading}
 						/>
 					</Stack>
 				</Col>
