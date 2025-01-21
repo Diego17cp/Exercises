@@ -1,3 +1,4 @@
+// TODO: replace all this shit, cause the API doesnt works
 import {
 	ChatCompletionRequestMessageRoleEnum,
 	Configuration,
