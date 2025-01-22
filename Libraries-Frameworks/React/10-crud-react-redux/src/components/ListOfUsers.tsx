@@ -11,17 +11,12 @@ import {
 	Title,
 } from "@tremor/react";
 
-import { useAppSelector, useAppDispatch } from "../hooks/store";
-import { deleteUserById, UserId } from "../store/users/slice";
+import { useAppSelector } from "../hooks/store";
+import { useUsersActions } from "../hooks/useUsersActions";
 
 export function ListOfUsers() {
 	const users = useAppSelector((state) => state.users);
-	const dispatch = useAppDispatch();
-
-	const handleRemoveUser = (id: UserId) => {
-		dispatch(deleteUserById(id));
-	};
-
+	const { removeUser } = useUsersActions();
 	return (
 		<>
 			<Table>
@@ -84,7 +79,7 @@ export function ListOfUsers() {
 									</svg>
 								</button>
 								<button onClick={
-									() => handleRemoveUser(item.id)
+									() => removeUser(item.id)
 								}>
 									<svg
 										aria-label="Remove element"
