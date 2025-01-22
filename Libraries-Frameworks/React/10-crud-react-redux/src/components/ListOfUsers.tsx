@@ -11,45 +11,13 @@ import {
 	Title,
 } from "@tremor/react";
 
-const users: {
-	id: string;
-	name: string;
-	email: string;
-	github: string;
-}[] = [
-	{
-		id: "1",
-		name: "Diego Castro",
-		email: "diego@gmail.com",
-		github: "diegocastro",
-	},
-	{
-		id: "2",
-		name: "Peter Parker",
-		email: "peter@dailybugle.com",
-		github: "spidey",
-	},
-	{
-		id: "3",
-		name: "Bruce Wayne",
-		email: "bruce@wayne.com",
-		github: "batman",
-	},
-	{
-		id: "4",
-		name: "Tony Stark",
-		email: "tony@stark.com",
-		github: "ironman",
-	},
-	{
-		id: "5",
-		name: "Clark Kent",
-		email: "clark@dailyplanet.com",
-		github: "superman",
-	},
-];
+import { useAppSelector } from "../hooks/store";
 
 export function ListOfUsers() {
+	const users = useAppSelector(
+		(state) => state.users
+	)
+
 	return (
 		<>
 			<Table>
