@@ -36,7 +36,7 @@ function App() {
 				if (res == null) return;
 				setResult(res);
 			})
-			.catch(() => setResult("Error"));
+			.catch((e) => setResult("Error"+ e));
 	}, [toLang, fromLang]);
 
 	const handleClipboard = () => {
