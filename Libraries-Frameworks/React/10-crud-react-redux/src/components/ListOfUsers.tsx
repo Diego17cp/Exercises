@@ -15,6 +15,7 @@ import { useAppSelector } from "../hooks/store";
 import { useUsersActions } from "../hooks/useUsersActions";
 
 export function ListOfUsers() {
+	// Access the users state from the store
 	const users = useAppSelector((state) => state.users);
 	const { removeUser } = useUsersActions();
 	return (
@@ -78,9 +79,7 @@ export function ListOfUsers() {
 										/>
 									</svg>
 								</button>
-								<button onClick={
-									() => removeUser(item.id)
-								}>
+								<button onClick={() => removeUser(item.id)}>
 									<svg
 										aria-label="Remove element"
 										xmlns="http://www.w3.org/2000/svg"
