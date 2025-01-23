@@ -63,14 +63,24 @@ export const usersSlice = createSlice({
 		addNewUser: (state, action : PayloadAction<User>) => {
 			const id = crypto.randomUUID()
 			return [...state, { id, ...action.payload }]
+			// Redux Toolkit allows us mutate the state directly
+			// state.push({ id, ...action.payload })
 		},
 		deleteUserById: (state, action : PayloadAction<UserId>) => {
 			const id = action.payload
 			return state.filter((user) => user.id !== id)
+		},
+		rollbackUser: (state, action : PayloadAction<UsersWithId>) => {
+			const isUserAlreadyDefined = state.some(
+				(user) => user.id === action.payload.id
+			)
+			if (!isUserAlreadyDefined) {
+				return [...state, action.payload]
+			}
 		}
-    }
+    },
 })
 
 export default usersSlice.reducer
 
-export const { addNewUser, deleteUserById } = usersSlice.actions
+export const { addNewUser, deleteUserById, rollbackUser } = usersSlice.actions
