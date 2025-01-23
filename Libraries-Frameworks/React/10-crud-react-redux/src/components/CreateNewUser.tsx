@@ -12,6 +12,7 @@ export const CreateNewUser = () => {
         const email = formData.get("email") as string
         const github = formData.get("github") as string
         addUser({name, email, github})
+        form.reset()
     }   
     return (
         <Card style={{
