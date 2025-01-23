@@ -4,6 +4,10 @@ import { ListOfUsers } from './components/ListOfUsers'
 
 function App() {
 
+  // TODO: Implement the following:
+  // - Edit a user
+  // - Show toasts when a user is added, or edited
+
   return (
     <>
     <ListOfUsers></ListOfUsers>
