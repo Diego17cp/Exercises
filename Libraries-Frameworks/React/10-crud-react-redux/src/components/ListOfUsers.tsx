@@ -15,9 +15,11 @@ import { useAppSelector } from "../hooks/store";
 import { useUsersActions } from "../hooks/useUsersActions";
 import { CreateNewUser } from "./CreateNewUser";
 import { useState } from "react";
+import { EditUser } from "./EditUser";
 
 export function ListOfUsers() {
 	const [opacity, setOpacity] = useState(0);
+	const [editOpacity, setEditOpacity] = useState(0);
 	// Access the users state from the store
 	const users = useAppSelector((state) => state.users);
 	const { removeUser } = useUsersActions();
@@ -85,7 +87,7 @@ export function ListOfUsers() {
 								</TableCell>
 								<TableCell className="text-center">{item.email}</TableCell>
 								<TableCell className="flex justify-around">
-									<button type="button">
+									<button type="button" onClick={() => setEditOpacity(1)}>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											fill="none"
@@ -125,6 +127,7 @@ export function ListOfUsers() {
 				</Table>
 			</section>
 			<CreateNewUser opacity={opacity} setOpacity={setOpacity}></CreateNewUser>
+			<EditUser opacity={editOpacity} setOpacity={setEditOpacity}></EditUser>
 		</>
 	);
 }

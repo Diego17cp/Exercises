@@ -7,37 +7,35 @@ type Props = {
 	setOpacity: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const CreateNewUser = ({ opacity, setOpacity }: Props) => {
-	const { addUser } = useUsersActions();
-
+export const EditUser = ({ opacity, setOpacity }: Props) => {
 	const [errMsg, setErrMsg] = useState("");
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		const form = e.currentTarget;
-		const formData = new FormData(form);
+	// const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	// 	e.preventDefault();
+	// 	const form = e.currentTarget;
+	// 	const formData = new FormData(form);
 
-		const name = formData.get("name") as string;
-		const email = formData.get("email") as string;
-		const github = formData.get("github") as string;
-		if(!name || !email || !github) {
-			setErrMsg("Please fill all the fields");
-			return;
-		}
-		addUser({ name, email, github });
-		setErrMsg("");
-		setOpacity(0);
-		form.reset();
-	};
+	// 	const name = formData.get("name") as string;
+	// 	const email = formData.get("email") as string;
+	// 	const github = formData.get("github") as string;
+	// 	if(!name || !email || !github) {
+	// 		setErrMsg("Please fill all the fields");
+	// 		return;
+	// 	}
+	// 	addUser({ name, email, github });
+	// 	setErrMsg("");
+	// 	setOpacity(0);
+	// 	form.reset();
+	// };
 	const handleClose = () => {
 		setOpacity(0);
 	};
 	return (
 		<Card
-			className={`w-3/12 h-3/5 absolute top-1/4 ${opacity===0? "z-0":"z-50"} flex flex-col p-5 backdrop-blur-md left-50 rounded-lg text-white border-2 border-slate-700 justify-around opacity-${opacity} transition-all duration-500`}
+			className={`w-3/12 h-4/6 absolute top-1/4 ${opacity===0? "z-0":"z-50"} flex flex-col p-5 backdrop-blur-md left-50 rounded-lg text-white border-2 border-slate-700 justify-around opacity-${opacity} transition-all duration-500`}
 		>
-			<section className="">
-				<Title className="text-3xl text-center">Create New User</Title>
+			<section className="mb-3">
+				<Title className="text-3xl text-center">Edit User Info</Title>
 				<button
 					className="absolute right-1 top-2"
 					onClick={handleClose}
@@ -62,6 +60,12 @@ export const CreateNewUser = ({ opacity, setOpacity }: Props) => {
 				className="h-5/6 w-full pt-3 px-2 flex flex-col gap-9 justify-center items-center"
 				onSubmit={handleSubmit}
 			>
+                <TextInput
+                    className="rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder="1"
+                    name="id"
+                    disabled
+                ></TextInput>
 				<TextInput
 					className="rounded-lg"
 					placeholder="Diego Castro"
