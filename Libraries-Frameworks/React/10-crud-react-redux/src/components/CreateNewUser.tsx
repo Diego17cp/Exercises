@@ -1,7 +1,12 @@
 import { Button, Card, TextInput, Title } from "@tremor/react";
 import { useUsersActions } from "../hooks/useUsersActions";
 
-export const CreateNewUser = () => {
+type State = {
+	opacity: number;
+	setOpacity: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export const CreateNewUser = ({ opacity, setOpacity }: State) => {
 	const { addUser } = useUsersActions();
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -14,13 +19,18 @@ export const CreateNewUser = () => {
 		addUser({ name, email, github });
 		form.reset();
 	};
+	const handleClose = () => {
+		setOpacity(0);
+	};
 	return (
-		<Card className="w-6/12 h-4/6 absolute top-50 z-10 flex flex-col p-5 backdrop-blur-md bg-transparent rounded-lg text-white border-2 border-slate-700 justify-around">
+		<Card
+			className={`w-3/12 h-3/5 absolute top-1/4 z-10 flex flex-col p-5 backdrop-blur-md left-50 rounded-lg text-white border-2 border-slate-700 justify-around opacity-${opacity} transition-all duration-500`}
+		>
 			<section className="">
 				<Title className="text-3xl text-center">Create New User</Title>
 				<button
 					className="absolute right-1 top-2"
-					onClick={() => console.log("close")}
+					onClick={handleClose}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +69,7 @@ export const CreateNewUser = () => {
 				></TextInput>
 				<Button
 					type="submit"
-					className="w-5/6 bg-slate-300 text-black outline-none border-0 rounded-md hover:bg-slate-500 hover:text-white transition-all duration-300"
+					className="w-5/6 bg-slate-300 text-black outline-none border-0 rounded-md hover:bg-slate-700 hover:text-white transition-all duration-500"
 				>
 					Create
 				</Button>

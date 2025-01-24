@@ -1,5 +1,4 @@
 import { Toaster } from "sonner";
-import { CreateNewUser } from "./components/CreateNewUser";
 import { ListOfUsers } from "./components/ListOfUsers";
 
 function App() {
@@ -9,9 +8,8 @@ function App() {
 	// Validate cannot add a user with the same email or empty fields
 
 	return (
-		<main className="bg-zinc-900 flex flex-col w-full h-screen p-4 justify-center items-center">
+		<main className="bg-zinc-900 flex flex-col w-full h-screen p-4 justify-center items-center relative">
 			<ListOfUsers></ListOfUsers>
-			<CreateNewUser></CreateNewUser>
 			<Toaster richColors></Toaster>
 		</main>
 	);
