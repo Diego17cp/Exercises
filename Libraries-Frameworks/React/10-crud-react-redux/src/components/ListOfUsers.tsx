@@ -23,7 +23,7 @@ export function ListOfUsers() {
 			<div className="flex justify-between mb-5 pb-4 border-b-2 border-slate-300">
 				<Title>
 					Users:
-					<Badge className="border-2 bg-emerald-300 ml-3 rounded-md outline-none">
+					<Badge className="border-2 bg-emerald-300 ml-3 rounded-md outline-none text-black">
 						{users.length}
 					</Badge>
 				</Title>
