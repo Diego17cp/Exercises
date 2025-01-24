@@ -35,6 +35,24 @@ const syncDB: Middleware = (store) => (next) => (action) => {
 				console.error("Error deleting user" + err);
 			});
 	}
+	if (type === "users/addNewUser") {
+		const user = payload;
+		fetch(`https://jsonplaceholder.typicode.com/users`, {
+			method: "POST",
+			body: JSON.stringify(user),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8",
+			},
+		})
+			.then((res) => {
+				if (res.ok) toast.success("User added successfully");
+			})
+			.catch((e) => {
+				store.dispatch(rollbackUser(user));
+				toast.error("Error adding user");
+				console.error("Error adding user" + e);
+			});
+	}
 };
 
 // The store is created with the configureStore function from Redux Toolkit
