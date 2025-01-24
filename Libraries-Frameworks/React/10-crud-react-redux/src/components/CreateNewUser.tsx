@@ -1,13 +1,17 @@
 import { Button, Card, TextInput, Title } from "@tremor/react";
 import { useUsersActions } from "../hooks/useUsersActions";
+import { useState } from "react";
 
-type State = {
+type Props = {
 	opacity: number;
 	setOpacity: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const CreateNewUser = ({ opacity, setOpacity }: State) => {
+export const CreateNewUser = ({ opacity, setOpacity }: Props) => {
 	const { addUser } = useUsersActions();
+
+	const [errMsg, setErrMsg] = useState("");
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.currentTarget;
@@ -16,7 +20,13 @@ export const CreateNewUser = ({ opacity, setOpacity }: State) => {
 		const name = formData.get("name") as string;
 		const email = formData.get("email") as string;
 		const github = formData.get("github") as string;
+		if(!name || !email || !github) {
+			setErrMsg("Please fill all the fields");
+			return;
+		}
 		addUser({ name, email, github });
+		setErrMsg("");
+		setOpacity(0);
 		form.reset();
 	};
 	const handleClose = () => {
@@ -49,7 +59,7 @@ export const CreateNewUser = ({ opacity, setOpacity }: State) => {
 				</button>
 			</section>
 			<form
-				className="h-5/6 w-full pt-3 px-2 flex flex-col gap-10 justify-center items-center"
+				className="h-5/6 w-full pt-3 px-2 flex flex-col gap-9 justify-center items-center"
 				onSubmit={handleSubmit}
 			>
 				<TextInput
@@ -67,6 +77,9 @@ export const CreateNewUser = ({ opacity, setOpacity }: State) => {
 					placeholder="diego17cp"
 					name="github"
 				></TextInput>
+				<div className="w-full text-center text-red-500 text-lg">
+					{errMsg}
+				</div>
 				<Button
 					type="submit"
 					className="w-5/6 bg-slate-300 text-black outline-none border-0 rounded-md hover:bg-slate-700 hover:text-white transition-all duration-500"
