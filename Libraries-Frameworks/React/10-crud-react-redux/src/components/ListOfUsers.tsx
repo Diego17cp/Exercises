@@ -19,50 +19,64 @@ export function ListOfUsers() {
 	const users = useAppSelector((state) => state.users);
 	const { removeUser } = useUsersActions();
 	return (
-		<>
-			<Table>
+		<section className="w-11/12 p-5 backdrop-blur-md bg-transparent rounded-lg text-white border-2 border-slate-700">
+			<div className="flex justify-between mb-5 pb-4 border-b-2 border-slate-300">
 				<Title>
 					Users:
-					<Badge
-						style={{
-							marginLeft: "10px",
-						}}
-					>
+					<Badge className="border-2 bg-emerald-300 ml-3 rounded-md outline-none">
 						{users.length}
 					</Badge>
 				</Title>
-				<TableHead>
+				<button>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="size-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+						/>
+					</svg>
+				</button>
+			</div>
+			<Table>
+				<TableHead className="bg-slate-600">
 					<TableRow>
-						<TableHeaderCell>ID</TableHeaderCell>
-						<TableHeaderCell>Nombre</TableHeaderCell>
-						<TableHeaderCell>Email</TableHeaderCell>
-						<TableHeaderCell>Acciones</TableHeaderCell>
+						<TableHeaderCell className="text-center">
+							ID
+						</TableHeaderCell>
+						<TableHeaderCell className="text-center">
+							Nombre
+						</TableHeaderCell>
+						<TableHeaderCell className="text-center">
+							Email
+						</TableHeaderCell>
+						<TableHeaderCell className="text-center">
+							Acciones
+						</TableHeaderCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{users.map((item) => (
 						<TableRow key={item.name}>
-							<TableCell>{item.id}</TableCell>
-							<TableCell
-								style={{
-									display: "flex",
-									alignItems: "center",
-									gap: "10px",
-								}}
-							>
+							<TableCell className="text-center">
+								{item.id}
+							</TableCell>
+							<TableCell className="flex items-center gap-4 text-center justify-center">
 								{item.name}
 								<img
 									src={`https://unavatar.io/github/${item.github}`}
 									alt={item.name}
-									style={{
-										width: "30px",
-										height: "30px",
-										borderRadius: "50%",
-									}}
+									className="w-8 h-8 rounded-3xl border-2 border-slate-300 border-solid"
 								/>
 							</TableCell>
-							<TableCell>{item.email}</TableCell>
-							<TableCell>
+							<TableCell className="text-center">{item.email}</TableCell>
+							<TableCell className="flex justify-around">
 								<button type="button">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -101,6 +115,6 @@ export function ListOfUsers() {
 					))}
 				</TableBody>
 			</Table>
-		</>
+		</section>
 	);
 }
