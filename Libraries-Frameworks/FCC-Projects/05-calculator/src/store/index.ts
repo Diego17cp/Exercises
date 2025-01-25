@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { operationsSlice } from "./operations/operationsSlice";
 
 export const store = configureStore({
     reducer:{
-        // operations:;
+        operations: operationsSlice.reducer
     }
 })
 

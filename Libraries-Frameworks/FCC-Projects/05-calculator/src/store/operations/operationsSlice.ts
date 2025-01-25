@@ -22,7 +22,7 @@ export const operationsSlice = createSlice({
             return state / action.payload
         },
         clear: () => {
-            return initialState
+            return 0
         }
     }
 })
