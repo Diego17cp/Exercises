@@ -1,5 +1,6 @@
 // Obtain the actions from the users slice and assign them to the useUsersActions hook
-import { addNewUser, deleteUserById, User, UserId } from "../store/users/slice";
+import { store } from "../store";
+import { addNewUser, deleteUserById, editUser, User, UserId, UsersWithId } from "../store/users/slice";
 // Import the useDispatch hook from react-redux for dispatching actions
 import { useAppDispatch } from "./store";
 
@@ -16,5 +17,24 @@ export const useUsersActions = () => {
 		dispatch(deleteUserById(id));
 	};
 
-	return { removeUser, addUser };
+	// The editUsers function receives a UsersWithId object and dispatches the editUser action with the UsersWithId object as a payload
+	const editUsers = ({id, name, email, github }: UsersWithId) => {
+		dispatch(editUser({ id, name, email, github }));
+	}
+
+	// The readUserInfo function receives a UserId and returns the user with the same id
+	// The function uses the getState method from the store to get the current state
+	// The function then returns the user with the same id as the one passed as a parameter
+	const readUserInfo = (id: UserId) => {
+		const state = store.getState();
+		const user = state.users.find((user: UsersWithId) => user.id === id);
+		return {
+			id: user?.id,
+			name: user?.name,
+			email: user?.email,
+			github: user?.github,
+		}
+	}
+
+	return { removeUser, addUser, editUsers, readUserInfo };
 };

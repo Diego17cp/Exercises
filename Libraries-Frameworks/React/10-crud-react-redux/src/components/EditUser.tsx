@@ -1,32 +1,46 @@
 import { Button, Card, TextInput, Title } from "@tremor/react";
 import { useUsersActions } from "../hooks/useUsersActions";
-import { useState } from "react";
+import { UsersWithId } from "../store/users/slice";
+import { toast } from "sonner";
 
 type Props = {
 	opacity: number;
 	setOpacity: React.Dispatch<React.SetStateAction<number>>;
+    userInfo: {
+        id: string | undefined;
+        name: string | undefined;
+        email: string | undefined;
+        github: string | undefined;
+    }
+    setUserInfo: React.Dispatch<React.SetStateAction<{
+        id: string | undefined;
+        name: string | undefined;
+        email: string | undefined;
+        github: string | undefined;
+    }>>;
 }
 
-export const EditUser = ({ opacity, setOpacity }: Props) => {
-	const [errMsg, setErrMsg] = useState("");
+export const EditUser = ({ opacity, setOpacity, userInfo, setUserInfo }: Props) => {
+    const {  editUsers } = useUsersActions();
 
-	// const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-	// 	e.preventDefault();
-	// 	const form = e.currentTarget;
-	// 	const formData = new FormData(form);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setUserInfo({
+            ...userInfo,
+            [name]: value
+        });
+    }
 
-	// 	const name = formData.get("name") as string;
-	// 	const email = formData.get("email") as string;
-	// 	const github = formData.get("github") as string;
-	// 	if(!name || !email || !github) {
-	// 		setErrMsg("Please fill all the fields");
-	// 		return;
-	// 	}
-	// 	addUser({ name, email, github });
-	// 	setErrMsg("");
-	// 	setOpacity(0);
-	// 	form.reset();
-	// };
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const form = e.currentTarget;
+		if(userInfo.id) {
+            toast.success("User updated successfully");
+            editUsers(userInfo as UsersWithId);
+            setOpacity(0);
+        }
+		form.reset();
+	};
 	const handleClose = () => {
 		setOpacity(0);
 	};
@@ -64,31 +78,35 @@ export const EditUser = ({ opacity, setOpacity }: Props) => {
                     className="rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="1"
                     name="id"
+                    value={userInfo.id}
                     disabled
                 ></TextInput>
 				<TextInput
 					className="rounded-lg"
 					placeholder="Diego Castro"
+                    value={userInfo.name}
 					name="name"
+                    onChange={handleChange}
 				></TextInput>
 				<TextInput
 					placeholder="example@gmail.com"
 					name="email"
+                    value={userInfo.email}
 					className="rounded-lg"
+                    onChange={handleChange}
 				></TextInput>
 				<TextInput
 					className="rounded-lg"
 					placeholder="diego17cp"
+                    value={userInfo.github}
 					name="github"
+                    onChange={handleChange}
 				></TextInput>
-				<div className={`w-full text-center text-red-500 text-lg ${errMsg ? "block" : "hidden"}`}>
-					{errMsg}
-				</div>
 				<Button
 					type="submit"
 					className="w-5/6 bg-slate-300 text-black outline-none border-0 rounded-md hover:bg-slate-700 hover:text-white transition-all duration-500"
 				>
-					Create
+					Update
 				</Button>
 			</form>
 		</Card>

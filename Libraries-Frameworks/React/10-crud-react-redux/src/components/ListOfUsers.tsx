@@ -17,12 +17,25 @@ import { CreateNewUser } from "./CreateNewUser";
 import { useState } from "react";
 import { EditUser } from "./EditUser";
 
+type UserInfo = {
+	id: string | undefined;
+	name: string | undefined;
+	email: string | undefined;
+	github: string | undefined;
+}
+
 export function ListOfUsers() {
 	const [opacity, setOpacity] = useState(0);
 	const [editOpacity, setEditOpacity] = useState(0);
+	const [userInfo, setUserInfo] = useState<UserInfo>({
+		id: "",
+		name: "",
+		email: "",
+		github: "",
+	})
 	// Access the users state from the store
 	const users = useAppSelector((state) => state.users);
-	const { removeUser } = useUsersActions();
+	const { removeUser, readUserInfo} = useUsersActions();
 	const handleOpen = () => {
 		setOpacity(1);
 	}
@@ -87,7 +100,11 @@ export function ListOfUsers() {
 								</TableCell>
 								<TableCell className="text-center">{item.email}</TableCell>
 								<TableCell className="flex justify-around">
-									<button type="button" onClick={() => setEditOpacity(1)}>
+									<button type="button" onClick={() => {
+										setEditOpacity(1);
+										const user = readUserInfo(item.id);
+										setUserInfo(user);
+									} }>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											fill="none"
@@ -127,7 +144,7 @@ export function ListOfUsers() {
 				</Table>
 			</section>
 			<CreateNewUser opacity={opacity} setOpacity={setOpacity}></CreateNewUser>
-			<EditUser opacity={editOpacity} setOpacity={setEditOpacity}></EditUser>
+			<EditUser opacity={editOpacity} setOpacity={setEditOpacity} userInfo={userInfo} setUserInfo={setUserInfo}></EditUser>
 		</>
 	);
 }

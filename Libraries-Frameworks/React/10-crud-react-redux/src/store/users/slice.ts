@@ -96,9 +96,20 @@ export const usersSlice = createSlice({
 				return [...state, action.payload];
 			}
 		},
+		// The editUser action receives the state and an action with a payload of type UsersWithId as parameters
+		editUser: (state, action: PayloadAction<UsersWithId>) => {
+			// Get the user from the payload
+			const user = action.payload
+			// Find the index of the user in the state
+			const index = state.findIndex((u) => u.id === user.id)
+			// If the user is found, update the user in the state
+			if (index !== -1) {
+				state[index] = user
+			}
+		}
 	},
 });
 
 export default usersSlice.reducer;
 
-export const { addNewUser, deleteUserById, rollbackUser } = usersSlice.actions;
+export const { addNewUser, deleteUserById, rollbackUser, editUser } = usersSlice.actions;
