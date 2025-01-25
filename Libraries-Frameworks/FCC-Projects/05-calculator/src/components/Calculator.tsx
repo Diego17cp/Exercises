@@ -2,7 +2,9 @@ import { useAppSelector } from "../hooks/operations";
 import { Pad } from "./Pad";
 
 export const Calculator = () => {
-	const { currentVal, operationDisplay } = useAppSelector((state) => state.operations);
+	const { currentVal, operationDisplay } = useAppSelector(
+		(state) => state.operations
+	);
 
 	return (
 		<main className="mx-auto my-30 p-2 bg-black border-2 border-gray-600 rounded-lg shadow-lg h-120 w-85 justify-center items-center flex flex-col gap-2">

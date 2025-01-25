@@ -1,7 +1,8 @@
 import { useOperationsActions } from "../hooks/useOperations";
 import { NumberPad } from "./NumberPad";
 export const Pad = () => {
-	const { clearOperation, handleSelectOperation, handleCalc  } = useOperationsActions();
+	const { clearOperation, handleSelectOperation, handleCalc } =
+		useOperationsActions();
 	const border = {
 		border: "1px solid #d1d5dc",
 	};

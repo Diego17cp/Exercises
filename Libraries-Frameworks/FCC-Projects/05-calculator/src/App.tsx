@@ -1,12 +1,11 @@
-import { Calculator } from "./components/Calculator"
+import { Calculator } from "./components/Calculator";
 
 function App() {
-
-  return (
-    <>
-      <Calculator></Calculator>
-    </>
-  )
+	return (
+		<>
+			<Calculator></Calculator>
+		</>
+	);
 }
 
-export default App
+export default App;

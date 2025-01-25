@@ -1,8 +1,8 @@
 import {
 	inputNumber,
-    selectOperation,
-    calculate,
-    clear
+	selectOperation,
+	calculate,
+	clear,
 } from "../store/operations/operationsSlice";
 import { Operations } from "../types";
 import { useAppDispatch } from "./operations";
@@ -10,15 +10,15 @@ import { useAppDispatch } from "./operations";
 export const useOperationsActions = () => {
 	const dispatch = useAppDispatch();
 
-    const handleInputNum = (num: string) => {
-        dispatch(inputNumber(num));
-    }
-    const handleSelectOperation = (operation: Operations) => {
-        dispatch(selectOperation(operation));
-    }
+	const handleInputNum = (num: string) => {
+		dispatch(inputNumber(num));
+	};
+	const handleSelectOperation = (operation: Operations) => {
+		dispatch(selectOperation(operation));
+	};
 	const handleCalc = () => {
-        dispatch(calculate());
-    }
+		dispatch(calculate());
+	};
 
 	const clearOperation = () => {
 		dispatch(clear());
@@ -26,8 +26,8 @@ export const useOperationsActions = () => {
 
 	return {
 		handleInputNum,
-        handleSelectOperation,
-        handleCalc,
+		handleSelectOperation,
+		handleCalc,
 		clearOperation,
 	};
 };
