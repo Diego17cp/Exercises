@@ -47,7 +47,7 @@ export const operationsSlice = createSlice({
 			state.currentVal = "0";
 		},
 		calculate: (state) => {
-			if (state.operation === null) {
+			if (state.operation === null && state.currentVal !== "0") {
 				state.operationDisplay = `${state.currentVal} = ${state.currentVal}`;
 				return;
 			}
