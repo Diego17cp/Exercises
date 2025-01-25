@@ -40,6 +40,7 @@ export const operationsSlice = createSlice({
             state.currentVal = "0"
         },
         calculate: (state) => {
+            if(state.previousVal === null || state.currentVal!== "0") return
             if(state.previousVal === null || state.operation === null) {
                 state.currentVal = "NaN"
                 return
