@@ -10,7 +10,7 @@ import { useAppDispatch } from "./operations";
 export const useOperationsActions = () => {
 	const dispatch = useAppDispatch();
 
-    const handleInputNum = (num: number) => {
+    const handleInputNum = (num: string) => {
         dispatch(inputNumber(num));
     }
     const handleSelectOperation = (operation: Operations) => {
