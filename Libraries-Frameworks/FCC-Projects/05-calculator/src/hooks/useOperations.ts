@@ -2,9 +2,9 @@ import {
 	inputNumber,
     selectOperation,
     calculate,
-    clear,
-    Operations
+    clear
 } from "../store/operations/operationsSlice";
+import { Operations } from "../types";
 import { useAppDispatch } from "./operations";
 
 export const useOperationsActions = () => {

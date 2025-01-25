@@ -1,12 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-export type Operations = "add" | "subtract" | "multiply" | "divide" | null;
-interface OperationsState {
-	currentVal: string;
-	operation: Operations;
-	previousVal: null | number;
-	operationDisplay: string;
-}
+import { Operations, OperationsState } from "../../types";
 
 const initialState: OperationsState = {
 	currentVal: "0",
