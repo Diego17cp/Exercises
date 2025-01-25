@@ -1,7 +1,7 @@
 import { useOperationsActions } from "../hooks/useOperations";
 import { NumberPad } from "./NumberPad";
 export const Pad = () => {
-	const { clearOperation } = useOperationsActions();
+	const { clearOperation, handleSelectOperation, handleCalc  } = useOperationsActions();
 	const border = {
 		border: "1px solid #d1d5dc",
 	};
@@ -18,12 +18,14 @@ export const Pad = () => {
 				<button
 					className="bg-gray-500 text-white w-1/3 text-xl active:bg-gray-600 active:scale-90 transition-all duration-500 cursor-pointer"
 					style={border}
+					onClick={() => handleSelectOperation("divide")}
 				>
 					/
 				</button>
 				<button
 					className="bg-gray-500 text-white w-1/3 text-xl active:bg-gray-600 active:scale-90 transition-all duration-500 cursor-pointer"
 					style={border}
+					onClick={() => handleSelectOperation("multiply")}
 				>
 					X
 				</button>
@@ -34,20 +36,22 @@ export const Pad = () => {
 					<button
 						className="bg-gray-500 text-white w-full text-xl active:bg-gray-600 active:scale-90 transition-all duration-500 cursor-pointer"
 						style={border}
+						onClick={() => handleSelectOperation("add")}
 					>
 						+
 					</button>
 					<button
 						className="bg-gray-500 text-white w-full text-xl active:bg-gray-600 active:scale-90 transition-all duration-500 cursor-pointer"
 						style={border}
+						onClick={() => handleSelectOperation("subtract")}
 					>
 						-
 					</button>
 					<button
 						className="bg-blue-900 text-white row-span-2 w-full text-xl active:bg-blue-950 active:scale-90 transition-all duration-500 cursor-pointer"
 						style={border}
+						onClick={handleCalc}
 					>
-						{" "}
 						=
 					</button>
 				</div>
