@@ -6,7 +6,7 @@ export const NumberPad = () => {
         border: "1px solid #d1d5dc"
     }
     return (
-        <section className="h-full w-3/4 bg-gray-800">
+        <section className="h-full w-3/4">
             <div className="number-pad grid grid-cols-3 grid-rows-4 h-full">
                 <button className={btnStyle} style={border}>7</button>
                 <button className={btnStyle} style={border}>8</button>

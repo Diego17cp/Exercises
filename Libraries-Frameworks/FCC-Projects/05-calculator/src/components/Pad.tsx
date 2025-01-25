@@ -5,7 +5,7 @@ export const Pad = () => {
         border: "1px solid #d1d5dc"
     }
     return (
-        <div className="w-80 h-96">
+        <div className="w-full h-4/5 font-mono">
             <div className="h-1/5 flex w-full ">
                 <button className="bg-red-500 text-white w-2/3 text-xl active:bg-red-700 active:scale-90 transition-all duration-500 cursor-pointer" style={border}>AC</button>
                 <button className="bg-gray-500 text-white w-1/3 text-xl active:bg-gray-600 active:scale-90 transition-all duration-500 cursor-pointer" style={border}>/</button>
