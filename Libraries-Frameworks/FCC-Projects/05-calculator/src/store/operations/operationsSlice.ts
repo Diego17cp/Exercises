@@ -24,12 +24,24 @@ export const operationsSlice = createSlice({
 				state.operationDisplay = state.currentVal;
 				return;
 			}
+			if (state.currentVal.length >= 10) {
+				state.currentVal = "Digit Limit Met";
+				return;
+			}
+			if (state.currentVal === "Digit Limit Met") {
+				return;
+			}
 			if (state.currentVal === "0") {
 				state.currentVal = action.payload;
 				state.operationDisplay = state.currentVal;
 			} else {
 				state.currentVal += action.payload;
 				state.operationDisplay = state.currentVal;
+			}
+		},
+		resetDigitLimit: (state) => {
+			if (state.currentVal === "Digit Limit Met") {
+				state.currentVal = state.operationDisplay;
 			}
 		},
 		selectOperation: (state, action: PayloadAction<Operations>) => {
@@ -102,5 +114,10 @@ export const operationsSlice = createSlice({
 
 export default operationsSlice.reducer;
 
-export const { inputNumber, selectOperation, calculate, clear } =
-	operationsSlice.actions;
+export const {
+	inputNumber,
+	selectOperation,
+	calculate,
+	clear,
+	resetDigitLimit,
+} = operationsSlice.actions;
