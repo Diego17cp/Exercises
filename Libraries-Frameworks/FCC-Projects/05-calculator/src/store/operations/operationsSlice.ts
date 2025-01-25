@@ -1,28 +1,61 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 
-type OperationsState = number;
+export type Operations = 'add' | 'subtract' | 'multiply' | 'divide' | null
+interface OperationsState {
+    currentVal: number,
+    operation: Operations,
+    previousVal: null | number
+} 
 
-const initialState: OperationsState = 0; 
+const initialState: OperationsState={
+    currentVal: 0,
+    operation: null,
+    previousVal: null
+}; 
 
 export const operationsSlice = createSlice({
     name: 'operations',
     initialState,
     reducers: {
-        add: (state, action: PayloadAction<OperationsState>) => {
-            return state + action.payload
+        inputNumber: (state, action: PayloadAction<number>) => {
+            state.currentVal = state.currentVal * 10 + action.payload
         },
-        subtract: (state, action: PayloadAction<OperationsState>) => {
-            return state - action.payload
+        selectOperation: (state, action: PayloadAction<Operations>) => {
+            state.previousVal = state.currentVal
+            state.operation = action.payload
+            state.currentVal = 0
         },
-        multiply: (state, action: PayloadAction<OperationsState>) => {
-            return state * action.payload
+        calculate: (state) => {
+            if(state.previousVal === null || state.operation === null) {
+                state.currentVal = NaN
+                return
+            }
+            switch(state.operation){
+                case 'add':
+                    state.currentVal = state.previousVal + state.currentVal
+                    break
+                case 'subtract':
+                    state.currentVal = state.previousVal - state.currentVal
+                    break
+                case 'multiply':
+                    state.currentVal = state.previousVal * state.currentVal
+                    break
+                case 'divide':
+                    if(state.currentVal !== 0){
+                        state.currentVal = state.previousVal / state.currentVal
+                    } else{
+                        state.currentVal = NaN
+                    }
+                    break
+            }
+            state.previousVal = null
+            state.operation = null
         },
-        divide: (state, action: PayloadAction<OperationsState>) => {
-            return state / action.payload
-        },
-        clear: () => {
-            return 0
+        clear: (state) => {
+            state.currentVal = 0
+            state.operation = null
+            state.previousVal = null
         }
     }
 })
@@ -30,9 +63,8 @@ export const operationsSlice = createSlice({
 export default operationsSlice.reducer;
 
 export const {
-    add,
-    subtract,
-    multiply,
-    divide,
+    inputNumber, 
+    selectOperation,
+    calculate,
     clear
 } = operationsSlice.actions;

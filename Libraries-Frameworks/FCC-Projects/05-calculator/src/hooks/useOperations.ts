@@ -1,40 +1,33 @@
 import {
-	add,
-	subtract,
-	multiply,
-	divide,
-	clear,
+	inputNumber,
+    selectOperation,
+    calculate,
+    clear,
+    Operations
 } from "../store/operations/operationsSlice";
 import { useAppDispatch } from "./operations";
 
 export const useOperationsActions = () => {
 	const dispatch = useAppDispatch();
 
-	const addOperation = (value: number) => {
-		dispatch(add(value));
-	};
-
-	const subtractOperation = (value: number) => {
-		dispatch(subtract(value));
-	};
-
-	const multiplyOperation = (value: number) => {
-		dispatch(multiply(value));
-	};
-
-	const divideOperation = (value: number) => {
-		dispatch(divide(value));
-	};
+    const handleInputNum = (num: number) => {
+        dispatch(inputNumber(num));
+    }
+    const handleSelectOperation = (operation: Operations) => {
+        dispatch(selectOperation(operation));
+    }
+	const handleCalc = () => {
+        dispatch(calculate());
+    }
 
 	const clearOperation = () => {
 		dispatch(clear());
 	};
 
 	return {
-		addOperation,
-		subtractOperation,
-		multiplyOperation,
-		divideOperation,
+		handleInputNum,
+        handleSelectOperation,
+        handleCalc,
 		clearOperation,
 	};
 };
