@@ -28,3 +28,11 @@ export const operationsSlice = createSlice({
 })
 
 export default operationsSlice.reducer;
+
+export const {
+    add,
+    subtract,
+    multiply,
+    divide,
+    clear
+} = operationsSlice.actions;
