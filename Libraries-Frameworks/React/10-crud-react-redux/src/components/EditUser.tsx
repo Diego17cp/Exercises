@@ -1,6 +1,6 @@
 import { Button, Card, TextInput, Title } from "@tremor/react";
 import { useUsersActions } from "../hooks/useUsersActions";
-import { UsersWithId } from "../store/users/slice";
+import { UsersWithId } from "../types";
 import { toast } from "sonner";
 
 type Props = {

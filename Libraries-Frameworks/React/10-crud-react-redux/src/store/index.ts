@@ -1,7 +1,8 @@
 import { configureStore, type Middleware } from "@reduxjs/toolkit";
 // Imports the reducer, action and type from the users slice
-import usersReducer, { rollbackUser, UsersWithId } from "./users/slice";
+import usersReducer, { rollbackUser } from "./users/slice";
 import { toast } from "sonner";
+import { UsersWithId } from "../types";
 
 const persistanceLocalStorageMiddleware: Middleware =
 	(store) => (next) => (action) => {

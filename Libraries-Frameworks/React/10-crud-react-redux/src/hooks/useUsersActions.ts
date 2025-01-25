@@ -1,6 +1,7 @@
 // Obtain the actions from the users slice and assign them to the useUsersActions hook
 import { store } from "../store";
-import { addNewUser, deleteUserById, editUser, User, UserId, UsersWithId } from "../store/users/slice";
+import { addNewUser, deleteUserById, editUser} from "../store/users/slice";
+import { User, UserId, UsersWithId } from "../types";
 // Import the useDispatch hook from react-redux for dispatching actions
 import { useAppDispatch } from "./store";
 
