@@ -1,39 +1,8 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { User, UserId, UsersWithId } from "../../types";
+import { default_State } from "../../mocks/initialState.ts";
 
 
-const default_State = [
-	{
-		id: "1",
-		name: "Diego Castro",
-		email: "diego@gmail.com",
-		github: "diego17cp",
-	},
-	{
-		id: "2",
-		name: "Peter Parker",
-		email: "peter@dailybugle.com",
-		github: "spidey",
-	},
-	{
-		id: "3",
-		name: "Bruce Wayne",
-		email: "bruce@wayne.com",
-		github: "batman",
-	},
-	{
-		id: "4",
-		name: "Tony Stark",
-		email: "tony@stark.com",
-		github: "ironman",
-	},
-	{
-		id: "5",
-		name: "Clark Kent",
-		email: "clark@dailyplanet.com",
-		github: "superman",
-	},
-];
 
 // Define the initial state of the slice
 const initialState: UsersWithId[] = (() => {
