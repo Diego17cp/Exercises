@@ -34,6 +34,11 @@ export const EditUser = ({ opacity, setOpacity, userInfo, setUserInfo }: Props) 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.currentTarget;
+        if(userInfo === userInfo) {
+            toast.info("Operation Cancelled");
+            setOpacity(0);
+            return;
+        }
 		if(userInfo.id) {
             toast.success("User updated successfully");
             editUsers(userInfo as UsersWithId);
@@ -43,6 +48,7 @@ export const EditUser = ({ opacity, setOpacity, userInfo, setUserInfo }: Props) 
 	};
 	const handleClose = () => {
 		setOpacity(0);
+        toast.info("Operation Cancelled");
 	};
 	return (
 		<Card
