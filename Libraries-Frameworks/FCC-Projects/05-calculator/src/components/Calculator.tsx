@@ -5,9 +5,9 @@ export const Calculator = () => {
 	const { currentVal } = useAppSelector((state) => state.operations);
 
 	return (
-		<main className="mx-auto my-30 p-2 bg-cyan-800 rounded-lg shadow-lg h-120 w-85 justify-center items-center flex flex-col gap-2">
+		<main className="mx-auto my-30 p-2 bg-black border-2 border-gray-600 rounded-lg shadow-lg h-120 w-85 justify-center items-center flex flex-col gap-2">
 			<div
-				className="w-full h-1/5 bg-black px-4 py-2 flex flex-col gap-2"
+				className="w-full h-1/5 px-4 py-2 flex flex-col gap-2"
 				style={{
 					fontFamily: "Zen Dots, serif",
 				}}
