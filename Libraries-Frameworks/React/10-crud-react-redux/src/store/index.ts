@@ -3,6 +3,7 @@ import { configureStore, type Middleware } from "@reduxjs/toolkit";
 import usersReducer, { rollbackUser } from "./users/slice";
 import { toast } from "sonner";
 import { UsersWithId } from "../types";
+import { UserActions } from "../hooks/store";
 
 const persistanceLocalStorageMiddleware: Middleware =
 	(store) => (next) => (action) => {
@@ -13,7 +14,7 @@ const persistanceLocalStorageMiddleware: Middleware =
 		);
 	};
 const syncDB: Middleware = (store) => (next) => (action) => {
-	const { type, payload } = action;
+	const { type, payload } = action as UserActions;
 	const prevState = store.getState();
 
 	next(action);
@@ -49,7 +50,7 @@ const syncDB: Middleware = (store) => (next) => (action) => {
 				if (res.ok) toast.success("User added successfully");
 			})
 			.catch((e) => {
-				store.dispatch(rollbackUser(user));
+				store.dispatch(rollbackUser(user as UsersWithId));
 				toast.error("Error adding user");
 				console.error("Error adding user" + e);
 			});

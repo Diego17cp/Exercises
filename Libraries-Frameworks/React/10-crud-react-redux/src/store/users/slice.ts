@@ -69,3 +69,4 @@ export const usersSlice = createSlice({
 export default usersSlice.reducer;
 
 export const { addNewUser, deleteUserById, rollbackUser, editUser } = usersSlice.actions;
+export type Actions = typeof usersSlice.actions;
