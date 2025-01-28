@@ -42,6 +42,11 @@ print(f"\nThe sandwich is: \n{sandwich}\n")
 # Crea una nueva lista que contenga los elementos de la lista original duplicados.
 # Ejemplo: [1, 2, 3] -> [1, 2, 3, 1, 2, 3]
 
+print("\nLet's duplicate a list")
+nums = [1, 2, 3]
+duplicated = nums + [nums[0], nums[1], nums[2]]
+print(f"\nThe original list is: {nums}\nThe duplicated list is: {duplicated}\n")
+
 # Ejercicio 5: Extrayendo el centro
 # Dada una lista con un número impar de elementos, extrae el elemento que se encuentra en el centro de la lista utilizando slicing.
 # Ejemplo: lista = [10, 20, 30, 40, 50] -> El centro es 30
