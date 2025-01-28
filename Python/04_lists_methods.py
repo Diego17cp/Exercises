@@ -4,6 +4,14 @@
 # Inserta el número 10 en la posición 2 usando insert().
 # Modifica el primer elemento de la lista para que sea 0.
 
+print("Let's add and modify elements on a list:\n")
+numbers = [1, 2, 3, 4, 5]
+print(f"The original list is {numbers}")
+numbers.append(6)
+numbers.insert(1, 10)
+numbers[0] = 0
+print(f"The modified list is {numbers}\n")
+
 # Ejercicio 2: Combinar y limpiar listas
 # Crea dos listas:
 # lista_a = [1, 2, 3]
