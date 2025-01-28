@@ -29,6 +29,13 @@ print(f"\nThe new list is: {numbers}\n")
 # pan_abajo = ["pan abajo"]
 # Crea una lista llamada sandwich que contenga el pan de arriba, los ingredientes y el pan de abajo, en ese orden.
 
+print("\nLet's make a sandwich")
+list_1 = ["pan arriba"]
+list_2 = ["jamón", "queso", "tomate"]
+list_3 = ["pan abajo"]
+sandwich ="\n".join(list_1+ list_2 + list_3)
+print(f"\nThe sandwich is: \n{sandwich}\n")
+
 # Ejercicio 4: Duplicando la lista
 # Dada una lista:
 # lista = [1, 2, 3]
