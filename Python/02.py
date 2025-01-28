@@ -4,39 +4,39 @@
 # Pide al usuario que introduzca dos números y muestra un mensaje
 # indicando cuál es mayor o si son iguales
 
-# print("Enter two numbers to determine which is greater")
-# a = input("Introduce the first number: ")	
-# b = input("Introduce the second number: ")
+print("Enter two numbers to determine which is greater")
+a = input("Introduce the first number: ")	
+b = input("Introduce the second number: ")
 
-# if a > b:
-#     print("\nThe first number is greater")
-# elif a < b:
-#     print("\nThe second number is greater")
-# else:
-#     print("\nBoth numbers are equal")
+if a > b:
+    print("\nThe first number is greater")
+elif a < b:
+    print("\nThe second number is greater")
+else:
+    print("\nBoth numbers are equal")
 
 # Ejercicio 2: Calculadora simple
 # Pide al usuario dos números y una operación (+, -, *, /)
 # Realiza la operación y muestra el resultado (maneja la división entre zero)
 
-# print("\nLet's do an simple operation \nIntroduce two numbers and an operation(+, -, *, /)")
-# x = input("Introduce the first number: ")
-# y = input("Introduce the second number: ")
-# z = input("Introduce the operation: ")
+print("\nLet's do an simple operation \nIntroduce two numbers and an operation(+, -, *, /)")
+x = input("Introduce the first number: ")
+y = input("Introduce the second number: ")
+z = input("Introduce the operation: ")
 
-# if z == "+":
-#     print("\nThe result is: ", float(x) + float(y))
-# elif z == "-":
-#     print("\nThe result is: ", float(x) - float(y))
-# elif z == "*":
-#     print("\nThe result is: ", float(x) * float(y))
-# elif z == "/":
-#     if y == "0":
-#         print("\nError: Yiu can't divide by zero")
-#     else:
-#         print("\nThe result is: ", float(x) / float(y))
-# else:
-#     print("\nError: Invalid operation")
+if z == "+":
+    print("\nThe result is: ", float(x) + float(y))
+elif z == "-":
+    print("\nThe result is: ", float(x) - float(y))
+elif z == "*":
+    print("\nThe result is: ", float(x) * float(y))
+elif z == "/":
+    if y == "0":
+        print("\nError: Yiu can't divide by zero")
+    else:
+        print("\nThe result is: ", float(x) / float(y))
+else:
+    print("\nError: Invalid operation")
 
 # Ejercicio 3: Año bisiesto
 # Pide al usuario que introduzca un año y determina si es bisiesto.
@@ -56,3 +56,19 @@ else:
 # - Adolescente (13-17 años)
 # - Adulto (18-64 años)
 # - Adulto mayor (65 años o más)
+
+print("\nLet's categorize an age")
+age = input("Introduce the age: ")
+
+if float(age) >= 0 and float(age) <= 2:
+    print("\nThe person is a baby")
+elif float(age) >= 3 and float(age) <= 12:
+    print("\nThe person is a child")
+elif float(age) >= 13 and float(age) <= 17:
+    print("\nThe person is a teenager")
+elif float(age) >= 18 and float(age) <= 64:
+    print("\nThe person is an adult")
+elif float(age) >= 65:
+    print("\nThe person is an older adult")
+else:
+    print("\nError: Invalid age")
