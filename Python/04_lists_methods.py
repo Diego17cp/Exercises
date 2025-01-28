@@ -39,6 +39,12 @@ list_b.clear()
 # Utiliza slicing y del para eliminar los elementos desde el índice 2 hasta el 5 (sin incluir el 5).
 # Imprime la lista resultante.
 
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(f"Original list: {my_list}")
+# sliced = my_list[2:4] Form 1
+del my_list[2:4]
+print(f"Sliced list: {my_list}\n")
+
 # Ejercicio 4: Ordenar y contar
 
 # Crea una lista con los siguientes números: [5, 2, 8, 1, 9, 4, 2].
