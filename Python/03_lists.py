@@ -50,6 +50,10 @@ print(f"\nThe original list is: {nums}\nThe duplicated list is: {duplicated}\n")
 # Ejercicio 5: Extrayendo el centro
 # Dada una lista con un número impar de elementos, extrae el elemento que se encuentra en el centro de la lista utilizando slicing.
 # Ejemplo: lista = [10, 20, 30, 40, 50] -> El centro es 30
+print("\nLet's get the center of a list")
+numbers = [10, 20, 30, 40, 50]
+center = numbers[len(numbers)//2]
+print(f"\nThe center of the list({numbers}) is: {center}\n")
 
 # Ejercicio 6: Reversa parcial
 # Dada una lista, invierte solo la primera mitad de la lista (utilizando slicing y concatenación).
