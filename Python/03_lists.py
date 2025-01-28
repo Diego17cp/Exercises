@@ -1,3 +1,6 @@
+import os
+os.system("clear")
+
 # Ejercicio 1: El mensaje secreto
 # Dada la siguiente lista:
 # mensaje = ["C", "o", "d", "i", "g", "o", " ", "s", "e", "c", "r", "e", "t", "o"]
