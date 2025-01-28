@@ -52,6 +52,13 @@ print(f"Sliced list: {my_list}\n")
 # Cuenta cuántas veces aparece el número 2 en la lista usando count().
 # Comprueba si el número 7 está en la lista usando in.
 
+numbers_2 = [5, 2, 8, 1, 9, 4, 2]
+print(f"Original list: {numbers_2}")
+numbers_2.sort()
+print(f"Sorted list: {numbers_2}")
+print(f"The number 2 appears: ", numbers_2.count(2), "times.")
+print(f"The number 7 is in the list?: ", 7 in numbers_2, "\n")
+
 # Ejercicio 5: Copia vs. Referencia
 # Crea una lista llamada original con los números [1, 2, 3].
 # Crea una copia de la lista original llamada copia_1 usando slicing.
