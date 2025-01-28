@@ -2,20 +2,39 @@
 # Pide al usuario que introduzca dos números y muestra un mensaje
 # indicando cuál es mayor o si son iguales
 
-print("Enter two numbers to determine which is greater")
-a = input("Introduce the first number: ")	
-b = input("Introduce the second number: ")
+# print("Enter two numbers to determine which is greater")
+# a = input("Introduce the first number: ")	
+# b = input("Introduce the second number: ")
 
-if a > b:
-    print("\nThe first number is greater")
-elif a < b:
-    print("\nThe second number is greater")
-else:
-    print("\nBoth numbers are equal")
+# if a > b:
+#     print("\nThe first number is greater")
+# elif a < b:
+#     print("\nThe second number is greater")
+# else:
+#     print("\nBoth numbers are equal")
 
 # Ejercicio 2: Calculadora simple
 # Pide al usuario dos números y una operación (+, -, *, /)
 # Realiza la operación y muestra el resultado (maneja la división entre zero)
+
+print("\nLet's do an simple operation \nIntroduce two numbers and an operation(+, -, *, /)")
+x = input("Introduce the first number: ")
+y = input("Introduce the second number: ")
+z = input("Introduce the operation: ")
+
+if z == "+":
+    print("\nThe result is: ", float(x) + float(y))
+elif z == "-":
+    print("\nThe result is: ", float(x) - float(y))
+elif z == "*":
+    print("\nThe result is: ", float(x) * float(y))
+elif z == "/":
+    if y == "0":
+        print("\nError: Yiu can't divide by zero")
+    else:
+        print("\nThe result is: ", float(x) / float(y))
+else:
+    print("\nError: Invalid operation")
 
 # Ejercicio 3: Año bisiesto
 # Pide al usuario que introduzca un año y determina si es bisiesto.
