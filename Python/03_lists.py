@@ -9,12 +9,18 @@ os.system("clear")
 print("Let's find the secret message")
 msg = ["C", "o", "d", "i", "g", "o", " ", "s", "e", "c", "r", "e", "t", "o"]
 secret ="".join(msg[7:]) # Use join method 'cause the result would be a string
-print(f"\nThe secret message is: {secret}")
+print(f"\nThe secret message is: {secret}\n")
 
 # Ejercicio 2: Intercambio de posiciones
 # Dada la siguiente lista:
 # numeros = [10, 20, 30, 40, 50]
 # Intercambia la primera y la última posición utilizando solo asignación por índice.
+
+print("\nLet's swap the first and last position of a list")
+numbers = [10, 20, 30, 40, 50]
+print(f"\nThe original list is: {numbers}")
+numbers[0], numbers[-1] = numbers[-1], numbers[0]
+print(f"\nThe new list is: {numbers}\n")
 
 # Ejercicio 3: El sándwich de listas
 # Dadas las siguientes listas:
