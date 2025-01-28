@@ -58,3 +58,9 @@ print(f"\nThe center of the list({numbers}) is: {center}\n")
 # Ejercicio 6: Reversa parcial
 # Dada una lista, invierte solo la primera mitad de la lista (utilizando slicing y concatenación).
 # Ejemplo: lista = [1, 2, 3, 4, 5, 6] -> Resultado: [3, 2, 1, 4, 5, 6]
+print("\nLet's reverse the first half of a list")
+numbers = [1, 2, 3, 4, 5, 6]
+mid = numbers[:len(numbers)//2]
+mid_reversed = mid[::-1]
+result = mid_reversed + numbers[len(numbers)//2:]
+print(f"\nThe original list is: {numbers}\nThe list with the first half reversed is: {result}\n")
