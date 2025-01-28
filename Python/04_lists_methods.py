@@ -42,7 +42,7 @@ list_b.clear()
 my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 print(f"Original list: {my_list}")
 # sliced = my_list[2:4] Form 1
-del my_list[2:4]
+del my_list[2:5]
 print(f"Sliced list: {my_list}\n")
 
 # Ejercicio 4: Ordenar y contar
@@ -73,6 +73,10 @@ copia_2 = original.copy()
 referencia = original
 referencia[0] = 10
 print(f"Lists: {original}, {copia_1}, {copia_2}, {referencia}\n")
+
 # Ejercicio 6: Ordenar strings sin diferenciar mayúsculas y minúsculas.
 # Crea una lista con las siguientes cadenas: ["Manzana", "pera", "BANANA", "naranja"].
 # Ordena la lista sin diferenciar entre mayúsculas y minúsculas.
+fruits = ["Manzana", "pera", "BANANA", "naranja"]
+fruits.sort(key=str.lower)
+print(f"Sorted list: ", fruits)
