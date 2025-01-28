@@ -67,6 +67,12 @@ print(f"The number 7 is in the list?: ", 7 in numbers_2, "\n")
 # Modifica el primer elemento de la lista referencia a 10.
 # Imprime las cuatro listas (original, copia_1, copia_2, referencia) y observa los cambios.
 
+original = [1, 2, 3]
+copia_1 = original[:]
+copia_2 = original.copy()
+referencia = original
+referencia[0] = 10
+print(f"Lists: {original}, {copia_1}, {copia_2}, {referencia}\n")
 # Ejercicio 6: Ordenar strings sin diferenciar mayúsculas y minúsculas.
 # Crea una lista con las siguientes cadenas: ["Manzana", "pera", "BANANA", "naranja"].
 # Ordena la lista sin diferenciar entre mayúsculas y minúsculas.
