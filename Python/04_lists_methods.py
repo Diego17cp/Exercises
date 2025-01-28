@@ -21,6 +21,19 @@ print(f"The modified list is {numbers}\n")
 # Elimina el elemento en el índice 3 de lista_a usando pop(). Imprime el elemento eliminado.
 # Limpia completamente lista_b usando clear().
 
+print("\nLet's combine and clean lists:\n")
+list_a = [1, 2, 3]
+list_b = [4, 5, 6, 7, 1, 2]
+print(f"There are the list A: {list_a} and the list B: {list_b}. Let's combine them:\n")
+list_a.extend(list_b)
+print(f"Both lists combined: {list_a}\n\nLet's clean the list:\n")
+list_a.remove(1)
+print(f"List without the first number 1: {list_a}\n")
+popped = list_a.pop(3)
+print(f"Clean the number {popped} from the list {list_a}\n")
+list_b.clear()
+
+
 # Ejercicio 3: Slicing y eliminación con del
 # Crea una lista con los números del 1 al 10.
 # Utiliza slicing y del para eliminar los elementos desde el índice 2 hasta el 5 (sin incluir el 5).
