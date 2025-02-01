@@ -23,6 +23,16 @@ print(f"Sum of all pair numbers between 1 and 20:", tot)
 # El factorial de un número entero positivo es el producto de todos los números del 1 al ese número. Por ejemplo, el factorial de 5
 # 5! = 5 x 4 x 3 x 2 x 1 = 120.
 print("\nEjercicio 3:")
+num = int(input('Please enter a number greater than 0\n'))
+count = 1
+factorial = 1
+while count <= num:
+    factorial *= count
+    count += 1
+    if num < 0:
+        print('Error: Cannot calc the factorial of negative numbers')
+        break
+print(f"The factorial of {num} is {factorial}")
 
 # Ejercicio 4: Validación de contraseña
 # Pide al usuario que introduzca una contraseña.
