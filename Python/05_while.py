@@ -9,6 +9,13 @@ while count >=1:
 # Ejercicio 2: Suma de números pares (while)
 # Calcula la suma de los números pares entre 1 y 20 (inclusive) usando un bucle while.
 print("\nEjercicio 2:")
+tot = 0
+count = 0
+while count <= 20:
+    if count!=0 and count % 2 == 0:
+        tot += count
+    count += 1
+print(f"Sum of all pair numbers between 1 and 20:", tot)
 
 # Ejercicio 3: Factorial de un número
 # Pide al usuario que introduzca un número entero positivo.
