@@ -51,6 +51,12 @@ print('Valid password')
 # Pide al usuario que introduzca un número.
 # Imprime la tabla de multiplicar de ese número (del 1 al 10) usando un bucle while.
 print("\nEjercicio 5:")
+x = int(input('Enter a number for view its multiplication table\n'))
+count = 0
+print('Multiplication table of:', x)
+while count <= 12: # I included the 12 to do more complete the exercise xd
+    print(f'{x}x{count}={x*count}')
+    count+=1
 
 # Ejercicio 6: Números primos hasta N
 # Pide al usuario que introduzca un número entero positivo N.
