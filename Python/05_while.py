@@ -40,6 +40,12 @@ print(f"The factorial of {num} is {factorial}")
 # Usa un bucle while para seguir pidiendo la contraseña hasta que cumpla con los requisitos.
 # Si la contraseña es válida, imprime "Contraseña válida".
 print("\nEjercicio 4:")
+psw = input('Enter a password\n') 
+while len(psw) < 8:
+    psw = input("Enter a valid password\n")
+    if len(psw) < 8:
+        print('Enter a valid password greather than 8 characters')
+print('Valid password')
 
 # Ejercicio 5: Tabla de multiplicar
 # Pide al usuario que introduzca un número.
