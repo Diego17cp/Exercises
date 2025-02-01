@@ -62,3 +62,20 @@ while count <= 12: # I included the 12 to do more complete the exercise xd
 # Pide al usuario que introduzca un número entero positivo N.
 # Imprime todos los números primos menores o iguales que N usando un bucle while.
 print("\nEjercicio 6:")
+n = int(input('Enter a number\n'))
+count = 2
+print(f'Prime numbers less than {n}')
+
+while count <= n:
+    is_prime = True
+    i = 2
+    
+    while i * i <= count:
+        if count % i == 0:
+            is_prime = False
+            break
+        i += 1
+    if is_prime:
+        print(count)
+    count += 1
+# Did it with help:(
