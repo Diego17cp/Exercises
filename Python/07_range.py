@@ -7,6 +7,8 @@ for i in range(1, 11):
 # Ejercicio 2: Imprimir números impares del 1 al 20
 # Imprime todos los números impares entre 1 y 20 (inclusive) usando un bucle for y range().
 print("\nEjercicio 2:")
+for i in range(1, 21, 2):
+    print(i)
 
 # Ejercicio 3: Imprimir múltiplos de 5
 # Imprime los múltiplos de 5 desde 5 hasta 50 (inclusive) usando un bucle for y range().
