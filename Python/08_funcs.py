@@ -19,3 +19,11 @@ def search_max(numbers):
     return max(numbers)
 
 print(f'The max number is: {search_max(numbers=[1, 2, 3, 4, 5])}\n')
+
+def filter_by_char(char, list):
+    count = 0
+    for i in list:
+        if i[0] == char:
+            count += 1
+    return count
+print(f'There are {filter_by_char(char='c', list=['car', 'flower', 'mouse', 'keyboard', 'cast'])} words that starts with "C"\n')
