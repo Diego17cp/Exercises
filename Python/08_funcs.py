@@ -27,3 +27,16 @@ def filter_by_char(char, list):
             count += 1
     return count
 print(f'There are {filter_by_char(char='c', list=['car', 'flower', 'mouse', 'keyboard', 'cast'])} words that starts with "C"\n')
+
+def get_factorial(n):
+    i = 1
+    f = 1
+    while i <= n:
+        f *= i
+        i += 1
+
+        if n < 0: return print('Error: Cannot calc factorial of negative numbers')
+        if n == 0: return print('The factorial of 0 is 0')
+        if n == 1: return print('The factorial of 1 is 1')
+    return f
+print(f'The factorial of 5 is: {get_factorial(5)}')
