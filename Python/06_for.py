@@ -22,6 +22,14 @@ print(f'The average in the {nums}\'s list is: {avg}')
 # numeros = [15, 5, 25, 10, 20]
 # Encuentra el número máximo en la lista usando un bucle for.
 print("\nEjercicio 3:")
+nums = [15, 5, 25, 10, 20]
+# Alternative: max(nums)
+max_n = 0
+for n in nums:
+    if max_n < n:
+        max_n = n
+print(f'The greater number in the {nums}\'s list is {max_n}')
+
 
 # Ejercicio 4: Filtrar cadenas por longitud
 # Dada la siguiente lista de palabras:
