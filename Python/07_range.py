@@ -25,7 +25,10 @@ for i in range(10, 0, -1):
 # Ejercicio 5: Suma de números en un rango
 # Calcula la suma de los números del 1 al 100 (inclusive) usando un bucle for y range().
 print("\nEjercicio 5:")
-
+s = 0
+for i in range(1, 101):
+    s += i
+print(f'The sum from 1 to 100 is {s}')
 # Ejercicio 6: Tabla de multiplicar
 # Pide al usuario que introduzca un número.
 # Imprime la tabla de multiplicar de ese número (del 1 al 10) usando un bucle for y range().
