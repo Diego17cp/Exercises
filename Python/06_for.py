@@ -37,6 +37,11 @@ print(f'The greater number in the {nums}\'s list is {max_n}')
 # Crea una nueva lista que contenga solo las palabras con más de 5 letras
 # usando un bucle for y list comprehension.
 print("\nEjercicio 4:")
+words = ['casa', 'arbol', 'sol', 'elefante', 'luna']
+five_chars_words = [
+    word for word in words if len(word) >= 5
+]
+print(five_chars_words)
 
 # Ejercicio 5: Contar palabras que empiezan con una letra
 # Dada la siguiente lista de palabras:
