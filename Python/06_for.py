@@ -1,12 +1,21 @@
 # Ejercicio 1: Imprimir números pares
 # Imprime todos los números pares del 2 al 20 (inclusive) usando un bucle for.
 print("\nEjercicio 1:")
+for n in range(2, 21, 2):
+    print(n)
+# Can do it with a iterable if u want to do a list with 20 elements xd
 
 # Ejercicio 2: Calcular la media de una lista
 # Dada la siguiente lista de números:
 # numeros = [10, 20, 30, 40, 50]
 # Calcula la media de los números usando un bucle for.
 print("\nEjercicio 2:")
+nums = [10, 20, 30, 40, 50]
+avg = 0
+for num in nums:
+    avg += num
+avg = avg / len(nums)
+print(f'The average in the {nums}\'s list is: {avg}')
 
 # Ejercicio 3: Buscar el máximo de una lista
 # Dada la siguiente lista de números:
