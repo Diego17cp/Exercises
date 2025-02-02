@@ -33,3 +33,7 @@ print(f'The sum from 1 to 100 is {s}')
 # Pide al usuario que introduzca un número.
 # Imprime la tabla de multiplicar de ese número (del 1 al 10) usando un bucle for y range().
 print("\nEjercicio 6:")
+n = int(input('Enter a number to view its multiplicate table:\n'))
+print(f'Multplicate table of {n}')
+for i in range(1, 13):
+    print(f'{n} * {i} = {n*i}')
