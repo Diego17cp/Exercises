@@ -1,6 +1,8 @@
 # Ejercicio 1: Imprimir números del 1 al 10
 # Imprime los números del 1 al 10 (inclusive) usando un bucle for y range().
 print("\nEjercicio 1:")
+for i in range(1, 11):
+    print(i)
 
 # Ejercicio 2: Imprimir números impares del 1 al 20
 # Imprime todos los números impares entre 1 y 20 (inclusive) usando un bucle for y range().
