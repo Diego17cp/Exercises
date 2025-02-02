@@ -19,6 +19,8 @@ for i in range(5, 51, 5):
 # Ejercicio 4: Imprimir números en orden inverso
 # Imprime los números del 10 al 1 (inclusive) en orden inverso usando un bucle for y range().
 print("\nEjercicio 4:")
+for i in range(10, 0, -1):
+    print(i)
 
 # Ejercicio 5: Suma de números en un rango
 # Calcula la suma de los números del 1 al 100 (inclusive) usando un bucle for y range().
