@@ -49,3 +49,11 @@ print(five_chars_words)
 # Pide al usuario que introduzca una letra.
 # Cuenta cuántas palabras en la lista empiezan con esa letra (sin diferenciar mayúsculas/minúsculas).
 print("\nEjercicio 5:")
+
+words = ['casa', 'arbol', 'sol', 'elefante', 'luna', 'coche']
+char = input('Enter a letter\n').lower()
+count = 0
+for word in words:
+    if word[0].lower() == char:
+        count += 1
+print(f'In the list {words}\'s there are {count} words that starts with {char}')
