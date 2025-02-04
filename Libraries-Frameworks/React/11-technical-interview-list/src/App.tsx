@@ -30,7 +30,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		fetch("https://randomuser.me/api?results=100")
+		fetch("https://randomuser.me/api?results=10")
 			.then(async (response) => await response.json())
 			.then((data) => {
 				setUsers(data.results);
