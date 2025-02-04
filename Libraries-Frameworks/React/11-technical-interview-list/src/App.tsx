@@ -63,7 +63,7 @@ function App() {
 			return filteredUsers.toSorted((a, b) =>
 				a.name.last.localeCompare(b.name.last)
 			);
-    return filteredUsers;
+		return filteredUsers;
 	}, [filteredUsers, sorting]);
 
 	return (

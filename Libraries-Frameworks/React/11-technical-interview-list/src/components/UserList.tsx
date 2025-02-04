@@ -18,9 +18,24 @@ export const UserList = ({
 			<thead>
 				<tr>
 					<th>Pic</th>
-					<th className="pointer" onClick={() => changeSort(SortBy.NAME)}>Name</th>
-					<th className="pointer" onClick={() => changeSort(SortBy.LAST)}>Last Name</th>
-					<th className="pointer" onClick={() => changeSort(SortBy.COUNTRY)}>Country</th>
+					<th
+						className="pointer"
+						onClick={() => changeSort(SortBy.NAME)}
+					>
+						Name
+					</th>
+					<th
+						className="pointer"
+						onClick={() => changeSort(SortBy.LAST)}
+					>
+						Last Name
+					</th>
+					<th
+						className="pointer"
+						onClick={() => changeSort(SortBy.COUNTRY)}
+					>
+						Country
+					</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
