@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import { type User } from "./types";
 import { UserList } from "./components/UserList";
@@ -34,15 +34,23 @@ function App() {
 			.catch((error) => console.error(error));
 	}, []);
 
-  const filteredUsers = typeof filterCountry === 'string' && filterCountry.length > 0
-  ? users.filter((user) => user.location.country.toLowerCase().includes(filterCountry.toLowerCase()))
-  : users;
+	const filteredUsers = useMemo(() => {
+		return typeof filterCountry === "string" && filterCountry.length > 0
+			? users.filter((user) =>
+					user.location.country
+						.toLowerCase()
+						.includes(filterCountry.toLowerCase())
+			  )
+			: users;
+	}, [users, filterCountry]);
 
-	const sortedUsersByCountry = sortByCountry
-		? filteredUsers.toSorted((a, b) => {
-				return a.location.country.localeCompare(b.location.country);
-		  })
-		: filteredUsers;
+	const sortedUsersByCountry = useMemo(() => {
+		return sortByCountry
+			? filteredUsers.toSorted((a, b) =>
+					a.location.country.localeCompare(b.location.country)
+			  )
+			: filteredUsers;
+	}, [filteredUsers, sortByCountry]);
 
 	return (
 		<>
