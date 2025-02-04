@@ -6,6 +6,11 @@ import { UserList } from './components/UserList'
 function App() {
 
   const [users, setUsers] = useState<User[]>([])
+  const [showColors, setShowColors] = useState(false)
+
+  const toggleColors = () => {
+    setShowColors(!showColors)
+  }
 
   useEffect(
     () => {
@@ -19,7 +24,14 @@ function App() {
   return (
     <>
       <h1>Hola ts</h1>
-      < UserList users={users}/>
+      <header>
+        <button onClick={toggleColors}>
+          Color cells
+        </button>
+      </header>
+      <main>
+        < UserList showColors={showColors} users={users}/>
+      </main>
     </>
   )
 }
