@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { type User } from './types'
+import { UserList } from './components/UserList'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
       <h1>Hola ts</h1>
-      
+      < UserList users={users}/>
     </>
   )
 }
