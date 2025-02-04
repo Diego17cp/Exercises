@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
-import { type User } from "./types";
+import { SortBy, type User } from "./types.d";
 import { UserList } from "./components/UserList";
 
 function App() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [showColors, setShowColors] = useState(false);
-	const [sortByCountry, setSortByCountry] = useState(false);
+	const [sorting, setSorting] = useState<SortBy>(SortBy.NONE);
 	const originalUsers = useRef<User[]>([]);
 	const [filterCountry, setFilterCountry] = useState<string | null>(null);
 
@@ -14,7 +14,9 @@ function App() {
 		setShowColors(!showColors);
 	};
 	const toggleSortByCountry = () => {
-		setSortByCountry(!sortByCountry);
+		const newSortVal =
+			sorting === SortBy.NONE ? SortBy.COUNTRY : SortBy.NONE;
+		setSorting(newSortVal);
 	};
 	const handleDelete = (uuid: string) => {
 		const filteredUsers = users.filter((user) => user.login.uuid !== uuid);
@@ -22,6 +24,9 @@ function App() {
 	};
 	const handleReset = () => {
 		setUsers(originalUsers.current);
+	};
+	const handleChangeSort = (sort: SortBy) => {
+		setSorting(sort);
 	};
 
 	useEffect(() => {
@@ -45,12 +50,21 @@ function App() {
 	}, [users, filterCountry]);
 
 	const sortedUsersByCountry = useMemo(() => {
-		return sortByCountry
-			? filteredUsers.toSorted((a, b) =>
-					a.location.country.localeCompare(b.location.country)
-			  )
-			: filteredUsers;
-	}, [filteredUsers, sortByCountry]);
+		if (sorting === SortBy.COUNTRY)
+			return filteredUsers.toSorted((a, b) =>
+				a.location.country.localeCompare(b.location.country)
+			);
+		if (sorting === SortBy.NONE) return filteredUsers;
+		if (sorting === SortBy.NAME)
+			return filteredUsers.toSorted((a, b) =>
+				a.name.first.localeCompare(b.name.first)
+			);
+		if (sorting === SortBy.LAST)
+			return filteredUsers.toSorted((a, b) =>
+				a.name.last.localeCompare(b.name.last)
+			);
+    return filteredUsers;
+	}, [filteredUsers, sorting]);
 
 	return (
 		<>
@@ -70,6 +84,7 @@ function App() {
 					showColors={showColors}
 					users={sortedUsersByCountry}
 					handleDelete={handleDelete}
+					changeSort={handleChangeSort}
 				/>
 			</main>
 		</>
