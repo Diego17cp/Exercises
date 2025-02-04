@@ -3,9 +3,10 @@ import { User } from "../types";
 interface Props {
 	users: User[];
     showColors: boolean
+    handleDelete: (uuid: string) => void
 }
 
-export const UserList = ({ showColors, users }: Props) => {
+export const UserList = ({ showColors, users, handleDelete }: Props) => {
 	return (
 		<table>
 			<thead>
@@ -33,7 +34,9 @@ export const UserList = ({ showColors, users }: Props) => {
 							<td>{user.name.last}</td>
 							<td>{user.location.country}</td>
 							<td>
-								<button>Delete</button>
+								<button onClick={
+                                    () => handleDelete(user.login.uuid)
+                                }>Delete</button>
 							</td>
 						</tr>
 					);

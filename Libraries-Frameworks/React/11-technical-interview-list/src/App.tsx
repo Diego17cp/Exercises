@@ -14,6 +14,9 @@ function App() {
 	const toggleSortByCountry = () => {
 		setSortByCountry(!sortByCountry);
 	};
+	const handleDelete = (uuid: string) => {
+		setUsers(users.filter((user) => user.login.uuid !== uuid));
+	};
 
 	useEffect(() => {
 		fetch("https://randomuser.me/api?results=100")
@@ -36,7 +39,11 @@ function App() {
 				<button onClick={toggleSortByCountry}>Sort by country</button>
 			</header>
 			<main>
-				<UserList showColors={showColors} users={sortedUsersByCountry} />
+				<UserList
+					showColors={showColors}
+					users={sortedUsersByCountry}
+          handleDelete={handleDelete}
+				/>
 			</main>
 		</>
 	);
