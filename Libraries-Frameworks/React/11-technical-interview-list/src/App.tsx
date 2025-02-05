@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 import { SortBy, type User } from "./types.d";
 import { UserList } from "./components/UserList";
+import { useQuery } from "@tanstack/react-query";
+
 
 const fetchUsers = async (page: number) => {
 	const response = await fetch(
@@ -15,13 +17,13 @@ const fetchUsers = async (page: number) => {
 }
 
 function App() {
-	const [users, setUsers] = useState<User[]>([]);
+	const { isLoading, isError, data: users = [], refetch } = useQuery<User[]>({
+		queryKey: ['users'],
+		queryFn: async () => await fetchUsers(1),
+	})
 	const [showColors, setShowColors] = useState(false);
 	const [sorting, setSorting] = useState<SortBy>(SortBy.NONE);
-	const originalUsers = useRef<User[]>([]);
 	const [filterCountry, setFilterCountry] = useState<string | null>(null);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const toggleColors = () => {
@@ -34,34 +36,14 @@ function App() {
 	};
 	const handleDelete = (uuid: string) => {
 		const filteredUsers = users.filter((user) => user.login.uuid !== uuid);
-		setUsers(filteredUsers);
+		// setUsers(filteredUsers);
 	};
-	const handleReset = () => {
-		setUsers(originalUsers.current);
+	const handleReset = async () => {
+		await refetch();
 	};
 	const handleChangeSort = (sort: SortBy) => {
 		setSorting(sort);
 	};
-
-	useEffect(() => {
-		setLoading(true);
-		setError(false);
-		fetchUsers(currentPage)
-			.then(users => {
-				setUsers(
-					prevUsers => {
-						const newUsers = [...prevUsers, ...users];
-						originalUsers.current = newUsers;
-						return newUsers;
-					}
-				);
-			})
-			.catch((error) => {
-				setError(error);
-				console.error(error);
-			})
-			.finally(() => setLoading(false));
-	}, [currentPage]);
 
 	const filteredUsers = useMemo(() => {
 		return typeof filterCountry === "string" && filterCountry.length > 0
@@ -112,12 +94,12 @@ function App() {
 						changeSort={handleChangeSort}
 					/>
 				)}
-				{loading && <p>Loading...</p>}
-				{!loading && error && <p>Error loading users</p>}
-				{!loading && !error && users.length === 0 && (
+				{isLoading && <p>Loading...</p>}
+				{!isLoading && isError && <p>Error loading users</p>}
+				{!isLoading && !isError && users.length === 0 && (
 					<p>There aren't users to show</p>
 				)}
-				{!loading && !error && users.length!== 0 && (
+				{!isLoading && !isError && users.length!== 0 && (
 					<button onClick={() => setCurrentPage(currentPage + 1)}>
 						Charge more users
 					</button>
