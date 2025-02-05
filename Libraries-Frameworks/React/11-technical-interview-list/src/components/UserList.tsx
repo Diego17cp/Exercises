@@ -40,13 +40,12 @@ export const UserList = ({
 				</tr>
 			</thead>
 			<tbody>
-				{users.map((user, index) => {
-					const bgColor = index % 2 === 0 ? "#333" : "#555";
-					const color = showColors ? bgColor : "transparent";
+				{users.map((user) => {
+					const color = showColors ? 'colored' : '';
 					return (
 						<tr
 							key={user.login.uuid}
-							style={{ backgroundColor: color }}
+							className={ color}
 						>
 							<td>
 								<img
