@@ -4,11 +4,13 @@ import { SortBy } from "./types.d";
 import { UserList } from "./components/UserList";
 import { useUsers } from "./hooks/useUsers";
 import { Results } from "./components/Results";
+import { useQueryClient } from "@tanstack/react-query";
 
 function App() {
 	// flatMap method makes a new array with the results of calling a provided function on every element in the array
 	const { isLoading, isError, users, refetch, fetchNextPage, hasNextPage } =
 		useUsers();
+	const queryClient = useQueryClient();
 
 	const [showColors, setShowColors] = useState(false);
 	const [sorting, setSorting] = useState<SortBy>(SortBy.NONE);
@@ -23,8 +25,15 @@ function App() {
 		setSorting(newSortVal);
 	};
 	const handleDelete = (uuid: string) => {
-		const filteredUsers = users.filter((user) => user.login.uuid !== uuid);
-		// setUsers(filteredUsers);
+		queryClient.setQueryData(["users"], (oldData: any) => ({
+			pages: oldData.pages.map((page) => ({
+				...page,
+				users: page.users.filter(
+					(user) => user.login.uuid !== uuid
+				),
+			})),
+			pageParams: oldData.pageParams,
+		}));
 	};
 	const handleReset = async () => {
 		await refetch();
