@@ -3,6 +3,17 @@ import "./App.css";
 import { SortBy, type User } from "./types.d";
 import { UserList } from "./components/UserList";
 
+const fetchUsers = async (page: number) => {
+	const response = await fetch(
+		`https://randomuser.me/api?results=10&seed=dialca&page=${page}`
+	);
+	const data = await response.json();
+	if (!response.ok) {
+		throw new Error("Error fetching users");
+	}
+	return data.results;
+}
+
 function App() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [showColors, setShowColors] = useState(false);
@@ -35,18 +46,15 @@ function App() {
 	useEffect(() => {
 		setLoading(true);
 		setError(false);
-		fetch(`https://randomuser.me/api?results=10&seed=abc&page=${currentPage}`)
-			.then(async (response) => {
-				if (!response.ok) {
-					throw new Error("Error fetching users");
-				}
-				return await response.json();
-			})
-			.then((data) => {
+		fetchUsers(currentPage)
+			.then(users => {
 				setUsers(
-					prevUsers => [...prevUsers, ...data.results]
+					prevUsers => {
+						const newUsers = [...prevUsers, ...users];
+						originalUsers.current = newUsers;
+						return newUsers;
+					}
 				);
-				originalUsers.current = data.results;
 			})
 			.catch((error) => {
 				setError(error);
@@ -109,7 +117,7 @@ function App() {
 				{!loading && !error && users.length === 0 && (
 					<p>There aren't users to show</p>
 				)}
-				{!loading && !error && (
+				{!loading && !error && users.length!== 0 && (
 					<button onClick={() => setCurrentPage(currentPage + 1)}>
 						Charge more users
 					</button>
