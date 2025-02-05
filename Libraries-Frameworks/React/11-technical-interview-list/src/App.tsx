@@ -11,6 +11,7 @@ function App() {
 	const [filterCountry, setFilterCountry] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const toggleColors = () => {
 		setShowColors(!showColors);
@@ -34,23 +35,25 @@ function App() {
 	useEffect(() => {
 		setLoading(true);
 		setError(false);
-		fetch("https://randomuser.me/api?results=10")
+		fetch(`https://randomuser.me/api?results=10&seed=abc&page=${currentPage}`)
 			.then(async (response) => {
 				if (!response.ok) {
 					throw new Error("Error fetching users");
 				}
-				return await response.json()
+				return await response.json();
 			})
 			.then((data) => {
-				setUsers(data.results);
+				setUsers(
+					prevUsers => [...prevUsers, ...data.results]
+				);
 				originalUsers.current = data.results;
 			})
-			.catch((error) => { 
-				setError(error)
-				console.error(error)
+			.catch((error) => {
+				setError(error);
+				console.error(error);
 			})
 			.finally(() => setLoading(false));
-	}, []);
+	}, [currentPage]);
 
 	const filteredUsers = useMemo(() => {
 		return typeof filterCountry === "string" && filterCountry.length > 0
@@ -93,18 +96,23 @@ function App() {
 				/>
 			</header>
 			<main>
-				{loading && <p>Loading...</p>}
-				{!loading && error && <p>Error loading users</p>}
-				{!loading && !error && users.length === 0 && (
-					<p>There aren't users to show</p>
-				)}
-				{!loading && !error && users.length > 0 && (
+				{users.length > 0 && (
 					<UserList
 						showColors={showColors}
 						users={sortedUsersByCountry}
 						handleDelete={handleDelete}
 						changeSort={handleChangeSort}
 					/>
+				)}
+				{loading && <p>Loading...</p>}
+				{!loading && error && <p>Error loading users</p>}
+				{!loading && !error && users.length === 0 && (
+					<p>There aren't users to show</p>
+				)}
+				{!loading && !error && (
+					<button onClick={() => setCurrentPage(currentPage + 1)}>
+						Charge more users
+					</button>
 				)}
 			</main>
 		</>
