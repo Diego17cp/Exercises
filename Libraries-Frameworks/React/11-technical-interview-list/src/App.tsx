@@ -3,6 +3,7 @@ import "./App.css";
 import { SortBy } from "./types.d";
 import { UserList } from "./components/UserList";
 import { useUsers } from "./hooks/useUsers";
+import { Results } from "./components/Results";
 
 function App() {
 	// flatMap method makes a new array with the results of calling a provided function on every element in the array
@@ -62,6 +63,7 @@ function App() {
 	return (
 		<>
 			<h1>Users List</h1>
+			<Results />
 			<header>
 				<button onClick={toggleColors}>Color cells</button>
 				<button onClick={toggleSortByCountry}>Sort by country</button>

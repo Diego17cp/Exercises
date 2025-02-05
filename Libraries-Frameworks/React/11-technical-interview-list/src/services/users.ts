@@ -11,6 +11,6 @@ export const fetchUsers = async (pageParam: number) : Promise<UserPageResponse> 
 	const currentPage = Number(data.info.page);
 	return {
 		users: data.results as User[],
-		nextPage : currentPage > 10 ? undefined : currentPage + 1
+		nextPage : currentPage >= 10 ? undefined : currentPage + 1
 	};
 };
