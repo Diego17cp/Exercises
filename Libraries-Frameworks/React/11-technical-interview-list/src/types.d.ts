@@ -109,3 +109,12 @@ export interface Picture {
 	medium: string;
 	thumbnail: string;
 }
+
+export type UserPageResponse = {
+	users: User[];
+	nextPage: number | undefined;
+};
+export type UserInfinityResponse = {
+	pages: UserPageResponse[];
+	pageParams: (number | undefined)[];
+}
