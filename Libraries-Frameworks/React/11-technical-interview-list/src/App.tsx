@@ -2,29 +2,38 @@ import { useMemo, useState } from "react";
 import "./App.css";
 import { SortBy, type User } from "./types.d";
 import { UserList } from "./components/UserList";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-
-const fetchUsers = async (page: number) => {
+const fetchUsers = async ({ pageParam = 1 }: { pageParam?: number }) => {
 	const response = await fetch(
-		`https://randomuser.me/api?results=10&seed=dialca&page=${page}`
+		`https://randomuser.me/api?results=10&seed=dialca&page=${pageParam}`
 	);
 	const data = await response.json();
 	if (!response.ok) {
 		throw new Error("Error fetching users");
 	}
-	return data.results;
-}
+	const currentPage = Number(data.info.page);
+	const nextPage = currentPage > 10 ? undefined : currentPage + 1;
+	return {
+		users: data.results,
+		nextPage,
+	};
+};
 
 function App() {
-	const { isLoading, isError, data: users = [], refetch } = useQuery<User[]>({
-		queryKey: ['users'],
-		queryFn: async () => await fetchUsers(1),
-	})
+	const { isLoading, isError, data, refetch, fetchNextPage, hasNextPage } =
+		useInfiniteQuery({
+			queryKey: ["users"],
+			queryFn: fetchUsers,
+			getNextPageParam: (lastPage) => lastPage.nextPage,
+			initialPageParam: 1,
+		});
+	// flatMap method makes a new array with the results of calling a provided function on every element in the array
+	const users: User[] = data?.pages?.flatMap((page) => page.users) ?? [];
+
 	const [showColors, setShowColors] = useState(false);
 	const [sorting, setSorting] = useState<SortBy>(SortBy.NONE);
 	const [filterCountry, setFilterCountry] = useState<string | null>(null);
-	const [currentPage, setCurrentPage] = useState(1);
 
 	const toggleColors = () => {
 		setShowColors(!showColors);
@@ -99,10 +108,20 @@ function App() {
 				{!isLoading && !isError && users.length === 0 && (
 					<p>There aren't users to show</p>
 				)}
-				{!isLoading && !isError && users.length!== 0 && (
-					<button onClick={() => setCurrentPage(currentPage + 1)}>
-						Charge more users
-					</button>
+				{!isLoading &&
+					!isError &&
+					hasNextPage &&
+					users.length !== 0 && (
+						<button
+							onClick={() => {
+								fetchNextPage();
+							}}
+						>
+							Charge more users
+						</button>
+					)}
+				{!isLoading && !isError && !hasNextPage && (
+					<p>No more users found</p>
 				)}
 			</main>
 		</>
