@@ -1,14 +1,13 @@
 import { useMemo, useState } from "react";
 import "./App.css";
-import { SortBy, type User } from "./types.d";
+import { SortBy } from "./types.d";
 import { UserList } from "./components/UserList";
-import { useInfiniteQuery } from "@tanstack/react-query";
-
-
+import { useUsers } from "./hooks/useUsers";
 
 function App() {
 	// flatMap method makes a new array with the results of calling a provided function on every element in the array
-	const users: User[] = data?.pages?.flatMap((page) => page.users) ?? [];
+	const { isLoading, isError, users, refetch, fetchNextPage, hasNextPage } =
+		useUsers();
 
 	const [showColors, setShowColors] = useState(false);
 	const [sorting, setSorting] = useState<SortBy>(SortBy.NONE);
