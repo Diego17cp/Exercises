@@ -28,9 +28,7 @@ function App() {
 		queryClient.setQueryData(["users"], (oldData: any) => ({
 			pages: oldData.pages.map((page) => ({
 				...page,
-				users: page.users.filter(
-					(user) => user.login.uuid !== uuid
-				),
+				users: page.users.filter((user) => user.login.uuid !== uuid),
 			})),
 			pageParams: oldData.pageParams,
 		}));

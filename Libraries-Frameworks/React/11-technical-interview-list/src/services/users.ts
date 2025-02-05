@@ -1,6 +1,8 @@
 import { User, type UserPageResponse } from "../types.d";
 
-export const fetchUsers = async (pageParam: number) : Promise<UserPageResponse> => {
+export const fetchUsers = async (
+	pageParam: number
+): Promise<UserPageResponse> => {
 	const response = await fetch(
 		`https://randomuser.me/api?results=10&seed=dialca&page=${pageParam}`
 	);
@@ -11,6 +13,6 @@ export const fetchUsers = async (pageParam: number) : Promise<UserPageResponse> 
 	const currentPage = Number(data.info.page);
 	return {
 		users: data.results as User[],
-		nextPage : currentPage >= 10 ? undefined : currentPage + 1
+		nextPage: currentPage >= 10 ? undefined : currentPage + 1,
 	};
 };
