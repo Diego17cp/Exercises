@@ -4,30 +4,9 @@ import { SortBy, type User } from "./types.d";
 import { UserList } from "./components/UserList";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-const fetchUsers = async ({ pageParam = 1 }: { pageParam?: number }) => {
-	const response = await fetch(
-		`https://randomuser.me/api?results=10&seed=dialca&page=${pageParam}`
-	);
-	const data = await response.json();
-	if (!response.ok) {
-		throw new Error("Error fetching users");
-	}
-	const currentPage = Number(data.info.page);
-	const nextPage = currentPage > 10 ? undefined : currentPage + 1;
-	return {
-		users: data.results,
-		nextPage,
-	};
-};
+
 
 function App() {
-	const { isLoading, isError, data, refetch, fetchNextPage, hasNextPage } =
-		useInfiniteQuery({
-			queryKey: ["users"],
-			queryFn: fetchUsers,
-			getNextPageParam: (lastPage) => lastPage.nextPage,
-			initialPageParam: 1,
-		});
 	// flatMap method makes a new array with the results of calling a provided function on every element in the array
 	const users: User[] = data?.pages?.flatMap((page) => page.users) ?? [];
 
