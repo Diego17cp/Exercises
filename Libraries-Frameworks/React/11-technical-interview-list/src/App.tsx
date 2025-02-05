@@ -45,7 +45,7 @@ function App() {
 					user.location.country
 						.toLowerCase()
 						.includes(filterCountry.toLowerCase())
-			  )
+			)
 			: users;
 	}, [users, filterCountry]);
 
@@ -68,7 +68,7 @@ function App() {
 
 	return (
 		<>
-			<h1>Hola ts</h1>
+			<h1>Users List</h1>
 			<header>
 				<button onClick={toggleColors}>Color cells</button>
 				<button onClick={toggleSortByCountry}>Sort by country</button>
