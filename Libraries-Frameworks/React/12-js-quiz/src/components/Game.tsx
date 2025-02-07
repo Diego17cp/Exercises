@@ -1,17 +1,18 @@
 import {
 	Card,
-	// IconButton,
+	IconButton,
 	List,
 	ListItem,
 	ListItemButton,
 	ListItemText,
-	// Stack,
+	Stack,
 	Typography,
 } from "@mui/material";
 import { useQuestionsStore } from "../store/questions";
 import SyntaxHighLighter from "react-syntax-highlighter";
 import { gradientDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { type Question as QuestionType } from "../types.d";
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 
 const Question = ({ info }: { info: QuestionType }) => {
 	const selectAnswer = useQuestionsStore((state) => state.selectAnswer);
@@ -59,11 +60,35 @@ const Question = ({ info }: { info: QuestionType }) => {
 export const Game = () => {
 	const questions = useQuestionsStore((state) => state.questions);
 	const currentQuestion = useQuestionsStore((state) => state.currentQuestion);
+	const goNextQuestion = useQuestionsStore((state) => state.goNextQuestion);
+	const goPrevQuestion = useQuestionsStore((state) => state.goPrevQuestion);
 
 	const questionInfo = questions[currentQuestion];
 
 	return (
 		<>
+			<Stack
+				direction={"row"}
+				gap={2}
+				alignItems={"center"}
+				justifyContent={"center"}
+			>
+				<IconButton
+					onClick={goPrevQuestion}
+					disabled={currentQuestion === 0}
+				>
+					<ArrowBackIosNew />
+				</IconButton>
+				<Typography variant={"h6"}>
+					{currentQuestion + 1} / {questions.length}
+				</Typography>
+				<IconButton
+					onClick={goNextQuestion}
+					disabled={currentQuestion >= questions.length - 1}
+				>
+					<ArrowForwardIos />
+				</IconButton>
+			</Stack>
 			<Question info={questionInfo}></Question>
 		</>
 	);
