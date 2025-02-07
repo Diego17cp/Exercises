@@ -24,7 +24,7 @@ function App() {
 				</Stack>
 
 				{questions.length === 0 && <Start />}
-        {questions.length > 0 && <Game />}
+				{questions.length > 0 && <Game />}
 			</Container>
 		</main>
 	);

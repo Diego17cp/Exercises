@@ -13,6 +13,7 @@ import SyntaxHighLighter from "react-syntax-highlighter";
 import { gradientDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { type Question as QuestionType } from "../types.d";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import { Footer } from "./Footer";
 
 const Question = ({ info }: { info: QuestionType }) => {
 	const selectAnswer = useQuestionsStore((state) => state.selectAnswer);
@@ -90,6 +91,7 @@ export const Game = () => {
 				</IconButton>
 			</Stack>
 			<Question info={questionInfo}></Question>
+			<Footer />
 		</>
 	);
 };
