@@ -3,11 +3,10 @@ import "./App.css";
 import { JsLogo } from "./components/JsLogo";
 import { Start } from "./components/Start";
 import { useQuestionsStore } from "./store/questions";
-
+import { Game } from "./components/Game";
 
 function App() {
-
-  const questions = useQuestionsStore (state => state.questions);
+	const questions = useQuestionsStore((state) => state.questions);
 
 	return (
 		<main>
@@ -24,8 +23,8 @@ function App() {
 					</Typography>
 				</Stack>
 
-        <Start></Start>
-
+				{questions.length === 0 && <Start />}
+        {questions.length > 0 && <Game />}
 			</Container>
 		</main>
 	);
