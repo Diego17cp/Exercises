@@ -16,6 +16,7 @@ function App() {
 					spacing={2}
 					justifyContent={"center"}
 					alignItems={"center"}
+					mb={2}
 				>
 					<JsLogo />
 					<Typography variant="h2" align="center" component={"h1"}>
