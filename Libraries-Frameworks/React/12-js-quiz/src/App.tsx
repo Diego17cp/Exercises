@@ -2,9 +2,13 @@ import { Container, Stack, Typography } from "@mui/material";
 import "./App.css";
 import { JsLogo } from "./components/JsLogo";
 import { Start } from "./components/Start";
+import { useQuestionsStore } from "./store/questions";
 
 
 function App() {
+
+  const questions = useQuestionsStore (state => state.questions);
+
 	return (
 		<main>
 			<Container maxWidth="sm">

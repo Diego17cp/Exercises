@@ -1,5 +1,12 @@
-import { Button } from "@mui/material";
+import { Button } from "@mui/material"
+import { useQuestionsStore } from "../store/questions";
 
 export const Start = () => {
-	return <Button variant="contained">Start</Button>;
-};
+    const fetchQuestions = useQuestionsStore(state => state.fetchQuestions);
+    const handleClick = () => {
+        fetchQuestions(5);
+    }
+    return (
+        <Button variant="contained" onClick={handleClick}>Start</Button>
+    )
+}
