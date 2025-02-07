@@ -1,7 +1,11 @@
+import { Button } from "@mui/material";
 import { useQuestionsData } from "../hooks/useQuestionsData";
+import { useQuestionsStore } from "../store/questions";
 
 export const Footer = () => {
 	const { correct, incorrect, unanswered } = useQuestionsData();
+	const reset = useQuestionsStore((state) => state.reset);
+
 	return (
 		<footer
 			style={{
@@ -11,7 +15,17 @@ export const Footer = () => {
 			<strong>
 				{`✅ ${correct} - ❌ ${incorrect} - ❓ ${unanswered}`}
 			</strong>
-			<p>© 2021 JavaScript Quiz</p>
+			<div
+				style={{
+					marginTop: "1rem",
+				}}
+			>
+				<Button onClick={() => reset()}>Reset Game</Button>
+			</div>
+			<p>
+				© 2024 - Made by Diego17 following React Cours of{" "}
+				<a href="http://youtube.com/MiduDev">@MiduDev</a>
+			</p>
 		</footer>
 	);
 };
