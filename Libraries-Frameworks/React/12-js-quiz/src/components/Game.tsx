@@ -68,22 +68,13 @@ export const Game = () => {
 	const toggleModal = useQuestionsStore((state) => state.toggleModal);
 	const questionInfo = questions[currentQuestion];
 
-	// useEffect(() => {
-    //     // Solo ejecutamos la lógica si tenemos preguntas y questionInfo
-    //     if (questions.length > 0 && questionInfo) {
-    //         // Verificamos si estamos en la última pregunta
-    //         const isLastQuestion = currentQuestion === questions.length - 1;
-            
-    //         // Verificamos si TODAS las preguntas han sido respondidas
-    //         const allAnswered = questions.every(q => q.userSelectedAnswer !== null);
-            
-    //         // Solo mostramos el modal si estamos en la última pregunta y todas están respondidas
-    //         if (isLastQuestion && allAnswered) {
-    //             toggleModal(true);
-    //         }
-    //     }
-    // }, [questionInfo?.userSelectedAnswer]);
-
+	useEffect(() => {
+		if (questions.length > 0 && questionInfo) {
+			if (questions.every(q => q.userSelectedAnswer != null)) {
+				toggleModal(true);
+			}
+		}
+	}, [questions, questionInfo, toggleModal]); // Agregamos currentQuestion como dependencia
 	return (
 		<>
 			<Stack
