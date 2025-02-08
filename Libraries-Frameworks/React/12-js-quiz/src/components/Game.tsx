@@ -19,6 +19,8 @@ import { useEffect } from "react";
 
 const Question = ({ info }: { info: QuestionType }) => {
 	const selectAnswer = useQuestionsStore((state) => state.selectAnswer);
+	const isVisible = useQuestionsStore((state) => state.isModalVisible);
+
 	const handleClick = (answerIndex: number) => () => {
 		selectAnswer(info.id, answerIndex);
 	};
@@ -37,7 +39,14 @@ const Question = ({ info }: { info: QuestionType }) => {
 	return (
 		<Card
 			variant="outlined"
-			sx={{ textAlign: "left", p: 2, bgcolor: "background.paper", mt: 4 }}
+			sx={{
+				textAlign: "left",
+				p: 2,
+				bgcolor: "background.paper",
+				mt: 4,
+				opacity: isVisible ? 0.3 : 1,
+				transition: "all 0.5s ease",
+			}}
 		>
 			<Typography variant="h5">{info.question}</Typography>
 			<SyntaxHighLighter language="javascript" style={gradientDark}>
@@ -70,7 +79,7 @@ export const Game = () => {
 
 	useEffect(() => {
 		if (questions.length > 0 && questionInfo) {
-			if (questions.every(q => q.userSelectedAnswer != null)) {
+			if (questions.every((q) => q.userSelectedAnswer != null)) {
 				toggleModal(true);
 			}
 		}
