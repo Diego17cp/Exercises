@@ -27,7 +27,7 @@ export const PointsModal = () => {
 				zIndex: 1000,
 				opacity: isVisible ? 1 : 0,
 				pointerEvents: isVisible ? "auto" : "none",
-                height: '35%',
+                height: '40%',
                 width: '30%',
 			}}
 			style={{
@@ -49,7 +49,7 @@ export const PointsModal = () => {
 				<CloseIcon />
 			</Button>
 			<Typography variant="h3" sx={{
-                mb: 2,
+                mb: 3,
                 textAlign: 'center'
             }}>Score</Typography>
 			<Typography variant="h5" sx={{
