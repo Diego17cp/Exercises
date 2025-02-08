@@ -1,17 +1,16 @@
 import { Button, Card, Typography } from "@mui/material";
 import { useQuestionsStore } from "../store/questions";
-import CloseIcon from '@mui/icons-material/Close';
-
+import CloseIcon from "@mui/icons-material/Close";
 
 export const PointsModal = () => {
 	const points = useQuestionsStore((state) => state.points);
 	const maxPoints = useQuestionsStore((state) => state.maxPoints);
 	const reset = useQuestionsStore((state) => state.reset);
-    const isVisible = useQuestionsStore((state) => state.isModalVisible);
-    const toggleModal = useQuestionsStore((state) => state.toggleModal);
+	const isVisible = useQuestionsStore((state) => state.isModalVisible);
+	const toggleModal = useQuestionsStore((state) => state.toggleModal);
 
 	const handleClick = () => {
-		toggleModal(false)
+		toggleModal(false);
 	};
 
 	return (
@@ -27,12 +26,12 @@ export const PointsModal = () => {
 				zIndex: 1000,
 				opacity: isVisible ? 1 : 0,
 				pointerEvents: isVisible ? "auto" : "none",
-                height: '40%',
-                width: '30%',
+				height: "40%",
+				width: "30%",
 			}}
 			style={{
 				transition: "all 0.5s ease",
-                boxShadow: '0 0 10px #125'
+				boxShadow: "0 0 35px #125",
 			}}
 		>
 			<Button
@@ -48,17 +47,25 @@ export const PointsModal = () => {
 			>
 				<CloseIcon />
 			</Button>
-			<Typography variant="h3" sx={{
-                mb: 3,
-                textAlign: 'center'
-            }}>Score</Typography>
-			<Typography variant="h5" sx={{
-                textAlign: 'center',
-                mb: 2
-            }}>
+			<Typography
+				variant="h3"
+				sx={{
+					mb: 3,
+					textAlign: "center",
+				}}
+			>
+				Score
+			</Typography>
+			<Typography
+				variant="h5"
+				sx={{
+					textAlign: "center",
+					mb: 2,
+				}}
+			>
 				You scored {points} out of {maxPoints}
 			</Typography>
-			{ points===maxPoints && (
+			{points === maxPoints && (
 				<Typography variant="h5">Perfect Score!🏆</Typography>
 			)}
 			<Button
@@ -66,8 +73,8 @@ export const PointsModal = () => {
 					reset();
 					handleClick();
 				}}
-				sx={{ mt: 2, width: "100%" }}
-                variant="contained"
+				sx={{ mt: 4, width: "100%" }}
+				variant="contained"
 			>
 				Reset Game
 			</Button>
