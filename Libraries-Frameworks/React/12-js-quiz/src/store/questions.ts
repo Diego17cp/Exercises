@@ -7,6 +7,9 @@ interface State {
 	questions: Question[];
 	currentQuestion: number;
 	points: number;
+	maxPoints: number;
+	isModalVisible: boolean;
+	toggleModal: (val: boolean) => void;
 	fetchQuestions: (limit: number) => Promise<void>;
 	selectAnswer: (questionId: number, answerIndex: number) => void;
 	goNextQuestion: () => void;
@@ -21,6 +24,8 @@ export const useQuestionsStore = create<State>()(
 				questions: [],
 				currentQuestion: 0,
 				points : 0,
+				maxPoints: 20,
+				isModalVisible: false,
 
 				fetchQuestions: async (limit: number) => {
 					const res = await fetch(`http://localhost:5173/data.json`);
@@ -69,7 +74,13 @@ export const useQuestionsStore = create<State>()(
 					}
 				},
 				reset: () => {
-					set({ currentQuestion: 0, questions: [] });
+					set({ currentQuestion: 0, questions: [], points: 0 });
+				},
+				toggleModal: (val: boolean) => {
+					if (val) {
+						confetti();
+					}
+					set({ isModalVisible: val });
 				},
 			};
 		},

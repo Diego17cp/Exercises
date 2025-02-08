@@ -14,6 +14,8 @@ import { gradientDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { type Question as QuestionType } from "../types.d";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import { Footer } from "./Footer";
+import { PointsModal } from "./PointsModal";
+import { useEffect } from "react";
 
 const Question = ({ info }: { info: QuestionType }) => {
 	const selectAnswer = useQuestionsStore((state) => state.selectAnswer);
@@ -63,9 +65,24 @@ export const Game = () => {
 	const currentQuestion = useQuestionsStore((state) => state.currentQuestion);
 	const goNextQuestion = useQuestionsStore((state) => state.goNextQuestion);
 	const goPrevQuestion = useQuestionsStore((state) => state.goPrevQuestion);
-	// const points = useQuestionsStore((state) => state.points);
-
+	const toggleModal = useQuestionsStore((state) => state.toggleModal);
 	const questionInfo = questions[currentQuestion];
+
+	// useEffect(() => {
+    //     // Solo ejecutamos la lógica si tenemos preguntas y questionInfo
+    //     if (questions.length > 0 && questionInfo) {
+    //         // Verificamos si estamos en la última pregunta
+    //         const isLastQuestion = currentQuestion === questions.length - 1;
+            
+    //         // Verificamos si TODAS las preguntas han sido respondidas
+    //         const allAnswered = questions.every(q => q.userSelectedAnswer !== null);
+            
+    //         // Solo mostramos el modal si estamos en la última pregunta y todas están respondidas
+    //         if (isLastQuestion && allAnswered) {
+    //             toggleModal(true);
+    //         }
+    //     }
+    // }, [questionInfo?.userSelectedAnswer]);
 
 	return (
 		<>
@@ -92,6 +109,7 @@ export const Game = () => {
 				</IconButton>
 			</Stack>
 			<Question info={questionInfo}></Question>
+			<PointsModal />
 			<Footer />
 		</>
 	);
