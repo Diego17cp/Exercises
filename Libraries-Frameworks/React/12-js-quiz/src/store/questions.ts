@@ -6,6 +6,7 @@ import { persist } from "zustand/middleware";
 interface State {
 	questions: Question[];
 	currentQuestion: number;
+	points: number;
 	fetchQuestions: (limit: number) => Promise<void>;
 	selectAnswer: (questionId: number, answerIndex: number) => void;
 	goNextQuestion: () => void;
@@ -19,6 +20,7 @@ export const useQuestionsStore = create<State>()(
 			return {
 				questions: [],
 				currentQuestion: 0,
+				points : 0,
 
 				fetchQuestions: async (limit: number) => {
 					const res = await fetch(`http://localhost:5173/data.json`);
@@ -31,6 +33,7 @@ export const useQuestionsStore = create<State>()(
 				},
 				selectAnswer: (questionId: number, answerIndex: number) => {
 					const { questions } = get();
+					const { points } = get();
 					const newQuestions = structuredClone(questions);
 					const questionIndex = newQuestions.findIndex(
 						(q) => q.id === questionId
@@ -40,6 +43,7 @@ export const useQuestionsStore = create<State>()(
 						questionInfo.correctAnswer === answerIndex;
 					if (isCorrect) {
 						confetti();
+						set({ points: points + 4 });
 					}
 
 					newQuestions[questionIndex] = {
@@ -47,6 +51,7 @@ export const useQuestionsStore = create<State>()(
 						isCorrect,
 						userSelectedAnswer: answerIndex,
 					};
+
 					set({ questions: newQuestions });
 				},
 				goNextQuestion: () => {

@@ -63,6 +63,7 @@ export const Game = () => {
 	const currentQuestion = useQuestionsStore((state) => state.currentQuestion);
 	const goNextQuestion = useQuestionsStore((state) => state.goNextQuestion);
 	const goPrevQuestion = useQuestionsStore((state) => state.goPrevQuestion);
+	// const points = useQuestionsStore((state) => state.points);
 
 	const questionInfo = questions[currentQuestion];
 
