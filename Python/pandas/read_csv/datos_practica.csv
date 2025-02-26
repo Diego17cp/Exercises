@@ -1,0 +1,11 @@
+ID,Nombre,Edad,Género,Ciudad,Salario,Fecha_Ingreso,Departamento
+1,Juan Pérez,25,Masculino,Madrid,25000.5,2018-06-15,Ventas
+2,Ana Gómez,30,Femenino,Barcelona,32000.75,2015-09-23,Marketing
+3,Carlos López,45,Masculino,Sevilla,45000.0,2010-12-01,IT
+4,María Díaz,40,Femenino,Valencia,38000.25,2012-04-17,Finanzas
+5,Pedro Sánchez,35,Masculino,Bilbao,29500.0,2016-11-05,Recursos Humanos
+6,Laura Fernández,28,Femenino,Málaga,31000.9,2019-07-30,Ventas
+7,Luis Ramírez,50,Masculino,Zaragoza,47000.3,2008-03-12,IT
+8,Carmen Torres,32,Femenino,Alicante,33500.8,2017-08-19,Finanzas
+9,Jorge Herrera,29,Masculino,Oviedo,28000.65,2020-02-10,Marketing
+10,Marta Castro,41,Femenino,Toledo,40000.2,2013-05-25,Recursos Humanos
