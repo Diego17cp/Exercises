@@ -66,14 +66,14 @@ def check_all_messages(msg):
         '¡Saludos! ¿Qué necesitas? 🌟',
         '¡Bienvenido! ¿En qué te puedo ayudar? 🤝',
         'Habla causa, ¿en qué estás? 🤔'
-    ], ['hola', 'saludos', 'que onda', 'buenas'], single_response=True)
+    ], ['hola', 'saludos', 'buenas'], single_response=True)
     response('📍 Estamos ubicados en Senati Chiclayo', ['donde', 'ubicados', 'direccion', 'ubicacion'], single_response=True)
     response([
         '😊 ¡Siempre a tus órdenes!',
         '¡No hay de qué! 🌟',
         '¡Es un placer ayudarte! 💫',
         '¡Para eso estamos! 🤝'
-    ], ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
+    ], ['gracias', 'agradezco', 'thanks'], single_response=True)
     response('Para ver los libros disponibles, escribe "consultar"', ['libros', 'consulta', 'ver', 'disponibles'], required_words=['consultar'])
     response('Para prestar un libro, escribe "prestar"', ['prestar', 'tomar', 'libro', 'prestado'], required_words=['prestar'])
     response('Para devolver un libro, escribe "devolver"', ['devolver', 'regresar', 'libro'], required_words=['devolver'])
@@ -85,14 +85,14 @@ def check_all_messages(msg):
         '¡Todo bien! ¿Y tú? 🌟',
         'Todo bacán, mano 🤝',
         'Chévere, mi king 👑'
-    ], ['como', 'estas', 'te encuentras', 'vas'], single_response=True)
+    ], ['como', 'estas', 'te', 'vas', 'tal', 'que', 'onda', 'encuentras'], single_response=True)
     response('GAAAAAAAAA 👻', ['ga', 'gaaaa', 'bota tu ga'], single_response=True)
     response([
         'Go Left 👻',
         'Go leftsito 👻',
         'Sale su left 👻',
         'Left, mano 👻'
-    ], ['left', 'lefas', 'go left', 'L4D2', 'l4d2'], single_response=True)
+    ], ['left', 'lefas', 'go', 'L4D2', 'l4d2'], single_response=True)
     response('🤖 Soy un bot creado por Diego, como ejercicio en Senati', ['quien', 'eres', 'creador', 'bot'], single_response=True)
     response([
         'Yo también te quiero 😊',
