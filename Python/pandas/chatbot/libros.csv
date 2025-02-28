@@ -1,0 +1,11 @@
+titulo,categoria,autor,f_edicion,estado,precio
+IT,Terror,Stephen King,1986,Disponible,20.0
+EL PADRINO,Drama,Mario Puzo,1969,Disponible,22.0
+LOS JUEGOS DEL HAMBRE,Acción,Suzanne Collins,2008,Disponible,18.0
+CARRIE,Terror,Stephen King,1974,Disponible,15.0
+1984,Ciencia Ficción,George Orwell,1949,Disponible,15.5
+DON QUIJOTE,Clásico,Miguel de Cervantes,1605,Disponible,30.0
+HARRY POTTER,Fantasía,J.K. Rowling,1997,Disponible,25.0
+MOBY DICK,Aventura,Herman Melville,1851,Disponible,18.5
+EL PRINCIPITO,Infantil,Antoine de Saint-Exupéry,1943,Disponible,12.0
+SHERLOCK HOLMES,Misterio,Arthur Conan Doyle,1887,Disponible,20.0
