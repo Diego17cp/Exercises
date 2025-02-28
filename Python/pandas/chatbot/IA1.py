@@ -48,9 +48,10 @@ def msg_probability(user_msg, recognized_words, single_response=False, required_
 def check_all_messages(msg):
     highest_prob = {}
 
-    def response(bot_response, list_of_words, single_response=False, required_words=[]):
+    def response(bot_responses, list_of_words, single_response=False, required_words=[]):
         nonlocal highest_prob
-        highest_prob[bot_response] = msg_probability(msg, list_of_words, single_response, required_words)
+        responses = bot_responses if isinstance(bot_responses, list) else [bot_responses]
+        highest_prob[tuple(responses)] = msg_probability(msg, list_of_words, single_response, required_words)
     response('''
         🤖 Comandos disponibles:
         📚 consultar - Ver todos los libros
@@ -59,27 +60,70 @@ def check_all_messages(msg):
         💰 comprar - Comprar un libro
         ℹ️  info (título) - Ver información de un libro
     ''', ['ayuda', 'comandos', 'opciones', 'help', 'ayudame'], single_response=True)
-    response('👋 ¡Hola! ¿Cómo puedo ayudarte?', ['hola', 'saludos', 'que onda', 'buenas'], single_response=True)
+    response([
+        '👋 ¡Hola! ¿Cómo puedo ayudarte?',
+        '¡Hola! ¿En qué puedo servirte hoy? 😊',
+        '¡Saludos! ¿Qué necesitas? 🌟',
+        '¡Bienvenido! ¿En qué te puedo ayudar? 🤝',
+        'Habla causa, ¿en qué estás? 🤔'
+    ], ['hola', 'saludos', 'que onda', 'buenas'], single_response=True)
     response('📍 Estamos ubicados en Senati Chiclayo', ['donde', 'ubicados', 'direccion', 'ubicacion'], single_response=True)
-    response('😊 ¡Siempre a tus órdenes!', ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
+    response([
+        '😊 ¡Siempre a tus órdenes!',
+        '¡No hay de qué! 🌟',
+        '¡Es un placer ayudarte! 💫',
+        '¡Para eso estamos! 🤝'
+    ], ['gracias', 'te lo agradezco', 'thanks'], single_response=True)
     response('Para ver los libros disponibles, escribe "consultar"', ['libros', 'consulta', 'ver', 'disponibles'], required_words=['consultar'])
     response('Para prestar un libro, escribe "prestar"', ['prestar', 'tomar', 'libro', 'prestado'], required_words=['prestar'])
     response('Para devolver un libro, escribe "devolver"', ['devolver', 'regresar', 'libro'], required_words=['devolver'])
     response('Para comprar un libro, escribe "comprar"', ['comprar', 'adquirir', 'libro'], required_words=['comprar'])
-    response('Para ver la información de un libro, escribe "info"', ['info', 'informacion', 'detalles', 'libro'], required_words=['info'])
-    response('Estoy bien, gracias', ['como', 'estas', 'te encuentras', 'vas'], required_words=['como'])
+    response('Para ver la información de un libro, escribe "info (nombre del libro deseado)"', ['info', 'informacion', 'detalles', 'libro'], required_words=['info'])
+    response([
+        'Estoy bien, gracias'
+        '¡Estoy genial! 😊',
+        '¡Todo bien! ¿Y tú? 🌟',
+        'Todo bacán, mano 🤝',
+        'Chévere, mi king 👑'
+    ], ['como', 'estas', 'te encuentras', 'vas'], single_response=True)
     response('GAAAAAAAAA 👻', ['ga', 'gaaaa', 'bota tu ga'], single_response=True)
+    response([
+        'Go Left 👻',
+        'Go leftsito 👻',
+        'Sale su left 👻',
+        'Left, mano 👻'
+    ], ['left', 'lefas', 'go left', 'L4D2', 'l4d2'], single_response=True)
+    response('🤖 Soy un bot creado por Diego, como ejercicio en Senati', ['quien', 'eres', 'creador', 'bot'], single_response=True)
+    response([
+        'Yo también te quiero 😊',
+        '¡Yo también te quiero, humano! 🌟',
+        '¡Yo también te amo, mano! 🤝',
+        'Yo también causa',
+        '😳'
+    ], ['te', 'quiero', 'amo'], single_response=True)
+    response([
+        'Por qué me dices eso, mi king 😢',
+        '¡No me hables así! 😭',
+        '¡Eso duele! 😢',
+        '¡Perdóname por nacer! 😭',
+        '😿'
+    ], ['te', 'odio'], required_words=['odio'])
+    
 
     best_match = max(highest_prob, key=highest_prob.get)
-    return unknown() if highest_prob[best_match] < 1 else best_match
+    if highest_prob[best_match] < 1:
+        return unknown()
+    return random.choice(list(best_match))
 
 def unknown():
     responses = [
         '❓ ¿Puedes decirlo de nuevo?',
         '😕 No estoy seguro de lo que quieres decir',
-        '🤔 No entiendo lo que dices'
+        '🤔 No entiendo lo que dices',
+        '🤨 ¿Podrías reformular tu pregunta?',
+        '😅 No logro entender, ¿podrías ser más específico?'
     ]
-    return responses[random.randrange(3)]
+    return random.choice(responses)
 
 if __name__ == '__main__':
     while True:
