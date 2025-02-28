@@ -85,7 +85,7 @@ def check_all_messages(msg):
         '¡Todo bien! ¿Y tú? 🌟',
         'Todo bacán, mano 🤝',
         'Chévere, mi king 👑'
-    ], ['como', 'estas', 'te', 'vas', 'tal', 'que', 'onda', 'encuentras'], single_response=True)
+    ], ['como', 'estas', 'vas', 'tal', 'que', 'onda', 'encuentras'], single_response=True)
     response('GAAAAAAAAA 👻', ['ga', 'gaaaa', 'bota tu ga'], single_response=True)
     response([
         'Go Left 👻',
