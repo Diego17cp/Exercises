@@ -24,14 +24,14 @@ export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({ children }) =>
     const [usuarios, setUsuarios] = useState<Usuario[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost/backend/public/usuario')
+        fetch('http://localhost/backend/public/api/usuario')
             .then(response => response.json())
             .then(data => setUsuarios(data));
     }, []);
 
     const addUser = async (user: Omit<Usuario, 'id'>) => {
         try {
-            const response = await fetch('http://localhost/backend/public/usuario', {
+            const response = await fetch('http://localhost/backend/public/api/usuario', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({ children }) =>
 
     const deleteUser = async (id: id) => {
         try {
-            const response = await fetch(`http://localhost/backend/public/usuario/${id}`, {
+            const response = await fetch(`http://localhost/backend/public/api/usuario/${id}`, {
                 method: 'DELETE',
                 credentials: 'include',
             headers: {
