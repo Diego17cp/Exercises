@@ -34,7 +34,9 @@ export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({ children }) =>
             const response = await fetch('http://localhost/backend/public/usuario', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
                 body: JSON.stringify(user)
             });
@@ -53,7 +55,12 @@ export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({ children }) =>
     const deleteUser = async (id: id) => {
         try {
             const response = await fetch(`http://localhost/backend/public/usuario/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
             });
 
             if (!response.ok) {
