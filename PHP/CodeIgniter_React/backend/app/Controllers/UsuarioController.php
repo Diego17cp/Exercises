@@ -26,15 +26,28 @@ class UsuarioController extends ResourceController
     }
     public function create()
     {
-        $data = $this->request->getPost();
-        if ($data) {
-            $data['id_usuario'] = $this->crear_id_usuario();
-            $this->model->insert($data);
-            return $this->respondCreated([
-                'message' => 'Usuario creado exitosamente'
-            ]);
+        try {
+            $json = $this->request->getJSON();
+            $userId = $this->crear_id_usuario();
+            $data = [
+                'id' => $userId,
+                'nombre' => $json->nombre ?? null,
+                'email' => $json->email ?? null,
+                'edad' => isset($json->edad) ? (int)$json->edad : null
+            ];
+            if ($this->model->insert($data)) {
+                return $this->respondCreated([
+                    'status' => 201,
+                    'error' => null,
+                    'messages' => 'Usuario creado exitosamente',
+                    'data' => $data
+                ]);
+            }
+            return $this->fail($this->model->errors() ?: 'Error al crear usuario');
+        } catch (\Exception $e) {
+            log_message('error', 'Create error: ' . $e->getMessage());
+            return $this->fail($e->getMessage());
         }
-        return $this->fail($this->model->errors());
     }
     public function update($id = null)
     {

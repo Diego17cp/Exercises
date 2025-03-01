@@ -25,22 +25,16 @@ function App() {
 			return;
 		}
 
-		try {
-			if (addUser) {
-				await addUser({
-					nombre: nombre.trim(),
-					email: email.trim(),
-					edad,
-				});
-				// Limpiar formulario después de éxito
-				setNombre("");
-				setEmail("");
-				setEdad(0);
-			}
-		} catch (err) {
-			setError("Error al crear usuario");
-			console.error(err);
-		}
+		if (addUser) {
+      addUser({
+        nombre: nombre,
+        email: email,
+        edad: edad,
+      });
+      setNombre("");
+      setEmail("");
+      setEdad(0);
+    }
 	};
 
 	return (
@@ -69,7 +63,6 @@ function App() {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
 					/>
 				</div>
 				<div>

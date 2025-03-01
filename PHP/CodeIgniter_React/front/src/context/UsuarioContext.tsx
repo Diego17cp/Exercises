@@ -43,18 +43,21 @@ export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					Accept: "application/json",
 				},
 				body: JSON.stringify(user),
 			});
-
+			const data = await response.json();
 			if (!response.ok) {
-				throw new Error("Error creating user");
+				throw new Error(data.message || "Error creating user");
 			}
-
-			const newUser = await response.json();
-			setUsuarios((prev) => [...prev, newUser]);
-		} catch (error) {
-			console.error("Error adding user:", error);
+			if (data.data) {
+				setUsuarios((prev) => [...prev, data.data]);
+				return data.data;
+			}
+		} catch (error: unknown) {
+			console.error("Error creating user:", error);
+			throw error;
 		}
 	};
 
