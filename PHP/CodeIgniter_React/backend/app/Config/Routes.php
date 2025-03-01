@@ -6,4 +6,6 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->resource('usuario', ['controller' => 'UsuarioController']);
+$routes->group('api', function($routes) {
+    $routes->resource('usuario', ['controller' => 'UsuarioController']);
+});
