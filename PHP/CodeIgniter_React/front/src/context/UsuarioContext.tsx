@@ -2,85 +2,89 @@ import { createContext, useState, useEffect } from "react";
 
 type id = string;
 interface Usuario {
-    id: id;
-    nombre: string; 
-    email: string;
-    edad: number;   
+	id: id;
+	nombre: string;
+	email: string;
+	edad: number;
 }
 
 interface UsuarioContextType {
-    usuarios: Usuario[];
-    addUser: (user: Omit<Usuario, 'id'>) => void;
-    deleteUser: (id: id) => void;
+	usuarios: Usuario[];
+	addUser: (user: Omit<Usuario, "id">) => void;
+	deleteUser: (id: id) => void;
 }
 
 export const UsuarioContext = createContext<UsuarioContextType | null>(null);
 
 interface UsuarioProviderProps {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }
 
-export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({ children }) => {
-    const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+const baseUrl = "http://localhost/backend/public/api/usuario";
 
-    useEffect(() => {
-        fetch('http://localhost/backend/public/api/usuario')
-            .then(response => response.json())
-            .then(data => setUsuarios(data));
-    }, []);
+export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({
+	children,
+}) => {
+	const [usuarios, setUsuarios] = useState<Usuario[]>([]);
 
-    const addUser = async (user: Omit<Usuario, 'id'>) => {
-        try {
-            const response = await fetch('http://localhost/backend/public/api/usuario', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                body: JSON.stringify(user)
-            });
-            
-            if (!response.ok) {
-                throw new Error('Error creating user');
-            }
-            
-            const newUser = await response.json();
-            setUsuarios(prev => [...prev, newUser]);
-        } catch (error) {
-            console.error('Error adding user:', error);
-        }
-    };
+	useEffect(() => {
+		fetch(baseUrl, {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => setUsuarios(data));
+	}, []);
 
-    const deleteUser = async (id: id) => {
-        try {
-            const response = await fetch(`http://localhost/backend/public/api/usuario/${id}`, {
-                method: 'DELETE',
-                credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-            });
+	const addUser = async (user: Omit<Usuario, "id">) => {
+		try {
+			const response = await fetch(baseUrl, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(user),
+			});
 
-            if (!response.ok) {
-                throw new Error('Error deleting user');
-            }
+			if (!response.ok) {
+				throw new Error("Error creating user");
+			}
 
-            setUsuarios(prev => prev.filter(user => user.id !== id));
-        } catch (error) {
-            console.error('Error deleting user:', error);
-        }
-    };
+			const newUser = await response.json();
+			setUsuarios((prev) => [...prev, newUser]);
+		} catch (error) {
+			console.error("Error adding user:", error);
+		}
+	};
 
-    const contextVal: UsuarioContextType = {
-        usuarios,
-        addUser,
-        deleteUser
-    }
-    return (
-        <UsuarioContext.Provider value={contextVal}>
-            {children}
-        </UsuarioContext.Provider>
-    )
+	const deleteUser = async (id: id) => {
+		try {
+			const response = await fetch(`${baseUrl}/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error("Error deleting user");
+			}
+
+			setUsuarios((prev) => prev.filter((user) => user.id !== id));
+		} catch (error) {
+			console.error("Error deleting user:", error);
+		}
+	};
+
+	const contextVal: UsuarioContextType = {
+		usuarios,
+		addUser,
+		deleteUser,
+	};
+	return (
+		<UsuarioContext.Provider value={contextVal}>
+			{children}
+		</UsuarioContext.Provider>
+	);
 };
