@@ -2,9 +2,9 @@
 namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 
-class UsuariosController extends ResourceController
+class UsuarioController extends ResourceController
 {
-    protected $modelName = 'App\Models\UsuariosModel';
+    protected $modelName = 'App\Models\UsuarioModel';
     protected $format = 'json';
 
     public function index()
