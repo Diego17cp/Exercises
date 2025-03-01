@@ -16,10 +16,20 @@ class UsuarioController extends ResourceController
         $user = $this->model->find($id);
         $user ? $this->respond($user) : $this->failNotFound('No se encontró el usuario');
     }
+    public function crear_id_usuario()
+    {
+        do {
+            $id = 'US' . substr(uniqid(), -6);
+            $existe = $this->model->find($id);
+        } while ($existe);
+        return $id;
+    }
     public function create()
     {
         $data = $this->request->getPost();
-        if ($this->model->insert($data)) {
+        if ($data) {
+            $data['id_usuario'] = $this->crear_id_usuario();
+            $this->model->insert($data);
             return $this->respondCreated([
                 'message' => 'Usuario creado exitosamente'
             ]);
