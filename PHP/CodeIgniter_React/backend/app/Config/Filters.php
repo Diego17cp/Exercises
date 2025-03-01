@@ -68,10 +68,8 @@ class Filters extends BaseFilters
      * @var array<string, array<string, array<string, string>>>|array<string, list<string>>
      */
     public array $globals = [
-        'before' => [
-        ],
-        'after' => [
-        ],
+        'before' => [],
+        'after' => [],
     ];
 
     /**
@@ -98,5 +96,7 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'cors' => ['after' => ['api/*']],
+    ];
 }
