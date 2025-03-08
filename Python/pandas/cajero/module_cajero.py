@@ -5,13 +5,17 @@ import re
 
 df_clientes = pd.read_excel('pandas/cajero/clientes.xlsx', dtype={'dni': str, 'telefono': str, 'contraseña': str})
 df_transacciones = pd.read_excel('pandas/cajero/transacciones.xlsx', dtype={'dni': str})
+
 def validar_email(email):
     patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return bool(re.match(patron, email))
+
 def validar_telefono(telefono):
     return len(telefono) == 9 and telefono.isdigit() and telefono.startswith('9')
+
 def validar_nombre(nombre):
     return bool(re.match(r'^[A-Za-záéíóúñÁÉÍÓÚÑ\s]{2,50}$', nombre))
+
 def validar_contraseña(contraseña):
     return bool(re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$', contraseña))
 
@@ -39,6 +43,7 @@ def generar_boleta(tipo, monto, dni):
     
 def crear_cuenta ():
     global df_clientes
+
     crear_dni = input('Ingrese el DNI del titular de la cuenta:\n')
     while len(crear_dni) != 8 or not crear_dni.isdigit():
         print('El DNI debe contener 8 dígitos numéricos')
@@ -46,6 +51,7 @@ def crear_cuenta ():
     if crear_dni in df_clientes['dni'].values:
         print('Este DNI ya está registrado')
         return
+    
     edad = int(input('Ingrese la edad del titular: \n'))
     try:
         edad = int(input('Ingrese la edad del titular:\n'))
@@ -64,14 +70,17 @@ def crear_cuenta ():
     while not validar_nombre(apellido):
         print('Los apellidos deben contener solo letras y espacios (2-50 caracteres)')
         apellido = input('Ingrese nuevamente los apellidos: ')
+
     telefono = input('Ingrese el teléfono del titular (9 dígitos):\n')
     while not validar_telefono(telefono):
         print('El teléfono debe comenzar con 9 y tener 9 dígitos')
         telefono = input('Ingrese nuevamente el teléfono: ')
+    
     correo = input('Ingrese el correo del titular:\n')
     while not validar_email(correo):
         print('Ingrese un correo electrónico válido')
         correo = input('Ingrese nuevamente el correo: ')
+    
     contraseña = input('Ingrese su contraseña:\n')
     while not validar_contraseña(contraseña):
         print('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número')
@@ -94,6 +103,7 @@ def crear_cuenta ():
 
 def retirar_dinero():
     global df_clientes
+
     dni = input('Ingrese el DNI:\n')
     while len(dni) != 8 or not dni.isdigit():
         print('El DNI debe contener 8 dígitos numéricos')
@@ -130,6 +140,7 @@ def retirar_dinero():
 
 def ingresar_dinero():
     global df_clientes
+
     dni = input('Ingrese el DNI:\n')
     while len(dni) != 8 or not dni.isdigit():
         print('El DNI debe contener 8 dígitos numéricos')
@@ -213,6 +224,6 @@ def transactions_timeline(dni):
     plt.xlabel('Fecha')
     plt.ylabel('Monto (S/.)')
     plt.legend()
-    # plt.xticks(rotation=45)
+    plt.xticks(rotation=45)
     plt.tight_layout()
     plt.show()
