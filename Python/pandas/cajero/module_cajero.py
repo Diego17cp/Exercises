@@ -219,7 +219,7 @@ def transactions_timeline(dni):
     plt.figure(figsize=(10, 6))
     for tipo in ['retiro', 'deposito']:
         datos = transacciones[transacciones['tipo'] == tipo]
-        plt.plot(datos['monto'], datos['fecha'], 'o-', label=tipo.capitalize())
+        plt.plot(datos['fecha'], datos['monto'], 'o-', label=tipo.capitalize())
     plt.title(f'Evolución de Transacciones - DNI: {dni}')
     plt.xlabel('Fecha')
     plt.ylabel('Monto (S/.)')
