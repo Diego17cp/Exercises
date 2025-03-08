@@ -1,9 +1,20 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import datetime as dt
+import re
 
 df_clientes = pd.read_excel('pandas/cajero/clientes.xlsx', dtype={'dni': str, 'telefono': str, 'contraseña': str})
 df_transacciones = pd.read_excel('pandas/cajero/transacciones.xlsx', dtype={'dni': str})
+def validar_email(email):
+    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return bool(re.match(patron, email))
+def validar_telefono(telefono):
+    return len(telefono) == 9 and telefono.isdigit() and telefono.startswith('9')
+def validar_nombre(nombre):
+    return bool(re.match(r'^[A-Za-záéíóúñÁÉÍÓÚÑ\s]{2,50}$', nombre))
+def validar_contraseña(contraseña):
+    return bool(re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$', contraseña))
+
 def generar_boleta(tipo, monto, dni):
     fecha = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -24,7 +35,7 @@ def generar_boleta(tipo, monto, dni):
 
     global df_transacciones
     df_transacciones = pd.concat([df_transacciones, pd.DataFrame([nueva_transaccion])], ignore_index=True)
-    df_transacciones.to_excel('transacciones.xlsx', index=False)
+    df_transacciones.to_excel('pandas/cajero/transacciones.xlsx', index=False)
     
 def crear_cuenta ():
     global df_clientes
@@ -36,28 +47,58 @@ def crear_cuenta ():
         print('Este DNI ya está registrado')
         return
     edad = int(input('Ingrese la edad del titular: \n'))
-    while edad < 18:
-        print('El titular debe ser mayor de edad')
-        edad = int(input('Ingrese nuevamente la edad: '))
+    try:
+        edad = int(input('Ingrese la edad del titular:\n'))
+        while edad < 18 or edad > 100:
+            print('El titular debe ser mayor de edad y menor de 100 años')
+            edad = int(input('Ingrese nuevamente la edad: '))
+    except ValueError:
+        print('Error: Debe ingresar un número válido')
+        return
         
+    nombre = input('Ingrese el nombre del titular:\n')
+    while not validar_nombre(nombre):
+        print('El nombre debe contener solo letras y espacios (2-50 caracteres)')
+        nombre = input('Ingrese nuevamente el nombre: ')
+    apellido = input('Ingrese los apellidos del titular:\n')
+    while not validar_nombre(apellido):
+        print('Los apellidos deben contener solo letras y espacios (2-50 caracteres)')
+        apellido = input('Ingrese nuevamente los apellidos: ')
+    telefono = input('Ingrese el teléfono del titular (9 dígitos):\n')
+    while not validar_telefono(telefono):
+        print('El teléfono debe comenzar con 9 y tener 9 dígitos')
+        telefono = input('Ingrese nuevamente el teléfono: ')
+    correo = input('Ingrese el correo del titular:\n')
+    while not validar_email(correo):
+        print('Ingrese un correo electrónico válido')
+        correo = input('Ingrese nuevamente el correo: ')
+    contraseña = input('Ingrese su contraseña:\n')
+    while not validar_contraseña(contraseña):
+        print('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número')
+        contraseña = input('Ingrese nuevamente la contraseña: ')
+
     nueva_cuenta = {
         'dni': crear_dni,
-        'nombre': input('Ingrese el nombre del titular:\n'),
-        'apellido': input('Ingrese los apellidos del titular:\n'),
+        'nombre': nombre,
+        'apellido': apellido,
         'edad': edad,
-        'telefono': input('Ingrese el teléfono del titular (9 dígitos):\n'),
-        'correo': input('Ingrese el correo del titular:\n'),
+        'telefono': telefono,
+        'correo': correo,
         'saldo': 0.0,
-        'contraseña': input('Ingrese su contraseña (mín. 8 caracteres): \n')
+        'contraseña': contraseña
     }
     
     df_clientes = pd.concat([df_clientes, pd.DataFrame([nueva_cuenta])], ignore_index=True)
-    df_clientes.to_excel('clientes.xlsx', index=False)
+    df_clientes.to_excel('pandas/cajero/clientes.xlsx', index=False)
     print(f"{'-'*30}\nCuenta creada exitosamente\n{'-'*30}")
 
 def retirar_dinero():
     global df_clientes
     dni = input('Ingrese el DNI:\n')
+    while len(dni) != 8 or not dni.isdigit():
+        print('El DNI debe contener 8 dígitos numéricos')
+        dni = input('Ingrese nuevamente el DNI: ')
+
     password = input('Ingrese la contraseña:\n')
     
     cuenta = df_clientes[df_clientes['dni'] == dni]
@@ -77,14 +118,23 @@ def retirar_dinero():
         print('Monto inválido o excede el límite de S/. 500')
         return
         
-    if input('Confirmar retiro (s/n):\n').lower() == 's':
+    confirmacion = input('Confirmar retiro (s/n):\n').lower()
+    while confirmacion not in ['s', 'n']:
+        print('Por favor, ingrese "s" para confirmar o "n" para cancelar')
+        confirmacion = input('Confirmar retiro (s/n):\n').lower()
+        
+    if confirmacion == 's':
         df_clientes.loc[df_clientes['dni'] == dni, 'saldo'] = saldo - retiro
-        df_clientes.to_excel('clientes.xlsx', index=False)
+        df_clientes.to_excel('pandas/cajero/clientes.xlsx', index=False)
         generar_boleta('retiro', retiro, dni)
 
 def ingresar_dinero():
     global df_clientes
     dni = input('Ingrese el DNI:\n')
+    while len(dni) != 8 or not dni.isdigit():
+        print('El DNI debe contener 8 dígitos numéricos')
+        dni = input('Ingrese nuevamente el DNI: ')
+
     password = input('Ingrese la contraseña:\n')
     
     cuenta = df_clientes[df_clientes['dni'] == dni]
@@ -98,7 +148,7 @@ def ingresar_dinero():
         deposito = float(input('Ingrese monto a depositar:\n'))
     
     df_clientes.loc[df_clientes['dni'] == dni, 'saldo'] += deposito
-    df_clientes.to_excel('clientes.xlsx', index=False)
+    df_clientes.to_excel('pandas/cajero/clientes.xlsx', index=False)
     generar_boleta('deposito', deposito, dni)
 
 def revisar_cuenta():
