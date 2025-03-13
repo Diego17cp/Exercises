@@ -12,25 +12,25 @@ const ls = async (folder) => {
 		process.exit(1);
 	}
 
-    const filesPromises = files.map(
-        async (file) => {
-            const filePath = path.join(folder, file);
-            let fileStats
-            try{
-                fileStats = await fs.stat(filePath);
-            } catch (error) {
-                console.log(`No se pudo leer el archivo ${filePath}`);
-                return;
-            }
-            const isDirectory = fileStats.isDirectory();
-            const fileType = isDirectory ? "d" : "-";
-            const fileSize = fileStats.size.toString();
-            const fileModified = fileStats.mtime.toLocaleString();
+	const filesPromises = files.map(async (file) => {
+		const filePath = path.join(folder, file);
+		let fileStats;
+		try {
+			fileStats = await fs.stat(filePath);
+		} catch (error) {
+			console.log(`No se pudo leer el archivo ${filePath}`);
+			return;
+		}
+		const isDirectory = fileStats.isDirectory();
+		const fileType = isDirectory ? "d" : "-";
+		const fileSize = fileStats.size.toString();
+		const fileModified = fileStats.mtime.toLocaleString();
 
-            return `${fileType} ${pc.blue(file.padEnd(20))} ${pc.green(fileSize.padStart(10))} ${pc.yellow(fileModified)}`;
-        }
-    )
-    const filesInfo = await Promise.all(filesPromises);
-    filesInfo.forEach(fileInfo => console.log(fileInfo));
+		return `${fileType} ${pc.blue(file.padEnd(20))} ${pc.green(
+			fileSize.padStart(10)
+		)} ${pc.yellow(fileModified)}`;
+	});
+	const filesInfo = await Promise.all(filesPromises);
+	filesInfo.forEach((fileInfo) => console.log(fileInfo));
 };
 ls(folder);
