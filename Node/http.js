@@ -1,5 +1,6 @@
 const http = require("node:http");
 const pc = require("picocolors");
+const findAvailablePort = require("./free_port");
 
 const server = http.createServer(
     (req, res) => {
@@ -7,6 +8,8 @@ const server = http.createServer(
         res.end('Hello World!');
     }   
 )
-server.listen(0, () => {
-    console.log(`Server listening on port ${pc.blueBright(`http://localhost:${server.address().port}`)}` );
+findAvailablePort(3000).then((port) => {
+    server.listen(port, () => {
+        console.log(`Server listening on port ${pc.blueBright(`http://localhost:${port}`)}`);
+    });
 });
