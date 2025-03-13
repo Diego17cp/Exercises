@@ -1,0 +1,27 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "nodejs practice",
+  "keywords": [
+    "node",
+    "nodejs",
+    "exercises",
+    "course",
+    "midudev"
+  ],
+  "homepage": "https://github.com/Diego17cp/Exercises#readme",
+  "bugs": {
+    "url": "https://github.com/Diego17cp/Exercises/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diego17cp/Exercises.git"
+  },
+  "license": "MIT",
+  "author": "Diego Castro",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
