@@ -26,7 +26,7 @@ const ls = async (folder) => {
             const fileSize = fileStats.size;
             const fileModified = fileStats.mtime.toLocaleString();
 
-            return `${fileType} ${file} ${fileSize.toString()} ${fileModified}`;
+            return `${fileType} ${file.padEnd(20)} ${fileSize.toString().padStart(10)} ${fileModified}`;
         }
     )
     const filesInfo = await Promise.all(filesPromises);
