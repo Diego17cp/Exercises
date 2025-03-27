@@ -36,8 +36,8 @@ for i in range(5):
     print(f"Predicción: ${predictions[i][0] * 100000:.2f}, Valor real: ${y_test[i] * 100000:.2f}")
 
 plt.figure(figsize=(10, 5))
-plt.plot(history.history['loss'], label='Loss')
-plt.plot(history.history['val_loss'], label='Val Loss')
+plt.plot(history.history['loss'], label='Pérdida de Entrenamiento')
+plt.plot(history.history['val_loss'], label='Pérdida de Validación')
 plt.xlabel('Epocas')
 plt.ylabel('Pérdida')
 plt.legend()
