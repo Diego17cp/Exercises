@@ -29,10 +29,10 @@ reduce_lr = keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.5, pa
 history = model.fit(X_train, y_train, epochs=200, validation_data=(X_test, y_test), batch_size=32, callbacks=[early_stopping, reduce_lr])
 test_loss, test_mae = model.evaluate(X_test, y_test)
 print(f'\nTest MAE: ${test_mae:.2f}')
-predictions = model.predict(X_test[:5])
+predictions = model.predict(X_test[:15])
 print("Predicciones:", predictions.flatten())
 print("Valores reales:", y_test[:5])
-for i in range(5):
+for i in range(15):
     print(f"Predicción: ${predictions[i][0] * 100000:.2f}, Valor real: ${y_test[i] * 100000:.2f}")
 
 plt.figure(figsize=(10, 5))
