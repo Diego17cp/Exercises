@@ -23,3 +23,8 @@ X = df[features].values
 y = df[target].values
 
 print(f"X shape: {X.shape}, y shape: {y.shape}")
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
