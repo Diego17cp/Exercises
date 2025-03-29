@@ -38,6 +38,30 @@ mse = mean_squared_error(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
-print(f"Mean Squared Error: {mse:.2f}")
-print(f"Mean Absolute Error: {mae:.2f}")
-print(f"R^2 Score: {r2:.2f}")
+
+print("\nReal Price\tPredicted Price\tError Absoluto")
+print("-" * 50)
+for real, pred in zip(y_test[:20], y_pred[:20]):
+    error = abs(real - pred)
+    print(f"{real:.2f}\t\t{pred:.2f}\t\t{error:.2f}")
+
+# Resumen global
+print("\nResumen:")
+print(f"MAE: {mae:.2f}")
+print(f"MSE: {mse:.2f}")
+print(f"R2 Score: {r2:.4f}")
+
+
+media = np.mean(y)
+mediana = np.median(y)
+desv_std = np.std(y)
+
+print(f'\nMedia de precios: {media:.2f}')
+print(f'Mediana de precios: {mediana:.2f}')
+print(f'Desviación estándar de precios: {desv_std:.2f}')
+
+var_manual = np.mean((y - media)**2)
+std_manual = np.sqrt(var_manual)
+
+print(f'\nVarianza (manual): {var_manual:.2f}')
+print(f'Desviación Estándar (manual): {std_manual:.2f}')
