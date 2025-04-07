@@ -45,14 +45,15 @@ app.patch('/movies/:id', (req, res) => {
         return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
     const { id } = req.params;
-    const movie = movies.find(movie => movie.id === id);
-    if (!movie) {
-        return res.status(400).json({ message: 'Movie not found' })
+    const movieIdx = movies.findIndex(movie => movie.id === id);
+    if (movieIdx === -1) {
+        return res.status(404).json({ message: 'Movie not found' })
     }
-    const updateMovie = {
-        ...movies[movie],
+    movies[movieIdx] = {
+        ...movies[movieIdx],
         ...result.data
     }
+    res.json(movies[movieIdx])
 
 })
 app.listen(3000, () => {
