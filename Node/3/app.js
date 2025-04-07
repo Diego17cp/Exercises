@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const crypto = require('node:crypto');
 const movies  = require('./movies.json');
+const { validateMovie } = require('./schemes/movies');
 app.disable('x-powered-by');
 
 app.use(express.json());
@@ -22,8 +23,10 @@ app.get('/movies/:id', (req, res) => {
     res.status(404).json({ error: 'Movie not found' });
 })
 app.post('/movies', (req, res) => {
-    
-    const { title, genre, year, director, rate, poster } = req.body;
+    const result = validateMovie(req.body);
+    if (result.error) {
+        return res.status(400).json({error: JSON.parse(result.error.message)});
+    }
     const newMovie = {
         id: crypto.randomUUID(),
         title,
