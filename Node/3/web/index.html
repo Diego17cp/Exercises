@@ -27,9 +27,22 @@
                             <img src="${movie.poster}" alt="${movie.title}" />
                             <p>${movie.year}</p>
                             <p>Rating: ${movie.rate}</p>
+                            <button>Delete</button>
                         </article>`;
 					}).join("");
 					document.querySelector('main').innerHTML = html;
+                    document.addEventListener('click', e => {
+                        if (e.target.tagName === 'BUTTON') {
+                            const id = e.target.closest('article').dataset.id;
+                            fetch(`http://localhost:3000/movies/${id}`, {
+                                method: 'DELETE'
+                            })
+                            .then(res => res.json())
+                            .then(() => {
+                                e.target.closest('article').remove();
+                            });
+                        }
+                    });
 				});
 		</script>
 	</head>

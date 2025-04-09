@@ -1,62 +1,88 @@
 const express = require('express');
 const app = express();
 const crypto = require('node:crypto');
-const movies  = require('./movies.json');
+const movies = require('./movies.json');
 const { validateMovie, validatePartialMovie } = require('./schemes/movies');
+
 app.disable('x-powered-by');
 
-app.use(express.json());
-app.get('/movies', (req, res) => {
+// Middleware para manejar CORS
+app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204);
+    }
+    next();
+});
+
+app.use(express.json());
+
+// Rutas existentes...
+app.get('/movies', (req, res) => {
     const { genre } = req.query;
     if (genre) {
         const filteredMovies = movies.filter(
             movie => movie.genre.some(g => g.toLowerCase() === genre.toLowerCase())
-        )
+        );
         return res.json(filteredMovies);
     }
     res.json(movies);
-})
+});
+
 app.get('/movies/:id', (req, res) => {
     const { id } = req.params;
     const movie = movies.find(movie => movie.id === id);
     if (movie) return res.json(movie);
     res.status(404).json({ error: 'Movie not found' });
-})
+});
+
 app.post('/movies', (req, res) => {
     const result = validateMovie(req.body);
     if (result.error) {
-        return res.status(400).json({error: JSON.parse(result.error.message)});
+        return res.status(400).json({ error: JSON.parse(result.error.message) });
     }
     const newMovie = {
         id: crypto.randomUUID(),
-        title,
-        genre,
-        year,
-        director,
-        rate: rate ?? 0,
-        poster
-    }
+        title: req.body.title,
+        genre: req.body.genre,
+        year: req.body.year,
+        director: req.body.director,
+        rate: req.body.rate ?? 0,
+        poster: req.body.poster
+    };
     movies.push(newMovie);
     res.status(201).json(newMovie);
-})
+});
+
+app.delete('/movies/:id', (req, res) => {
+    const { id } = req.params;
+    const movieIdx = movies.findIndex(movie => movie.id === id);
+    if (movieIdx === -1) {
+        return res.status(404).json({ message: 'Movie not found' });
+    }
+    movies.splice(movieIdx, 1);
+    res.status(204).send();
+});
+
 app.patch('/movies/:id', (req, res) => {
-    const result = validatePartialMovie(req.body)
+    const result = validatePartialMovie(req.body);
     if (!result.success) {
-        return res.status(400).json({ error: JSON.parse(result.error.message) })
+        return res.status(400).json({ error: JSON.parse(result.error.message) });
     }
     const { id } = req.params;
     const movieIdx = movies.findIndex(movie => movie.id === id);
     if (movieIdx === -1) {
-        return res.status(404).json({ message: 'Movie not found' })
+        return res.status(404).json({ message: 'Movie not found' });
     }
     movies[movieIdx] = {
         ...movies[movieIdx],
         ...result.data
-    }
-    res.json(movies[movieIdx])
+    };
+    res.json(movies[movieIdx]);
+});
 
-})
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
-})
+});
