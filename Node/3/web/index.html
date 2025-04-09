@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>API Rest Try</title>
+        <style>
+            article {
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 10px;
+                border-radius: 5px;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+                width: 200px;
+            }
+        </style>
+		<script type="module">
+			fetch("http://localhost:3000/movies")
+				.then((res) => res.json())
+				.then((movies) => {
+					const html = movies.map((movie) => {
+						`<article data-id="${movie.id}" class="movie">
+                                <h2>${movie.title}</h2>
+                                <img src="${movie.poster}" alt="${movie.title}" />
+                                <p>${movie.description}</p>
+                                <p>Rating: ${movie.rating}</p>
+                            </article>`;
+					}).join("");
+                    document.querySelector('main').innerHTML = html;
+				});
+		</script>
+	</head>
+	<body>
+        <main></main>
+    </body>
+</html>
