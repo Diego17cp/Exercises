@@ -7,6 +7,7 @@ app.disable('x-powered-by');
 
 app.use(express.json());
 app.get('/movies', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
     const { genre } = req.query;
     if (genre) {
         const filteredMovies = movies.filter(

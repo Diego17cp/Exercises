@@ -22,14 +22,14 @@
 				.then((res) => res.json())
 				.then((movies) => {
 					const html = movies.map((movie) => {
-						`<article data-id="${movie.id}" class="movie">
-                                <h2>${movie.title}</h2>
-                                <img src="${movie.poster}" alt="${movie.title}" />
-                                <p>${movie.description}</p>
-                                <p>Rating: ${movie.rating}</p>
-                            </article>`;
+						return `<article data-id="${movie.id}" class="movie">
+                            <h2>${movie.title}</h2>
+                            <img src="${movie.poster}" alt="${movie.title}" />
+                            <p>${movie.year}</p>
+                            <p>Rating: ${movie.rate}</p>
+                        </article>`;
 					}).join("");
-                    document.querySelector('main').innerHTML = html;
+					document.querySelector('main').innerHTML = html;
 				});
 		</script>
 	</head>
