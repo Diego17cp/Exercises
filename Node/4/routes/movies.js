@@ -1,7 +1,7 @@
 import { Router } from "express";
-import movies from './movies.json' with { type: 'json' };
+import movies from '../movies.json' with { type: 'json' };
 import { randomUUID } from 'node:crypto';
-import { validateMovie, validatePartialMovie } from './schemes/movies.js';
+import { validateMovie, validatePartialMovie } from '../schemes/movies.js';
 
 export const moviesRouter = Router();
 
