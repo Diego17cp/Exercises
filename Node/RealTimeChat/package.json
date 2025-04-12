@@ -17,6 +17,7 @@
     "socket.io": "4.8.1"
   },
   "devDependencies": {
-    "@types/morgan": "^1.9.9"
+    "@types/morgan": "^1.9.9",
+    "@types/socket.io": "^3.0.1"
   }
 }
