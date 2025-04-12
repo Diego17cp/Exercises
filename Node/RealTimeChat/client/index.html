@@ -33,6 +33,7 @@
                     </li>`;
 				messages.insertAdjacentHTML("beforeend", item);
 				socket.auth.serverOffset = serverOffset;
+                messages.scrollTop = messages.scrollHeight;
 			});
 			form.addEventListener("submit", (e) => {
 				e.preventDefault();
