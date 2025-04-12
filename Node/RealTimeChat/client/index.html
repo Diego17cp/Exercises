@@ -6,13 +6,33 @@
 		<title>Real Time Chat</title>
 		<script type="module">
 			import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
-			const socket = io();
 			const form = document.getElementById("form");
 			const input = document.getElementById("input");
+
+			const getUsername = async () => {
+				const username = localStorage.getItem("username");
+				if (username) return username;
+				const res = await fetch(
+					"https://random-data-api.com/api/users/random_user"
+				);
+				const { username: randomUsername } = await res.json();
+				localStorage.setItem("username", randomUsername);
+				return randomUsername;
+			};
+			const socket = io({
+				auth: {
+					username: await getUsername(),
+					serverOffset: 0,
+				},
+			});
 			const messages = document.getElementById("messages");
-			socket.on("chat message", (msg) => {
-				const item = `<li>${msg}</li>`;
+			socket.on("chat message", (msg, serverOffset, username) => {
+				const item = `<li>
+                        <p>${msg}</p>
+                        <small>${username}</small>
+                    </li>`;
 				messages.insertAdjacentHTML("beforeend", item);
+				socket.auth.serverOffset = serverOffset;
 			});
 			form.addEventListener("submit", (e) => {
 				e.preventDefault();
@@ -51,24 +71,28 @@
 				position: relative;
 			}
 			#messages {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow-y: scroll;
+				height: 100%;
+				scroll-behavior: smooth;
+				padding-bottom: 48px;
 			}
-            #messages li {
-                border-radius: 8px;
-                margin: 4px;
-                padding: 8px;
-                transition: all 0.3s ease-in-out;
-            }
-            #messages li:nth-child(odd) {
-                background-color: #0056b3;
-                color: white;
-            }
-            #messages li:nth-child(even) {
-                background-color: #f1f1f1;
-                color: black;
-            }
+			#messages li {
+				border-radius: 8px;
+				margin: 4px;
+				padding: 8px;
+				transition: all 0.3s ease-in-out;
+			}
+			#messages li:nth-child(odd) {
+				background-color: #0056b3;
+				color: white;
+			}
+			#messages li:nth-child(even) {
+				background-color: #f1f1f1;
+				color: black;
+			}
 			#form {
 				bottom: 0;
 				display: flex;
