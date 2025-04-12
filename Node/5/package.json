@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "mysql2": "^3.14.0",
+    "zod": "3.24.2"
+  },
+  "type": "module"
+}
