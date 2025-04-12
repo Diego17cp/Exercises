@@ -7,15 +7,20 @@
 		<script type="module">
 			import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
 			const socket = io();
-            const form = document.getElementById("form");
-            const input = document.getElementById("input");
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                if (input.value) {
-                    socket.emit("chat message", input.value);
-                    input.value = "";
-                }
-            });
+			const form = document.getElementById("form");
+			const input = document.getElementById("input");
+			const messages = document.getElementById("messages");
+			socket.on("chat message", (msg) => {
+				const item = `<li>${msg}</li>`;
+				messages.insertAdjacentHTML("beforeend", item);
+			});
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+				if (input.value) {
+					socket.emit("chat message", input.value);
+					input.value = "";
+				}
+			});
 		</script>
 		<style>
 			*,
@@ -45,6 +50,25 @@
 				height: 100%;
 				position: relative;
 			}
+			#messages {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+			}
+            #messages li {
+                border-radius: 8px;
+                margin: 4px;
+                padding: 8px;
+                transition: all 0.3s ease-in-out;
+            }
+            #messages li:nth-child(odd) {
+                background-color: #0056b3;
+                color: white;
+            }
+            #messages li:nth-child(even) {
+                background-color: #f1f1f1;
+                color: black;
+            }
 			#form {
 				bottom: 0;
 				display: flex;
@@ -61,27 +85,28 @@
 				margin: 4px;
 				padding: 0 8px;
 			}
-            #input:focus {
-                outline: none;
-            }
-            #form button {
-                background-color: #007bff;
-                border: none;
-                border-radius: 9999px;
-                color: white;
-                cursor: pointer;
-                font-size: 16px;
-                margin-left: 4px;
-                padding: 8px 16px;
-                transition: all .3s ease-in-out;
-            }
-            #form button:hover {
-                background-color: #0056b3;
-            }
+			#input:focus {
+				outline: none;
+			}
+			#form button {
+				background-color: #007bff;
+				border: none;
+				border-radius: 9999px;
+				color: white;
+				cursor: pointer;
+				font-size: 16px;
+				margin-left: 4px;
+				padding: 8px 16px;
+				transition: all 0.3s ease-in-out;
+			}
+			#form button:hover {
+				background-color: #0056b3;
+			}
 		</style>
 	</head>
 	<body>
 		<section id="chat">
+			<ul id="messages"></ul>
 			<form action="" id="form">
 				<input
 					type="text"
