@@ -4,19 +4,19 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Real Time Chat</title>
-        <script type="module">
-            import { io } from 'https://cdn.socket.io/4.8.1/socket.io.esm.min.js'
-            const socket = io()
-        </script>
+		<script type="module">
+			import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
+			const socket = io();
+		</script>
 		<style>
 			*,
 			*::before,
 			*::after {
 				box-sizing: border-box;
 			}
-            :root {
-                color-scheme: light dark;
-            }
+			:root {
+				color-scheme: light dark;
+			}
 			body {
 				margin: 0;
 				font-family: system-ui, -apple-system, BlinkMacSystemFont,
@@ -36,14 +36,53 @@
 				height: 100%;
 				position: relative;
 			}
+			#form {
+				bottom: 0;
+				display: flex;
+				height: 48px;
+				left: 0;
+				padding: 4px;
+				position: absolute;
+				right: 0;
+			}
+			#input {
+				border-radius: 9999px;
+				border: 1px solid #eee;
+				flex: 1;
+				margin: 4px;
+				padding: 0 8px;
+			}
+            #input:focus {
+                outline: none;
+            }
+            #form button {
+                background-color: #007bff;
+                border: none;
+                border-radius: 9999px;
+                color: white;
+                cursor: pointer;
+                font-size: 16px;
+                margin-left: 4px;
+                padding: 8px 16px;
+                transition: all .3s ease-in-out;
+            }
+            #form button:hover {
+                background-color: #0056b3;
+            }
 		</style>
 	</head>
 	<body>
 		<section id="chat">
-            <form action="" id="form">
-                <input type="text" name="message" id="input" placeholder="Type a message..." autocomplete="off" />
-                <button type="submit">Send</button>
-            </form>
-        </section>
+			<form action="" id="form">
+				<input
+					type="text"
+					name="message"
+					id="input"
+					placeholder="Type a message..."
+					autocomplete="off"
+				/>
+				<button type="submit">Send</button>
+			</form>
+		</section>
 	</body>
 </html>
