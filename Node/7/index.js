@@ -10,15 +10,18 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use((req, res, next) => {
-	const token = req.cookies.access_token;
-	req.session = {
-		user: null,
-	};
-	try {
-		const data = jwt.verify(token, SECRET_KEY);
-		req.session.user = data;
-	} catch {}
-	next();
+    const token = req.cookies.access_token;
+    if (token) {
+        try {
+            const data = jwt.verify(token, SECRET_KEY);
+            req.session = { ...data };
+        } catch {
+            req.session = {};
+        }
+    } else {
+        req.session = {};
+    }
+    next();
 });
 
 // Set view engine
@@ -26,8 +29,7 @@ app.set("view engine", "ejs");
 
 // Routes
 app.get("/", (req, res) => {
-	const { user } = req.session;
-	res.render("index", { user });
+    res.render("index", req.session);
 });
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
@@ -63,9 +65,8 @@ app.post("/logout", (req, res) => {
 	res.clearCookie("access_token").json({ message: "Logged out" });
 });
 app.get("/protected", (req, res) => {
-	const { user } = req.session;
-	if (!user) return res.status(401).send("Unauthorized");
-	res.render("protected", { user });
+    if (!req.session.username) return res.status(401).send("Unauthorized");
+    res.render("protected", req.session);
 });
 
 app.listen(PORT, () => {
