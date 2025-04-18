@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use((req, res, next) => {
-	const token = req.cookies.access_tokeb;
+	const token = req.cookies.access_token;
 	req.session = {
 		user: null,
 	};
@@ -27,7 +27,7 @@ app.set("view engine", "ejs");
 // Routes
 app.get("/", (req, res) => {
 	const { user } = req.session;
-    res.render("index", { user });
+	res.render("index", { user });
 });
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
@@ -40,7 +40,7 @@ app.post("/login", async (req, res) => {
 				expiresIn: "1h",
 			}
 		);
-		res.cookie("access_tokeb", token, {
+		res.cookie("access_token", token, {
 			httpOnly: true,
 			sameSite: "strict",
 			secure: process.env.NODE_ENV === "production",
@@ -59,11 +59,13 @@ app.post("/register", async (req, res) => {
 		res.status(400).send(error.message);
 	}
 });
-app.post("/logout", (req, res) => {});
+app.post("/logout", (req, res) => {
+	res.clearCookie("access_token").json({ message: "Logged out" });
+});
 app.get("/protected", (req, res) => {
 	const { user } = req.session;
-    if (!user) return res.status(401).send("Unauthorized");
-    res.render("protected", { user });
+	if (!user) return res.status(401).send("Unauthorized");
+	res.render("protected", { user });
 });
 
 app.listen(PORT, () => {
