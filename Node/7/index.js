@@ -5,8 +5,10 @@ import { UserRepository } from "./user-repository.js";
 const app = express();
 app.use(express.json())
 
+app.set("view engine", "ejs")
+
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.render('example', { username: "Diego17" })
 })
 app.post('/login', async (req, res) => {
     const { username, password } = req.body
