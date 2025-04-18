@@ -3,6 +3,7 @@ import { PORT } from "./config.js";
 import { UserRepository } from "./user-repository.js";
 
 const app = express();
+app.use(express.json())
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
