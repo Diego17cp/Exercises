@@ -1,4 +1,5 @@
 import DBLOCAL from 'db-local'
+import bcrypt from 'bcrypt'
 
 const { Schema } = new DBLOCAL({ path: './db' })
 
@@ -24,11 +25,14 @@ export class UserRepository {
         // Create id
         const id = crypto.randomUUID()
 
+        // Hash password
+        const hashedPassword = bcrypt.hashSync(password, 10)
+
         // Create user
         User.create({
             _id: id,
             username,
-            password,
+            password: hashedPassword,
         }).save()
 
         return id
