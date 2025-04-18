@@ -1,5 +1,5 @@
 import DBLOCAL from 'db-local'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const { Schema } = new DBLOCAL({ path: './db' })
 
