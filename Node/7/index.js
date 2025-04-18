@@ -5,20 +5,29 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
 const app = express();
-app.use(express.json());
-app.use(cookieParser())
 
+// Middlewares
+app.use(express.json());
+app.use(cookieParser());
+app.use((req, res, next) => {
+	const token = req.cookies.access_tokeb;
+	req.session = {
+		user: null,
+	};
+	try {
+		const data = jwt.verify(token, SECRET_KEY);
+		req.session.user = data;
+	} catch {}
+	next();
+});
+
+// Set view engine
 app.set("view engine", "ejs");
 
+// Routes
 app.get("/", (req, res) => {
-    const token = req.cookies.access_tokeb;
-    if (!token) return res.render("index");
-    try {
-        const data = jwt.verify(token, SECRET_KEY);
-        return res.render("index", data);
-    } catch (error) {
-        return res.render("index");
-    }
+	const { user } = req.session;
+    res.render("index", { user });
 });
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
@@ -32,11 +41,11 @@ app.post("/login", async (req, res) => {
 			}
 		);
 		res.cookie("access_tokeb", token, {
-            httpOnly: true,
-            sameSite: "strict",
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 60 * 60 * 1000, // 1 hour
-        }).send({ username: user.username });
+			httpOnly: true,
+			sameSite: "strict",
+			secure: process.env.NODE_ENV === "production",
+			maxAge: 60 * 60 * 1000, // 1 hour
+		}).send({ username: user.username });
 	} catch (error) {
 		res.status(400).send(error.message);
 	}
@@ -52,14 +61,9 @@ app.post("/register", async (req, res) => {
 });
 app.post("/logout", (req, res) => {});
 app.get("/protected", (req, res) => {
-    const token = req.cookies.access_tokeb;
-    if (!token) return res.status(403).send("Unauthorized");
-    try {
-        const data = jwt.verify(token, SECRET_KEY);
-        res.render("protected", data);
-    } catch (error) {
-        return res.status(403).send("Unauthorized");
-    }
+	const { user } = req.session;
+    if (!user) return res.status(401).send("Unauthorized");
+    res.render("protected", { user });
 });
 
 app.listen(PORT, () => {
