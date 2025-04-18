@@ -43,8 +43,10 @@ export class UserRepository {
         if (!user) throw new Error("username not found");
         const isValid = await bcrypt.compare(password, user.password);
 		if (!isValid) throw new Error("invalid password");
+		
+		const { password:_, ...publicUser } = user;
 
-		return user
+		return publicUser
 	}
 }
 class Validation {
