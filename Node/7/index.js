@@ -9,10 +9,10 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 })
 app.post('/login', (req, res) => {})
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     const { username, password } = req.body
     try {
-        const id = UserRepository.create({ username, password })
+        const id = await UserRepository.create({ username, password })
         res.status(201).json({ id })
     } catch (error) {
         res.status(400).send(error.message)
