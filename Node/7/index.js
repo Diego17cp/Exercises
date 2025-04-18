@@ -8,10 +8,10 @@ app.use(express.json())
 app.get("/", (req, res) => {
     res.send("Hello World!");
 })
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body
     try {
-        const user = UserRepository.login({ username, password })
+        const user = await UserRepository.login({ username, password })
         res.status(200).json(user)
     } catch (error) {
         res.status(400).send(error.message)
