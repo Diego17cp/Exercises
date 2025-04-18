@@ -1,5 +1,206 @@
 <html>
+    <head>
+        <title>Auth App</title>
+        <style>
+            body {
+                font-family: system-ui, sans-serif;
+                background: #f4f6fa;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+            .container {
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+                padding: 2rem 2.5rem;
+                min-width: 320px;
+                max-width: 350px;
+            }
+            h1, h2 {
+                text-align: center;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            input[type="text"], input[type="password"] {
+                padding: 0.5rem;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                font-size: 1rem;
+            }
+            button {
+                padding: 0.6rem;
+                border-radius: 6px;
+                border: none;
+                background: #007bff;
+                color: #fff;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            button:hover {
+                background: #0056b3;
+            }
+            .error {
+                color: #c00;
+                background: #ffeaea;
+                border-radius: 6px;
+                padding: 0.5rem;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+            .success {
+                color: #080;
+                background: #eaffea;
+                border-radius: 6px;
+                padding: 0.5rem;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+            .logout-btn {
+                background: #c00;
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
     <body>
-        <h1>Hola <%= username %>!</h1>
+        <div class="container">
+            <h1>Bienvenido</h1>
+            <div id="auth-section" style="display:none;">
+                <div id="greeting" style="display:none;">
+                    <h2>Hola <span id="username"></span>!</h2>
+                    <button class="logout-btn" id="logout-btn">Cerrar sesión</button>
+                </div>
+                <div id="forms-section">
+                    <div id="error-msg" class="error" style="display:none;"></div>
+                    <form id="login-form" autocomplete="off">
+                        <h2>Iniciar sesión</h2>
+                        <input type="text" id="login-username" placeholder="Usuario" required minlength="3" />
+                        <input type="password" id="login-password" placeholder="Contraseña" required minlength="8" />
+                        <button type="submit">Entrar</button>
+                    </form>
+                    <form id="register-form" autocomplete="off">
+                        <h2>Registrarse</h2>
+                        <input type="text" id="register-username" placeholder="Usuario" required minlength="3" />
+                        <input type="password" id="register-password" placeholder="Contraseña" required minlength="8" />
+                        <button type="submit">Crear cuenta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Utilidades de sesión
+            function setSession(user) {
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+            function getSession() {
+                try {
+                    return JSON.parse(localStorage.getItem('user'));
+                } catch { return null; }
+            }
+            function clearSession() {
+                localStorage.removeItem('user');
+            }
+
+            // Renderizado condicional
+            function render() {
+                const user = getSession();
+                const authSection = document.getElementById('auth-section');
+                const greeting = document.getElementById('greeting');
+                const usernameSpan = document.getElementById('username');
+                const formsSection = document.getElementById('forms-section');
+                authSection.style.display = 'block';
+                if (user && user.username) {
+                    greeting.style.display = '';
+                    usernameSpan.textContent = user.username;
+                    formsSection.style.display = 'none';
+                } else {
+                    greeting.style.display = 'none';
+                    formsSection.style.display = '';
+                }
+            }
+
+            // Mostrar errores
+            function showError(msg) {
+                const errorDiv = document.getElementById('error-msg');
+                errorDiv.textContent = msg;
+                errorDiv.style.display = '';
+            }
+            function clearError() {
+                const errorDiv = document.getElementById('error-msg');
+                errorDiv.textContent = '';
+                errorDiv.style.display = 'none';
+            }
+
+            // Login
+            document.getElementById('login-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                clearError();
+                const username = document.getElementById('login-username').value.trim();
+                const password = document.getElementById('login-password').value;
+                try {
+                    const res = await fetch('/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    if (!res.ok) {
+                        const text = await res.text();
+                        showError(text || 'Error al iniciar sesión');
+                        return;
+                    }
+                    const user = await res.json();
+                    setSession(user);
+                    render();
+                    // Redirigir a /protected
+                    window.location.href = '/protected';
+                } catch (err) {
+                    showError('Error de red o del servidor');
+                }
+            });
+
+            // Register
+            document.getElementById('register-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                clearError();
+                const username = document.getElementById('register-username').value.trim();
+                const password = document.getElementById('register-password').value;
+                try {
+                    const res = await fetch('/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    if (!res.ok) {
+                        const text = await res.text();
+                        showError(text || 'Error al registrar');
+                        return;
+                    }
+                    // Registro exitoso, intenta login automático
+                    document.getElementById('login-username').value = username;
+                    document.getElementById('login-password').value = password;
+                    document.getElementById('login-form').dispatchEvent(new Event('submit'));
+                } catch (err) {
+                    showError('Error de red o del servidor');
+                }
+            });
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', async () => {
+                clearSession();
+                render();
+                // Opcional: puedes hacer un fetch a /logout cuando esté implementado
+            });
+
+            // Al cargar la página
+            render();
+        </script>
     </body>
 </html>
