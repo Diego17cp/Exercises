@@ -1,0 +1,93 @@
+---
+import { getLatestLaunches, getLaunchById } from "../../services/spacex";
+import Layout from "../../layouts/Layout.astro";
+import type { Doc } from "../../types/api";
+
+const { id } = Astro.params;
+let launch: Doc | null = null;
+if (id) {
+	launch = await getLaunchById({ id });
+}
+
+export const getStaticPaths = async () => {
+	const launches = await getLatestLaunches();
+	return launches.map((launch: Doc) => ({
+		params: { id: launch.id },
+	}));
+};
+---
+
+<Layout>
+	{
+		launch ? (
+			<section class="max-w-3xl mx-auto mt-10 bg-gray-900 rounded-xl shadow-lg border border-gray-700 p-8">
+				<div class="flex flex-col md:flex-row gap-8">
+					<div class="flex-shrink-0 flex flex-col items-center">
+						<img
+							src={launch.links.patch.large}
+							alt={`Patch for launch ${launch.name}`}
+							class="w-48 h-48 object-contain rounded-lg border border-gray-700 bg-gray-800 mb-4"
+						/>
+						<span
+							class:list={[
+								"text-xs font-semibold px-3 py-1 rounded",
+								{
+									"bg-green-200 text-green-900":
+										launch.success,
+									"bg-red-200 text-red-900": !launch.success,
+								},
+							]}
+						>
+							{launch.success ? "Success" : "Failure"}
+						</span>
+					</div>
+					<div class="flex-1">
+						<h1 class="text-3xl font-bold text-white mb-2">
+							{launch.name}
+						</h1>
+						<p class="text-gray-400 mb-4">
+							<span class="font-semibold">Flight Number:</span>{" "}
+							{launch.flight_number}
+						</p>
+						<p class="text-gray-400 mb-4">
+							<span class="font-semibold">Date (UTC):</span>{" "}
+							{new Date(launch.date_utc).toLocaleString()}
+						</p>
+						<p class="text-gray-400 mb-4">
+							<span class="font-semibold">Rocket:</span>{" "}
+							{launch.rocket}
+						</p>
+						<p class="text-gray-400 mb-4">
+							<span class="font-semibold">Launchpad:</span>{" "}
+							{launch.launchpad}
+						</p>
+						<p class="text-gray-400 mb-4">
+							<span class="font-semibold">Details:</span>{" "}
+							{launch.details ? (
+								launch.details
+							) : (
+								<span class="italic text-gray-500">
+									No details available.
+								</span>
+							)}
+						</p>
+						<div class="flex gap-4 mt-6">
+							{launch.links.patch.small && (
+								<a
+									href={launch.links.patch.small}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-blue-400 hover:underline"
+								>
+									Download Patch
+								</a>
+							)}
+						</div>
+					</div>
+				</div>
+			</section>
+		) : (
+			<div class="text-center text-gray-400 mt-20">Launch not found.</div>
+		)
+	}
+</Layout>
