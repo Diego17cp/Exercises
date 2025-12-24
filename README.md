@@ -1,4 +1,3 @@
-- Exercise of HTML/Bootstrap it's done and I won't update it because everything I wanted to do in it, I did on [Futbolera](https://github.com/Diego17cp/soccer-clothing) xD
 - Exercises of JS Logic were extracted from [MoureDev JS Course](https://github.com/mouredev/hello-javascript). 🫡
 - Exercises of Frameworks, currently React, Tailwind, Redux, etc using npm and Vite. Projects of [Front End Libraries of freeCodeCamp](https://www.freecodecamp.org/learn/front-end-development-libraries/) improved with up to date technologies / Following the [React Course by miduDev](https://github.com/midudev/aprendiendo-react) ⚛️
 - Exercises of a PHP CRUD for strengthen, Laravel soon ... 🐘
