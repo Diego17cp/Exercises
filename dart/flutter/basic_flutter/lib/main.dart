@@ -1,3 +1,4 @@
+import 'package:basic_flutter/components/index.dart';
 import 'package:basic_flutter/layouts/index.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: RowExample(),
+        appBar: AppBar(
+          title: const Text('Basic Flutter App'),
+          backgroundColor: const Color.fromARGB(255, 36, 100, 191),
+          foregroundColor: Colors.white,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () {
+                // Action when the button is pressed
+              },
+            ),
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 36, 100, 191),
+        body: ImageExample(),
       ),
     );
   }
