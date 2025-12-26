@@ -61,12 +61,17 @@ class _IMCHomeScreenState extends State<IMCHomeScreen> {
             child: ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => ResultScreen(
-                    age: selectedAge,
-                    weight: selectedWeight,
-                    height: selectedHeight,
-                  ),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      ResultScreen(
+                        age: selectedAge,
+                        weight: selectedWeight,
+                        height: selectedHeight,
+                      ),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          FadeTransition(opacity: animation, child: child),
+                  transitionDuration: Duration(milliseconds: 200),
                 ),
               ),
               style: ElevatedButton.styleFrom(
