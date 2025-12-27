@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:settings_app/preferences_keys.dart';
+import 'package:settings_app/providers/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool _darkMode = false;
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   String _language = "es";
   double _fontSize = 16.0;
 
@@ -23,7 +24,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _loadPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _darkMode = prefs.getBool(PreferencesKeys.isDarkMode) ?? false;
       _language = prefs.getString(PreferencesKeys.language) ?? "es";
       _fontSize = prefs.getDouble(PreferencesKeys.fontSize) ?? 16.0;
     });
@@ -42,16 +42,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeMode = ref.watch(themeProvider);
+    final isDarkMode = themeMode == ThemeMode.dark;
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: Column(
         children: [
           SwitchListTile(
             title: const Text('Dark Mode'),
-            value: _darkMode,
-            onChanged: (bool darkMode) {
-              setState(() => _darkMode = darkMode);
-              _savePreferences(PreferencesKeys.isDarkMode, darkMode);
+            value: isDarkMode,
+            onChanged: (bool value) {
+              ref.read(themeProvider.notifier).toggleTheme();
             },
           ),
           Padding(

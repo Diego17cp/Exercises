@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:settings_app/providers/theme_provider.dart';
 import 'package:settings_app/settings_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:settings_app/theme.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
-  Future<bool> _loadThemePreference() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isDarkMode') ?? false;
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _loadThemePreference(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(
-            home: Scaffold(body: Center(child: CircularProgressIndicator())),
-          );
-        }
-        final isDarkMode = snapshot.data ?? false;
-        return MaterialApp(
-          theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
-          home: SettingsScreen(),
-        );
-      },
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp(
+        home: SettingsScreen(),
+        themeMode: ref.watch(themeProvider),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark
     );
   }
 }
