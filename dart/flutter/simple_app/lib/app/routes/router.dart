@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_app/app/layouts/app_scaffold.dart';
+import 'package:simple_app/features/login/presentation/screens/login_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
@@ -48,20 +49,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: '/login',
-      builder: (context, state) => Container(
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Welcome to the Login Page"),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => GoRouter.of(context).pop(),
-              child: Text("Go Back"),
-            ),
-          ],
-        ),
-      ),
+      builder: (_, _) => const LoginScreen(),
     ),
   ],
 );
