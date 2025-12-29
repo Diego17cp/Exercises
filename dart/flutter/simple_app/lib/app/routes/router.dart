@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_app/app/layouts/app_scaffold.dart';
 import 'package:simple_app/features/login/presentation/screens/login_screen.dart';
+import 'package:simple_app/features/settings/presentation/screens/settings_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
@@ -37,12 +38,8 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           path: '/settings',
-          pageBuilder: (context, state) => NoTransitionPage(
-            child: Container(
-              alignment: Alignment.center,
-              child: Text("Welcome to the Settings Page"),
-            ),
-          ),
+          pageBuilder: (_, _) =>
+              NoTransitionPage(child: const SettingsScreen()),
         ),
       ],
     ),
