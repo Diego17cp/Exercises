@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_app/app/layouts/app_scaffold.dart';
+import 'package:simple_app/features/home/presentation/screens/home_screen.dart';
 import 'package:simple_app/features/login/presentation/screens/login_screen.dart';
 import 'package:simple_app/features/settings/presentation/screens/settings_screen.dart';
 
@@ -17,24 +18,8 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: '/',
-          pageBuilder: (context, state) => NoTransitionPage(
-            child: Container(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Welcome to the Home Page"),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      GoRouter.of(context).push('/login');
-                    },
-                    child: Text("Go to Login"),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          pageBuilder: (context, state) =>
+              NoTransitionPage(child: HomeScreen()),
         ),
         GoRoute(
           path: '/settings',
