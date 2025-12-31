@@ -2,3 +2,4 @@
 - Exercises of Frameworks, currently React, Tailwind, Redux, etc using npm and Vite. Projects of [Front End Libraries of freeCodeCamp](https://www.freecodecamp.org/learn/front-end-development-libraries/) improved with up to date technologies / Following the [React Course by miduDev](https://github.com/midudev/aprendiendo-react) ⚛️
 - Exercises of a PHP CRUD for strengthen, Laravel soon ... 🐘
 - Exercises of Python, following the [Python course by miduDev](https://github.com/midudev/curso-python/) and others 🐍
+- Exercises of Flutter, following the [Flutter & Dart course by AristiDev](https://github.com/ArisGuimera/Flutter-Expert) 🐣
